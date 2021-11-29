@@ -1,12 +1,17 @@
+
 <%@ include file="/init.jsp" %>
 
 <p>
 	<b><liferay-ui:message key="registration.caption"/></b>
 </p>
+
 <%
 	String backURL = ParamUtil.getString(request, "backURL");
 %>
-<aui:form action="<%= null %>" method="post" name="amfRegistration">
+
+<portlet:actionURL name="<%=MCVCommandNames.ADD_REGISTRATION%>" var="addRegistrationURL" />
+
+<aui:form action="<%= addRegistrationURL %>" method="post" name="amfRegistration">
 
 	<aui:input label="First Name" name="firstName" type="text"
 			   value='<%= "First Name" %>' />

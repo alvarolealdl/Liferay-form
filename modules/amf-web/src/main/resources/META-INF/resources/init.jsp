@@ -10,7 +10,7 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@ taglib prefix="liferay-item-selector" uri="http://liferay.com/tld/item-selector" %>
 <%@ taglib prefix="liferay-frontend" uri="http://liferay.com/tld/frontend" %>
 
-
+<%@ page import="com.liferay.amf.web.constants.MCVCommandNames" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 
 <liferay-theme:defineObjects />
