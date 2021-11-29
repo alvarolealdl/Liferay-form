@@ -17,7 +17,7 @@ package com.liferay.amf.service.impl;
 import com.liferay.amf.service.base.RegistrationLocalServiceBaseImpl;
 import com.liferay.amf.service.persistence.RegistrationPersistence;
 import com.liferay.portal.aop.AopService;
-
+import com.liferay.amf.model.Registration;
 import com.liferay.portal.kernel.exception.PortalException;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -45,14 +45,14 @@ public class RegistrationLocalServiceImpl
 	extends RegistrationLocalServiceBaseImpl {
 
 
-	public AmfRegistration addRegistration(long amfReistrationId, long groupId, long companyId, long userId,
+	public Registration addRegistration(long amfReistrationId, long groupId, long companyId, long userId,
 										   Date createDate, Date modifieDate, String userName, String firstName,
 										   String lastName, String emailAddress, String gender, Date birthday,
 										   String password, String homePhone, String mobilePhone, String address1,
 										   String address2, String city, String state, long zipCode, String securityAnswer)
 	throws PortalException {
 
-		AmfRegistration registration = _registrationPersistence.create(amfReistrationId);
+		Registration registration = _registrationPersistence.create(amfReistrationId);
 		registration.setGroupId(groupId);
 		registration.setCompanyId(companyId);
 		registration.setUserId(userId);

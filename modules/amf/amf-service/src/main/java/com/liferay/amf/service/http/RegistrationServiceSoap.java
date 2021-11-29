@@ -63,7 +63,7 @@ import java.rmi.RemoteException;
 @Deprecated
 public class RegistrationServiceSoap {
 
-	public static com.liferay.amf.model.AmfRegistration addRegistration(
+	public static com.liferay.amf.model.RegistrationSoap addRegistration(
 			long amfReistrationId, long groupId, long companyId, long userId,
 			java.util.Date createDate, java.util.Date modifieDate,
 			String userName, String firstName, String lastName,
@@ -74,14 +74,15 @@ public class RegistrationServiceSoap {
 		throws RemoteException {
 
 		try {
-			com.liferay.amf.model.AmfRegistration returnValue =
+			com.liferay.amf.model.Registration returnValue =
 				RegistrationServiceUtil.addRegistration(
 					amfReistrationId, groupId, companyId, userId, createDate,
 					modifieDate, userName, firstName, lastName, emailAddress,
 					gender, birthday, password, homePhone, mobilePhone,
 					address1, address2, city, state, zipCode, securityAnswer);
 
-			return returnValue;
+			return com.liferay.amf.model.RegistrationSoap.toSoapModel(
+				returnValue);
 		}
 		catch (Exception exception) {
 			_log.error(exception, exception);

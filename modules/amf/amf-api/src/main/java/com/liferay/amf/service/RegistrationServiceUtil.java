@@ -14,6 +14,7 @@
 
 package com.liferay.amf.service;
 
+import com.liferay.amf.model.Registration;
 import com.liferay.portal.kernel.exception.PortalException;
 
 /**
@@ -35,7 +36,7 @@ public class RegistrationServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>com.liferay.amf.service.impl.RegistrationServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static com.liferay.amf.model.AmfRegistration addRegistration(
+	public static Registration addRegistration(
 			long amfReistrationId, long groupId, long companyId, long userId,
 			java.util.Date createDate, java.util.Date modifieDate,
 			String userName, String firstName, String lastName,

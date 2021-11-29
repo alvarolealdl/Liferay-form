@@ -16,7 +16,7 @@ package com.liferay.amf.service.impl;
 
 import com.liferay.amf.service.base.RegistrationServiceBaseImpl;
 import com.liferay.portal.aop.AopService;
-
+import com.liferay.amf.model.Registration;
 import com.liferay.portal.kernel.exception.PortalException;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -46,7 +46,7 @@ import java.util.Date;
 public class RegistrationServiceImpl extends RegistrationServiceBaseImpl {
 
 
-	public AmfRegistration addRegistration(long amfReistrationId, long groupId, long companyId, long userId,
+	public Registration addRegistration(long amfReistrationId, long groupId, long companyId, long userId,
 										   Date createDate, Date modifieDate, String userName, String firstName,
 										   String lastName, String emailAddress, String gender, Date birthday,
 										   String password, String homePhone, String mobilePhone, String address1,
