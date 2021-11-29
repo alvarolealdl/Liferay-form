@@ -1,0 +1,10 @@
+Bundle-Name: amf-api
+Bundle-SymbolicName: com.liferay.amf.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.liferay.amf.exception,\
+	com.liferay.amf.model,\
+	com.liferay.amf.service,\
+	com.liferay.amf.service.persistence
+-check: EXPORTS
+-includeresource: META-INF/service.xml=../amf-service/service.xml

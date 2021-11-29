@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.4.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_4_0.dtd">
+
+<service-builder dependency-injector="ds" package-path="com.liferay.amf">
+	<namespace>AmfRegistration</namespace>
+	<!--<entity data-source="sampleDataSource" local-service="true" name="Foo" remote-service="false" session-factory="sampleSessionFactory" table="foo" tx-manager="sampleTransactionManager uuid="true"">-->
+	<entity name="Registration" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="amfRegistrationId" primary="true" type="long"></column>
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long"></column>
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long"></column>
+		<column name="userId" type="long"></column>
+		<column name="userName" type="String"></column>
+		<column name="createDate" type="Date"></column>
+		<column name="modifiedDate" type="Date"></column>
+		<column name="firstName" type="String"></column>
+		<column name="lastName" type="String"></column>
+		<column name="emailAddress" type="String"></column>
+		<column name="gender" type="String"></column>
+		<column name="birthday" type="Date"></column>
+		<column name="password" type="String"></column>
+		<column name="homePhone" type="String"></column>
+		<column name="mobilePhone" type="String"></column>
+		<column name="address1" type="String"></column>
+		<column name="address2" type="String"></column>
+		<column name="city" type="String"></column>
+		<column name="state" type="String"></column>
+		<column name="zipCode" type="Long"></column>
+		<column name="securityAnswer" type="String"></column>
+	</entity>
+	<exceptions>
+		<exception>EmailAddressNotFoundException</exception>
+	</exceptions>
+</service-builder>

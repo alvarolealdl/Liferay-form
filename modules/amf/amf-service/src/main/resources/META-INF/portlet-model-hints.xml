@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.liferay.amf.model.Registration">
+		<field name="amfRegistrationId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="firstName" type="String" />
+		<field name="lastName" type="String" />
+		<field name="emailAddress" type="String" />
+		<field name="gender" type="String" />
+		<field name="birthday" type="Date" />
+		<field name="password" type="String" />
+		<field name="homePhone" type="String" />
+		<field name="mobilePhone" type="String" />
+		<field name="address1" type="String" />
+		<field name="address2" type="String" />
+		<field name="city" type="String" />
+		<field name="state" type="String" />
+		<field name="zipCode" type="Long" />
+		<field name="securityAnswer" type="String" />
+	</model>
+</model-hints>
