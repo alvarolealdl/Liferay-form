@@ -14,10 +14,17 @@
 
 package com.liferay.amf.service.impl;
 
+import com.liferay.amf.model.Registration;
 import com.liferay.amf.service.base.RegistrationLocalServiceBaseImpl;
+import com.liferay.amf.service.persistence.RegistrationPersistence;
 import com.liferay.portal.aop.AopService;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.Group;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+
+import java.util.Date;
 
 /**
  * The implementation of the registration local service.
@@ -39,9 +46,44 @@ import org.osgi.service.component.annotations.Component;
 public class RegistrationLocalServiceImpl
 	extends RegistrationLocalServiceBaseImpl {
 
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Use <code>com.liferay.amf.service.RegistrationLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.amf.service.RegistrationLocalServiceUtil</code>.
-	 */
+
+	public Registration addRegistration(long amfReistrationId, long groupId, long companyId, long userId,
+										Date createDate, Date modifieDate, String userName, String firstName,
+										String lastName, String emailAddress, String gender, Date birthday,
+										String password, String homePhone, String mobilePhone, String address1,
+										String address2, String city, String state, long zipCode, String securityAnswer)
+	throws PortalException {
+
+		Registration registration = _registrationPersistence.create(amfReistrationId);
+		registration.setGroupId(groupId);
+		registration.setCompanyId(companyId);
+		registration.setUserId(userId);
+		registration.setCreateDate(createDate);
+		registration.setModifiedDate(modifieDate);
+		registration.setUserName(userName);
+		registration.setFirstName(firstName);
+		registration.setLastName(lastName);
+		registration.setEmailAddress(emailAddress);
+		registration.setEmailAddress(gender);
+		registration.setBirthday(birthday);
+		registration.setPassword(password);
+		registration.setHomePhone(homePhone);
+		registration.setMobilePhone(mobilePhone);
+		registration.setAddress1(address1);
+		registration.setAddress2(address2);
+		registration.setCity(city);
+		registration.setState(state);
+		registration.setZipCode(zipCode);
+		registration.setSecurityAnswer(securityAnswer);
+
+		return  _registrationPersistence.update(registration);
+
+
+
+
+	}
+
+
+	@Reference
+	private RegistrationPersistence _registrationPersistence;
 }

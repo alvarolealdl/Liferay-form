@@ -14,9 +14,15 @@
 
 package com.liferay.amf.service.http;
 
+import com.liferay.amf.service.RegistrationServiceUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
- * <code>com.liferay.amf.service.RegistrationServiceUtil</code> service
+ * <code>RegistrationServiceUtil</code> service
  * utility. The static methods of this class call the same methods of the
  * service utility. However, the signatures are different because it is
  * difficult for SOAP to support certain types.
@@ -56,4 +62,36 @@ package com.liferay.amf.service.http;
  */
 @Deprecated
 public class RegistrationServiceSoap {
+
+	public static com.liferay.amf.model.RegistrationSoap addRegistration(
+			long amfReistrationId, long groupId, long companyId, long userId,
+			java.util.Date createDate, java.util.Date modifieDate,
+			String userName, String firstName, String lastName,
+			String emailAddress, String gender, java.util.Date birthday,
+			String password, String homePhone, String mobilePhone,
+			String address1, String address2, String city, String state,
+			long zipCode, String securityAnswer)
+		throws RemoteException {
+
+		try {
+			com.liferay.amf.model.Registration returnValue =
+				RegistrationServiceUtil.addRegistration(
+					amfReistrationId, groupId, companyId, userId, createDate,
+					modifieDate, userName, firstName, lastName, emailAddress,
+					gender, birthday, password, homePhone, mobilePhone,
+					address1, address2, city, state, zipCode, securityAnswer);
+
+			return com.liferay.amf.model.RegistrationSoap.toSoapModel(
+				returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		RegistrationServiceSoap.class);
+
 }

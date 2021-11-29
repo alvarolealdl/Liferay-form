@@ -14,10 +14,15 @@
 
 package com.liferay.amf.service.impl;
 
+import com.liferay.amf.model.Registration;
 import com.liferay.amf.service.base.RegistrationServiceBaseImpl;
 import com.liferay.portal.aop.AopService;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+
+import java.util.Date;
 
 /**
  * The implementation of the registration remote service.
@@ -41,9 +46,19 @@ import org.osgi.service.component.annotations.Component;
 )
 public class RegistrationServiceImpl extends RegistrationServiceBaseImpl {
 
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Always use <code>com.liferay.amf.service.RegistrationServiceUtil</code> to access the registration remote service.
-	 */
+
+	public Registration addRegistration(long amfReistrationId, long groupId, long companyId, long userId,
+										Date createDate, Date modifieDate, String userName, String firstName,
+										String lastName, String emailAddress, String gender, Date birthday,
+										String password, String homePhone, String mobilePhone, String address1,
+										String address2, String city, String state, long zipCode, String securityAnswer)
+			throws PortalException {
+
+		return _registrationLocalServiceImpl.addRegistration(amfReistrationId, groupId, companyId, userId, createDate,
+				modifieDate, userName, firstName, lastName, emailAddress, gender, birthday, password, homePhone,
+				mobilePhone, address1, address2, city, state, zipCode, securityAnswer);
+	}
+
+	@Reference
+	private RegistrationLocalServiceImpl _registrationLocalServiceImpl;
 }

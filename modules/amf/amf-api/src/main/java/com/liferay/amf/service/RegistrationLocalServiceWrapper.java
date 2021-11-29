@@ -33,6 +33,24 @@ public class RegistrationLocalServiceWrapper
 		_registrationLocalService = registrationLocalService;
 	}
 
+	@Override
+	public com.liferay.amf.model.Registration addRegistration(
+			long amfReistrationId, long groupId, long companyId, long userId,
+			java.util.Date createDate, java.util.Date modifieDate,
+			String userName, String firstName, String lastName,
+			String emailAddress, String gender, java.util.Date birthday,
+			String password, String homePhone, String mobilePhone,
+			String address1, String address2, String city, String state,
+			long zipCode, String securityAnswer)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _registrationLocalService.addRegistration(
+			amfReistrationId, groupId, companyId, userId, createDate,
+			modifieDate, userName, firstName, lastName, emailAddress, gender,
+			birthday, password, homePhone, mobilePhone, address1, address2,
+			city, state, zipCode, securityAnswer);
+	}
+
 	/**
 	 * Adds the registration to the database. Also notifies the appropriate model listeners.
 	 *
