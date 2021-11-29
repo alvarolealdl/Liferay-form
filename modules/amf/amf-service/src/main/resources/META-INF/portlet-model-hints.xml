@@ -6,49 +6,22 @@
 		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
-		<field name="userName" type="String">
-			<validator name="required" />
-		</field>
+		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="firstName" type="String">
-			<hint name="max-length">50</hint>
-			<validator name="required" />
-		</field>
-		<field name="lastName" type="String">
-			<hint name="max-length">50</hint>
-			<validator name="required" />
-		</field>
-		<field name="emailAddress" type="String">
-			<hint name="max-length">255</hint>
-			<validator name="required" />
-		</field>
-		<field name="gender" type="String">
-			<validator name="required" />
-		</field>
-		<field name="birthday" type="Date">
-			<validator name="required" />
-		</field>
-		<field name="password" type="String">
-			<validator name="required" />
-		</field>
+		<field name="firstName" type="String" />
+		<field name="lastName" type="String" />
+		<field name="emailAddress" type="String" />
+		<field name="gender" type="String" />
+		<field name="birthday" type="Date" />
+		<field name="password" type="String" />
 		<field name="homePhone" type="String" />
 		<field name="mobilePhone" type="String" />
-		<field name="address1" type="String">
-			<validator name="required" />
-		</field>
+		<field name="address1" type="String" />
 		<field name="address2" type="String" />
-		<field name="city" type="String">
-			<validator name="required" />
-		</field>
-		<field name="state" type="String">
-			<validator name="required" />
-		</field>
-		<field name="zipCode" type="Long">
-			<validator name="required" />
-		</field>
-		<field name="securityAnswer" type="String">
-			<validator name="required" />
-		</field>
+		<field name="city" type="String" />
+		<field name="state" type="String" />
+		<field name="zipCode" type="Long" />
+		<field name="securityAnswer" type="String" />
 	</model>
 </model-hints>

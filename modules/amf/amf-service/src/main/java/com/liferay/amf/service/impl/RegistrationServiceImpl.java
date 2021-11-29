@@ -14,7 +14,6 @@
 
 package com.liferay.amf.service.impl;
 
-import com.liferay.amf.model.Registration;
 import com.liferay.amf.service.base.RegistrationServiceBaseImpl;
 import com.liferay.portal.aop.AopService;
 
@@ -47,11 +46,11 @@ import java.util.Date;
 public class RegistrationServiceImpl extends RegistrationServiceBaseImpl {
 
 
-	public Registration addRegistration(long amfReistrationId, long groupId, long companyId, long userId,
-										Date createDate, Date modifieDate, String userName, String firstName,
-										String lastName, String emailAddress, String gender, Date birthday,
-										String password, String homePhone, String mobilePhone, String address1,
-										String address2, String city, String state, long zipCode, String securityAnswer)
+	public AmfRegistration addRegistration(long amfReistrationId, long groupId, long companyId, long userId,
+										   Date createDate, Date modifieDate, String userName, String firstName,
+										   String lastName, String emailAddress, String gender, Date birthday,
+										   String password, String homePhone, String mobilePhone, String address1,
+										   String address2, String city, String state, long zipCode, String securityAnswer)
 			throws PortalException {
 
 		return _registrationLocalServiceImpl.addRegistration(amfReistrationId, groupId, companyId, userId, createDate,

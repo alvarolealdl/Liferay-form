@@ -44,7 +44,7 @@ public class RegistrationLocalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>com.liferay.amf.service.impl.RegistrationLocalServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
-	public static Registration addRegistration(
+	public static com.liferay.amf.model.AmfRegistration addRegistration(
 			long amfReistrationId, long groupId, long companyId, long userId,
 			java.util.Date createDate, java.util.Date modifieDate,
 			String userName, String firstName, String lastName,

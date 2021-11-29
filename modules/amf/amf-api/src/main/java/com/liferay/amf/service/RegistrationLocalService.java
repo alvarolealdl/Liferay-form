@@ -62,7 +62,7 @@ public interface RegistrationLocalService
 	 *
 	 * Never modify this interface directly. Add custom service methods to <code>com.liferay.amf.service.impl.RegistrationLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface. Consume the registration local service via injection or a <code>org.osgi.util.tracker.ServiceTracker</code>. Use {@link RegistrationLocalServiceUtil} if injection and service tracking are not available.
 	 */
-	public Registration addRegistration(
+	public AmfRegistration addRegistration(
 			long amfReistrationId, long groupId, long companyId, long userId,
 			Date createDate, Date modifieDate, String userName,
 			String firstName, String lastName, String emailAddress,

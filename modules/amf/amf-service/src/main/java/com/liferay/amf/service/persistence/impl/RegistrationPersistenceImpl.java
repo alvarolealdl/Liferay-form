@@ -20,7 +20,7 @@ import com.liferay.amf.model.RegistrationTable;
 import com.liferay.amf.model.impl.RegistrationImpl;
 import com.liferay.amf.model.impl.RegistrationModelImpl;
 import com.liferay.amf.service.persistence.RegistrationPersistence;
-import com.liferay.amf.service.persistence.impl.constants.AmfRegistrationPersistenceConstants;
+import com.liferay.amf.service.persistence.impl.constants.RegistrationPersistenceConstants;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.dao.orm.ArgumentsResolver;
@@ -652,7 +652,7 @@ public class RegistrationPersistenceImpl
 
 	@Override
 	@Reference(
-		target = AmfRegistrationPersistenceConstants.SERVICE_CONFIGURATION_FILTER,
+		target = RegistrationPersistenceConstants.SERVICE_CONFIGURATION_FILTER,
 		unbind = "-"
 	)
 	public void setConfiguration(Configuration configuration) {
@@ -660,7 +660,7 @@ public class RegistrationPersistenceImpl
 
 	@Override
 	@Reference(
-		target = AmfRegistrationPersistenceConstants.ORIGIN_BUNDLE_SYMBOLIC_NAME_FILTER,
+		target = RegistrationPersistenceConstants.ORIGIN_BUNDLE_SYMBOLIC_NAME_FILTER,
 		unbind = "-"
 	)
 	public void setDataSource(DataSource dataSource) {
@@ -669,7 +669,7 @@ public class RegistrationPersistenceImpl
 
 	@Override
 	@Reference(
-		target = AmfRegistrationPersistenceConstants.ORIGIN_BUNDLE_SYMBOLIC_NAME_FILTER,
+		target = RegistrationPersistenceConstants.ORIGIN_BUNDLE_SYMBOLIC_NAME_FILTER,
 		unbind = "-"
 	)
 	public void setSessionFactory(SessionFactory sessionFactory) {

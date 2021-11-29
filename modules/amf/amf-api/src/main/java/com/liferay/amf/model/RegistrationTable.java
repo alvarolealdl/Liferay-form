@@ -22,7 +22,7 @@ import java.sql.Types;
 import java.util.Date;
 
 /**
- * The table class for the &quot;AmfRegistration_Registration&quot; database table.
+ * The table class for the &quot;Registration_Registration&quot; database table.
  *
  * @author Brian Wing Shun Chan
  * @see Registration
@@ -78,7 +78,7 @@ public class RegistrationTable extends BaseTable<RegistrationTable> {
 			"securityAnswer", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
 
 	private RegistrationTable() {
-		super("AmfRegistration_Registration", RegistrationTable::new);
+		super("Registration_Registration", RegistrationTable::new);
 	}
 
 }

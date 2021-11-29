@@ -51,7 +51,7 @@ import com.liferay.portal.kernel.util.MethodKey;
  */
 public class RegistrationServiceHttp {
 
-	public static com.liferay.amf.model.Registration addRegistration(
+	public static com.liferay.amf.model.AmfRegistration addRegistration(
 			HttpPrincipal httpPrincipal, long amfReistrationId, long groupId,
 			long companyId, long userId, java.util.Date createDate,
 			java.util.Date modifieDate, String userName, String firstName,
@@ -90,7 +90,7 @@ public class RegistrationServiceHttp {
 					exception);
 			}
 
-			return (com.liferay.amf.model.Registration)returnObj;
+			return (com.liferay.amf.model.AmfRegistration)returnObj;
 		}
 		catch (com.liferay.portal.kernel.exception.SystemException
 					systemException) {

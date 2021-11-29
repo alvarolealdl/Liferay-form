@@ -3,7 +3,7 @@
 
 <hibernate-mapping auto-import="false" default-lazy="false">
 	<import class="com.liferay.amf.model.Registration" />
-	<class name="com.liferay.amf.model.impl.RegistrationImpl" table="AmfRegistration_Registration">
+	<class name="com.liferay.amf.model.impl.RegistrationImpl" table="Registration_Registration">
 		<id access="com.liferay.portal.dao.orm.hibernate.LiferayPropertyAccessor" name="amfRegistrationId" type="long">
 			<generator class="assigned" />
 		</id>

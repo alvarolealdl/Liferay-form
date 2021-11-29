@@ -34,7 +34,7 @@ public class RegistrationLocalServiceWrapper
 	}
 
 	@Override
-	public com.liferay.amf.model.Registration addRegistration(
+	public com.liferay.amf.model.AmfRegistration addRegistration(
 			long amfReistrationId, long groupId, long companyId, long userId,
 			java.util.Date createDate, java.util.Date modifieDate,
 			String userName, String firstName, String lastName,

@@ -14,7 +14,6 @@
 
 package com.liferay.amf.service;
 
-import com.liferay.amf.model.Registration;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
@@ -50,7 +49,7 @@ public interface RegistrationService extends BaseService {
 	 *
 	 * Never modify this interface directly. Add custom service methods to <code>com.liferay.amf.service.impl.RegistrationServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface. Consume the registration remote service via injection or a <code>org.osgi.util.tracker.ServiceTracker</code>. Use {@link RegistrationServiceUtil} if injection and service tracking are not available.
 	 */
-	public Registration addRegistration(
+	public AmfRegistration addRegistration(
 			long amfReistrationId, long groupId, long companyId, long userId,
 			Date createDate, Date modifieDate, String userName,
 			String firstName, String lastName, String emailAddress,
