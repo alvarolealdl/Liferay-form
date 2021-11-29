@@ -1,16 +1,10 @@
 dependencies {
-	compile project(":modules:amf:amf-api")
-
 	compileOnly group: "com.liferay.portal", name: "release.dxp.api"
-}
 
-buildService {
-	apiDir = "../amf-api/src/main/java"
+	cssBuilder group: "com.liferay", name: "com.liferay.css.builder", version: "3.0.2"
 }
 apply plugin: "com.liferay.plugin"
 
 liferay {
 	deployDir = file("/home/me/dev/projects/bundles/master/deploy")
 }
-
-group = "com.liferay.amf"
