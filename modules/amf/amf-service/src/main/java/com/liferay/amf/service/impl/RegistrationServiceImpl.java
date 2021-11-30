@@ -38,7 +38,7 @@ import java.util.Date;
  */
 @Component(
 	property = {
-		"json.web.service.context.name=amfregistration",
+		"json.web.service.context.name=amfRegistration",
 		"json.web.service.context.path=Registration"
 	},
 	service = AopService.class
@@ -46,16 +46,14 @@ import java.util.Date;
 public class RegistrationServiceImpl extends RegistrationServiceBaseImpl {
 
 
-	public Registration addRegistration(long amfReistrationId, long groupId, long companyId, long userId,
-										   Date createDate, Date modifieDate, String userName, String firstName,
+	public Registration addRegistration( String userName, String firstName,
 										   String lastName, String emailAddress, String gender, Date birthday,
 										   String password, String homePhone, String mobilePhone, String address1,
 										   String address2, String city, String state, long zipCode, String securityAnswer)
 			throws PortalException {
 
-		return _registrationLocalServiceImpl.addRegistration(amfReistrationId, groupId, companyId, userId, createDate,
-				modifieDate, userName, firstName, lastName, emailAddress, gender, birthday, password, homePhone,
-				mobilePhone, address1, address2, city, state, zipCode, securityAnswer);
+		return _registrationLocalServiceImpl.addRegistration(userName, firstName, lastName, emailAddress, gender,
+				birthday, password, homePhone, mobilePhone, address1, address2, city, state, zipCode, securityAnswer);
 	}
 
 	@Reference

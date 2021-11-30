@@ -51,12 +51,11 @@ public interface RegistrationService extends BaseService {
 	 * Never modify this interface directly. Add custom service methods to <code>com.liferay.amf.service.impl.RegistrationServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface. Consume the registration remote service via injection or a <code>org.osgi.util.tracker.ServiceTracker</code>. Use {@link RegistrationServiceUtil} if injection and service tracking are not available.
 	 */
 	public Registration addRegistration(
-			long amfReistrationId, long groupId, long companyId, long userId,
-			Date createDate, Date modifieDate, String userName,
-			String firstName, String lastName, String emailAddress,
-			String gender, Date birthday, String password, String homePhone,
-			String mobilePhone, String address1, String address2, String city,
-			String state, long zipCode, String securityAnswer)
+			String userName, String firstName, String lastName,
+			String emailAddress, String gender, Date birthday, String password,
+			String homePhone, String mobilePhone, String address1,
+			String address2, String city, String state, long zipCode,
+			String securityAnswer)
 		throws PortalException;
 
 	/**

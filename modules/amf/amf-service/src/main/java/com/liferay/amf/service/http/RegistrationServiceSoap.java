@@ -64,8 +64,6 @@ import java.rmi.RemoteException;
 public class RegistrationServiceSoap {
 
 	public static com.liferay.amf.model.RegistrationSoap addRegistration(
-			long amfReistrationId, long groupId, long companyId, long userId,
-			java.util.Date createDate, java.util.Date modifieDate,
 			String userName, String firstName, String lastName,
 			String emailAddress, String gender, java.util.Date birthday,
 			String password, String homePhone, String mobilePhone,
@@ -76,10 +74,9 @@ public class RegistrationServiceSoap {
 		try {
 			com.liferay.amf.model.Registration returnValue =
 				RegistrationServiceUtil.addRegistration(
-					amfReistrationId, groupId, companyId, userId, createDate,
-					modifieDate, userName, firstName, lastName, emailAddress,
-					gender, birthday, password, homePhone, mobilePhone,
-					address1, address2, city, state, zipCode, securityAnswer);
+					userName, firstName, lastName, emailAddress, gender,
+					birthday, password, homePhone, mobilePhone, address1,
+					address2, city, state, zipCode, securityAnswer);
 
 			return com.liferay.amf.model.RegistrationSoap.toSoapModel(
 				returnValue);

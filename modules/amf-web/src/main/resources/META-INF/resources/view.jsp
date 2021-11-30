@@ -1,3 +1,17 @@
+/**
+* Copyright (c) 2000-present Liferay, Inc. All rights reserved.
+*
+* This library is free software; you can redistribute it and/or modify it under
+* the terms of the GNU Lesser General Public License as published by the Free
+* Software Foundation; either version 2.1 of the License, or (at your option)
+* any later version.
+*
+* This library is distributed in the hope that it will be useful, but WITHOUT
+* ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+* FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
+* details.
+*/
+--%>
 
 <%@ include file="/init.jsp" %>
 
@@ -12,6 +26,7 @@
 <portlet:actionURL name="<%=MCVCommandNames.ADD_REGISTRATION%>" var="addRegistrationURL" />
 
 <aui:form action="<%= addRegistrationURL %>" method="post" name="amfRegistration">
+
 
 	<aui:input label="First Name" name="firstName" type="text"
 			   value='<%= "First Name" %>' />
@@ -31,8 +46,11 @@
 	<aui:input label="Birthday" name="Birthday" type="date"
 			   value='<%= "Birthday" %>' />
 
-	<aui:input label=" Confirm Password" name="confirmPassword" type="text"
+	<aui:input label="Password" name="password" type="text"
 			   value='<%= "Password" %>' />
+
+	<aui:input label=" Confirm Password" name="confirmPassword" type="text"
+			   value='<%= "Confirm Password" %>' />
 
 	<aui:input label="Home Phone" name="homePhone" type="text"
 			   value='<%= "Home Phone" %>' />
@@ -70,7 +88,7 @@
 
 	<!--Buttons-->
 	<liferay-frontend:edit-form-footer>
-		<aui:button type="submit" />
+		<aui:button type="submit" value="save" />
 
 		<aui:button href="<%= backURL %>" type="cancel" />
 	</liferay-frontend:edit-form-footer>

@@ -52,9 +52,7 @@ import com.liferay.portal.kernel.util.MethodKey;
 public class RegistrationServiceHttp {
 
 	public static com.liferay.amf.model.Registration addRegistration(
-			HttpPrincipal httpPrincipal, long amfReistrationId, long groupId,
-			long companyId, long userId, java.util.Date createDate,
-			java.util.Date modifieDate, String userName, String firstName,
+			HttpPrincipal httpPrincipal, String userName, String firstName,
 			String lastName, String emailAddress, String gender,
 			java.util.Date birthday, String password, String homePhone,
 			String mobilePhone, String address1, String address2, String city,
@@ -67,11 +65,9 @@ public class RegistrationServiceHttp {
 				_addRegistrationParameterTypes0);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, amfReistrationId, groupId, companyId, userId,
-				createDate, modifieDate, userName, firstName, lastName,
-				emailAddress, gender, birthday, password, homePhone,
-				mobilePhone, address1, address2, city, state, zipCode,
-				securityAnswer);
+				methodKey, userName, firstName, lastName, emailAddress, gender,
+				birthday, password, homePhone, mobilePhone, address1, address2,
+				city, state, zipCode, securityAnswer);
 
 			Object returnObj = null;
 
@@ -106,12 +102,10 @@ public class RegistrationServiceHttp {
 
 	private static final Class<?>[] _addRegistrationParameterTypes0 =
 		new Class[] {
-			long.class, long.class, long.class, long.class,
-			java.util.Date.class, java.util.Date.class, String.class,
 			String.class, String.class, String.class, String.class,
-			java.util.Date.class, String.class, String.class, String.class,
-			String.class, String.class, String.class, String.class, long.class,
-			String.class
+			String.class, java.util.Date.class, String.class, String.class,
+			String.class, String.class, String.class, String.class,
+			String.class, long.class, String.class
 		};
 
 }

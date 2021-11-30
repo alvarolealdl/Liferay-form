@@ -19,9 +19,14 @@ import com.liferay.amf.service.persistence.RegistrationPersistence;
 import com.liferay.portal.aop.AopService;
 import com.liferay.amf.model.Registration;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.service.GroupLocalService;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
+import com.liferay.portal.kernel.model.Group;
+import com.liferay.portal.kernel.model.User;
+import com.liferay.portal.kernel.service.ServiceContext;
 
+import java.time.Instant;
 import java.util.Date;
 
 /**
@@ -45,19 +50,22 @@ public class RegistrationLocalServiceImpl
 	extends RegistrationLocalServiceBaseImpl {
 
 
-	public Registration addRegistration(long amfReistrationId, long groupId, long companyId, long userId,
-										   Date createDate, Date modifieDate, String userName, String firstName,
-										   String lastName, String emailAddress, String gender, Date birthday,
-										   String password, String homePhone, String mobilePhone, String address1,
-										   String address2, String city, String state, long zipCode, String securityAnswer)
+	public Registration addRegistration(  String userName, String firstName,
+										String lastName, String emailAddress, String gender, Date birthday,
+										String password, String homePhone, String mobilePhone, String address1,
+										String address2, String city, String state, long zipCode, String securityAnswer)
 	throws PortalException {
 
-		Registration registration = _registrationPersistence.create(amfReistrationId);
-		registration.setGroupId(groupId);
-		registration.setCompanyId(companyId);
+
+		long userId = _serviceContext.getUserId();
+		User user = userLocalService.getUser(userId);
+		long amfRegistrationId = counterLocalService.increment(Registration.class.getName());
+
+		Registration registration = _registrationPersistence.create(amfRegistrationId);
+
+		registration.setCompanyId(user.getCompanyId());
 		registration.setUserId(userId);
-		registration.setCreateDate(createDate);
-		registration.setModifiedDate(modifieDate);
+		registration.setCreateDate(new Date());
 		registration.setUserName(userName);
 		registration.setFirstName(firstName);
 		registration.setLastName(lastName);
@@ -84,4 +92,10 @@ public class RegistrationLocalServiceImpl
 
 	@Reference
 	private RegistrationPersistence _registrationPersistence;
+
+	@Reference
+	private GroupLocalService _groupLocalService;
+
+	@Reference
+	private ServiceContext _serviceContext;
 }
