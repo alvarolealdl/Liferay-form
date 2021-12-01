@@ -88,6 +88,81 @@ public class RegistrationServiceSoap {
 		}
 	}
 
+	public static com.liferay.amf.model.RegistrationSoap updateRegistration(
+			long registrationId, String firstName, String lastName,
+			String emailAddress, String address1)
+		throws RemoteException {
+
+		try {
+			com.liferay.amf.model.Registration returnValue =
+				RegistrationServiceUtil.updateRegistration(
+					registrationId, firstName, lastName, emailAddress,
+					address1);
+
+			return com.liferay.amf.model.RegistrationSoap.toSoapModel(
+				returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
+	public static com.liferay.amf.model.RegistrationSoap deleteRegistration(
+			long registrationId)
+		throws RemoteException {
+
+		try {
+			com.liferay.amf.model.Registration returnValue =
+				RegistrationServiceUtil.deleteRegistration(registrationId);
+
+			return com.liferay.amf.model.RegistrationSoap.toSoapModel(
+				returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
+	public static com.liferay.amf.model.RegistrationSoap[] getRegistrationById(
+			long registrationId)
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.amf.model.Registration> returnValue =
+				RegistrationServiceUtil.getRegistrationById(registrationId);
+
+			return com.liferay.amf.model.RegistrationSoap.toSoapModels(
+				returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
+	public static com.liferay.amf.model.RegistrationSoap
+			getEmailAddressByUserId(long userId)
+		throws RemoteException {
+
+		try {
+			com.liferay.amf.model.Registration returnValue =
+				RegistrationServiceUtil.getEmailAddressByUserId(userId);
+
+			return com.liferay.amf.model.RegistrationSoap.toSoapModel(
+				returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(
 		RegistrationServiceSoap.class);
 

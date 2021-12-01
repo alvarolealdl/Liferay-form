@@ -52,6 +52,6 @@
 
 	</entity>
 	<exceptions>
-		<exception>EmailAddressNotFoundException</exception>
+		<exception>RegistrationValidationException</exception>
 	</exceptions>
 </service-builder>
