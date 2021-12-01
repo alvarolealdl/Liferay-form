@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.service.ServiceContext;
 
 import java.time.Instant;
 import java.util.Date;
+import java.util.List;
 
 /**
  * The implementation of the registration local service.
@@ -106,6 +107,19 @@ public class RegistrationLocalServiceImpl
 
 	}
 
+	public Registration deleteRegistration(long registrationId) throws PortalException{
+
+		return super.deleteRegistration(registrationId);
+	}
+
+	//Finders Methods
+	public List<Registration> getRegistrationById(long registrationId){
+		return _registrationPersistence.findByRegistrationId(registrationId);
+	}
+
+	public Registration getEmailAddressByUserId(long userId){
+		return _registrationPersistence.fetchByEmailAddress(userId);
+	}
 
 	@Reference
 	private RegistrationPersistence _registrationPersistence;
