@@ -44,6 +44,19 @@ public class RegistrationLocalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>com.liferay.amf.service.impl.RegistrationLocalServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static Registration addRegistration(
+			long groupId, String userName, String firstName, String lastName,
+			String emailAddress, String gender, java.util.Date birthday,
+			String password, String homePhone, String mobilePhone,
+			String address1, String address2, String city, String state,
+			long zipCode, String securityAnswer)
+		throws PortalException {
+
+		return getService().addRegistration(
+			groupId, userName, firstName, lastName, emailAddress, gender,
+			birthday, password, homePhone, mobilePhone, address1, address2,
+			city, state, zipCode, securityAnswer);
+	}
 
 	/**
 	 * Adds the registration to the database. Also notifies the appropriate model listeners.
@@ -57,20 +70,6 @@ public class RegistrationLocalServiceUtil {
 	 */
 	public static Registration addRegistration(Registration registration) {
 		return getService().addRegistration(registration);
-	}
-
-	public static Registration addRegistration(
-			String userName, String firstName, String lastName,
-			String emailAddress, String gender, java.util.Date birthday,
-			String password, String homePhone, String mobilePhone,
-			String address1, String address2, String city, String state,
-			long zipCode, String securityAnswer)
-		throws PortalException {
-
-		return getService().addRegistration(
-			userName, firstName, lastName, emailAddress, gender, birthday,
-			password, homePhone, mobilePhone, address1, address2, city, state,
-			zipCode, securityAnswer);
 	}
 
 	/**
@@ -229,6 +228,10 @@ public class RegistrationLocalServiceUtil {
 		return getService().getActionableDynamicQuery();
 	}
 
+	public static Registration getEmailAddressByUserId(long userId) {
+		return getService().getEmailAddressByUserId(userId);
+	}
+
 	public static
 		com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery
 			getIndexableActionableDynamicQuery() {
@@ -267,6 +270,10 @@ public class RegistrationLocalServiceUtil {
 		return getService().getRegistration(amfRegistrationId);
 	}
 
+	public static List<Registration> getRegistrationById(long registrationId) {
+		return getService().getRegistrationById(registrationId);
+	}
+
 	/**
 	 * Returns a range of all the registrations.
 	 *
@@ -289,6 +296,15 @@ public class RegistrationLocalServiceUtil {
 	 */
 	public static int getRegistrationsCount() {
 		return getService().getRegistrationsCount();
+	}
+
+	public static Registration updateRegistration(
+			long registrationId, String firstName, String lastName,
+			String emailAddress, String address1)
+		throws PortalException {
+
+		return getService().updateRegistration(
+			registrationId, firstName, lastName, emailAddress, address1);
 	}
 
 	/**

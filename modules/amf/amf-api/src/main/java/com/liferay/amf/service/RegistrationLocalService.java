@@ -62,6 +62,13 @@ public interface RegistrationLocalService
 	 *
 	 * Never modify this interface directly. Add custom service methods to <code>com.liferay.amf.service.impl.RegistrationLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface. Consume the registration local service via injection or a <code>org.osgi.util.tracker.ServiceTracker</code>. Use {@link RegistrationLocalServiceUtil} if injection and service tracking are not available.
 	 */
+	public Registration addRegistration(
+			long groupId, String userName, String firstName, String lastName,
+			String emailAddress, String gender, Date birthday, String password,
+			String homePhone, String mobilePhone, String address1,
+			String address2, String city, String state, long zipCode,
+			String securityAnswer)
+		throws PortalException;
 
 	/**
 	 * Adds the registration to the database. Also notifies the appropriate model listeners.
@@ -75,14 +82,6 @@ public interface RegistrationLocalService
 	 */
 	@Indexable(type = IndexableType.REINDEX)
 	public Registration addRegistration(Registration registration);
-
-	public Registration addRegistration(
-			String userName, String firstName, String lastName,
-			String emailAddress, String gender, Date birthday, String password,
-			String homePhone, String mobilePhone, String address1,
-			String address2, String city, String state, long zipCode,
-			String securityAnswer)
-		throws PortalException;
 
 	/**
 	 * @throws PortalException
@@ -213,6 +212,9 @@ public interface RegistrationLocalService
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public Registration getEmailAddressByUserId(long userId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
 
 	/**
@@ -241,6 +243,9 @@ public interface RegistrationLocalService
 	public Registration getRegistration(long amfRegistrationId)
 		throws PortalException;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Registration> getRegistrationById(long registrationId);
+
 	/**
 	 * Returns a range of all the registrations.
 	 *
@@ -262,6 +267,11 @@ public interface RegistrationLocalService
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getRegistrationsCount();
+
+	public Registration updateRegistration(
+			long registrationId, String firstName, String lastName,
+			String emailAddress, String address1)
+		throws PortalException;
 
 	/**
 	 * Updates the registration in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.

@@ -17,6 +17,8 @@ package com.liferay.amf.service;
 import com.liferay.amf.model.Registration;
 import com.liferay.portal.kernel.exception.PortalException;
 
+import java.util.List;
+
 /**
  * Provides the remote service utility for Registration. This utility wraps
  * <code>com.liferay.amf.service.impl.RegistrationServiceImpl</code> and is an
@@ -37,7 +39,7 @@ public class RegistrationServiceUtil {
 	 * Never modify this class directly. Add custom service methods to <code>com.liferay.amf.service.impl.RegistrationServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
 	public static Registration addRegistration(
-			String userName, String firstName, String lastName,
+			long groupId, String userName, String firstName, String lastName,
 			String emailAddress, String gender, java.util.Date birthday,
 			String password, String homePhone, String mobilePhone,
 			String address1, String address2, String city, String state,
@@ -45,9 +47,19 @@ public class RegistrationServiceUtil {
 		throws PortalException {
 
 		return getService().addRegistration(
-			userName, firstName, lastName, emailAddress, gender, birthday,
-			password, homePhone, mobilePhone, address1, address2, city, state,
-			zipCode, securityAnswer);
+			groupId, userName, firstName, lastName, emailAddress, gender,
+			birthday, password, homePhone, mobilePhone, address1, address2,
+			city, state, zipCode, securityAnswer);
+	}
+
+	public static Registration deleteRegistration(long registrationId)
+		throws PortalException {
+
+		return getService().deleteRegistration(registrationId);
+	}
+
+	public static Registration getEmailAddressByUserId(long userId) {
+		return getService().getEmailAddressByUserId(userId);
 	}
 
 	/**
@@ -57,6 +69,21 @@ public class RegistrationServiceUtil {
 	 */
 	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
+	}
+
+	public static List<Registration> getRegistrationById(long registrationId)
+		throws PortalException {
+
+		return getService().getRegistrationById(registrationId);
+	}
+
+	public static Registration updateRegistration(
+			long registrationId, String firstName, String lastName,
+			String emailAddress, String address1)
+		throws PortalException {
+
+		return getService().updateRegistration(
+			registrationId, firstName, lastName, emailAddress, address1);
 	}
 
 	public static RegistrationService getService() {

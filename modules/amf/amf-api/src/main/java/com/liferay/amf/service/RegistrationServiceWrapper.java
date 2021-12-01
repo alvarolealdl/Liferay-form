@@ -32,7 +32,7 @@ public class RegistrationServiceWrapper
 
 	@Override
 	public com.liferay.amf.model.Registration addRegistration(
-			String userName, String firstName, String lastName,
+			long groupId, String userName, String firstName, String lastName,
 			String emailAddress, String gender, java.util.Date birthday,
 			String password, String homePhone, String mobilePhone,
 			String address1, String address2, String city, String state,
@@ -40,9 +40,24 @@ public class RegistrationServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _registrationService.addRegistration(
-			userName, firstName, lastName, emailAddress, gender, birthday,
-			password, homePhone, mobilePhone, address1, address2, city, state,
-			zipCode, securityAnswer);
+			groupId, userName, firstName, lastName, emailAddress, gender,
+			birthday, password, homePhone, mobilePhone, address1, address2,
+			city, state, zipCode, securityAnswer);
+	}
+
+	@Override
+	public com.liferay.amf.model.Registration deleteRegistration(
+			long registrationId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _registrationService.deleteRegistration(registrationId);
+	}
+
+	@Override
+	public com.liferay.amf.model.Registration getEmailAddressByUserId(
+		long userId) {
+
+		return _registrationService.getEmailAddressByUserId(userId);
 	}
 
 	/**
@@ -53,6 +68,24 @@ public class RegistrationServiceWrapper
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _registrationService.getOSGiServiceIdentifier();
+	}
+
+	@Override
+	public java.util.List<com.liferay.amf.model.Registration>
+			getRegistrationById(long registrationId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _registrationService.getRegistrationById(registrationId);
+	}
+
+	@Override
+	public com.liferay.amf.model.Registration updateRegistration(
+			long registrationId, String firstName, String lastName,
+			String emailAddress, String address1)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _registrationService.updateRegistration(
+			registrationId, firstName, lastName, emailAddress, address1);
 	}
 
 	@Override

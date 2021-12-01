@@ -124,6 +124,222 @@ public class RegistrationUtil {
 	}
 
 	/**
+	 * Returns all the registrations where amfRegistrationId = &#63;.
+	 *
+	 * @param amfRegistrationId the amf registration ID
+	 * @return the matching registrations
+	 */
+	public static List<Registration> findByRegistrationId(
+		long amfRegistrationId) {
+
+		return getPersistence().findByRegistrationId(amfRegistrationId);
+	}
+
+	/**
+	 * Returns a range of all the registrations where amfRegistrationId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>RegistrationModelImpl</code>.
+	 * </p>
+	 *
+	 * @param amfRegistrationId the amf registration ID
+	 * @param start the lower bound of the range of registrations
+	 * @param end the upper bound of the range of registrations (not inclusive)
+	 * @return the range of matching registrations
+	 */
+	public static List<Registration> findByRegistrationId(
+		long amfRegistrationId, int start, int end) {
+
+		return getPersistence().findByRegistrationId(
+			amfRegistrationId, start, end);
+	}
+
+	/**
+	 * Returns an ordered range of all the registrations where amfRegistrationId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>RegistrationModelImpl</code>.
+	 * </p>
+	 *
+	 * @param amfRegistrationId the amf registration ID
+	 * @param start the lower bound of the range of registrations
+	 * @param end the upper bound of the range of registrations (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching registrations
+	 */
+	public static List<Registration> findByRegistrationId(
+		long amfRegistrationId, int start, int end,
+		OrderByComparator<Registration> orderByComparator) {
+
+		return getPersistence().findByRegistrationId(
+			amfRegistrationId, start, end, orderByComparator);
+	}
+
+	/**
+	 * Returns an ordered range of all the registrations where amfRegistrationId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>RegistrationModelImpl</code>.
+	 * </p>
+	 *
+	 * @param amfRegistrationId the amf registration ID
+	 * @param start the lower bound of the range of registrations
+	 * @param end the upper bound of the range of registrations (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching registrations
+	 */
+	public static List<Registration> findByRegistrationId(
+		long amfRegistrationId, int start, int end,
+		OrderByComparator<Registration> orderByComparator,
+		boolean useFinderCache) {
+
+		return getPersistence().findByRegistrationId(
+			amfRegistrationId, start, end, orderByComparator, useFinderCache);
+	}
+
+	/**
+	 * Returns the first registration in the ordered set where amfRegistrationId = &#63;.
+	 *
+	 * @param amfRegistrationId the amf registration ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching registration
+	 * @throws NoSuchRegistrationException if a matching registration could not be found
+	 */
+	public static Registration findByRegistrationId_First(
+			long amfRegistrationId,
+			OrderByComparator<Registration> orderByComparator)
+		throws com.liferay.amf.exception.NoSuchRegistrationException {
+
+		return getPersistence().findByRegistrationId_First(
+			amfRegistrationId, orderByComparator);
+	}
+
+	/**
+	 * Returns the first registration in the ordered set where amfRegistrationId = &#63;.
+	 *
+	 * @param amfRegistrationId the amf registration ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching registration, or <code>null</code> if a matching registration could not be found
+	 */
+	public static Registration fetchByRegistrationId_First(
+		long amfRegistrationId,
+		OrderByComparator<Registration> orderByComparator) {
+
+		return getPersistence().fetchByRegistrationId_First(
+			amfRegistrationId, orderByComparator);
+	}
+
+	/**
+	 * Returns the last registration in the ordered set where amfRegistrationId = &#63;.
+	 *
+	 * @param amfRegistrationId the amf registration ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching registration
+	 * @throws NoSuchRegistrationException if a matching registration could not be found
+	 */
+	public static Registration findByRegistrationId_Last(
+			long amfRegistrationId,
+			OrderByComparator<Registration> orderByComparator)
+		throws com.liferay.amf.exception.NoSuchRegistrationException {
+
+		return getPersistence().findByRegistrationId_Last(
+			amfRegistrationId, orderByComparator);
+	}
+
+	/**
+	 * Returns the last registration in the ordered set where amfRegistrationId = &#63;.
+	 *
+	 * @param amfRegistrationId the amf registration ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching registration, or <code>null</code> if a matching registration could not be found
+	 */
+	public static Registration fetchByRegistrationId_Last(
+		long amfRegistrationId,
+		OrderByComparator<Registration> orderByComparator) {
+
+		return getPersistence().fetchByRegistrationId_Last(
+			amfRegistrationId, orderByComparator);
+	}
+
+	/**
+	 * Removes all the registrations where amfRegistrationId = &#63; from the database.
+	 *
+	 * @param amfRegistrationId the amf registration ID
+	 */
+	public static void removeByRegistrationId(long amfRegistrationId) {
+		getPersistence().removeByRegistrationId(amfRegistrationId);
+	}
+
+	/**
+	 * Returns the number of registrations where amfRegistrationId = &#63;.
+	 *
+	 * @param amfRegistrationId the amf registration ID
+	 * @return the number of matching registrations
+	 */
+	public static int countByRegistrationId(long amfRegistrationId) {
+		return getPersistence().countByRegistrationId(amfRegistrationId);
+	}
+
+	/**
+	 * Returns the registration where userId = &#63; or throws a <code>NoSuchRegistrationException</code> if it could not be found.
+	 *
+	 * @param userId the user ID
+	 * @return the matching registration
+	 * @throws NoSuchRegistrationException if a matching registration could not be found
+	 */
+	public static Registration findByEmailAddress(long userId)
+		throws com.liferay.amf.exception.NoSuchRegistrationException {
+
+		return getPersistence().findByEmailAddress(userId);
+	}
+
+	/**
+	 * Returns the registration where userId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param userId the user ID
+	 * @return the matching registration, or <code>null</code> if a matching registration could not be found
+	 */
+	public static Registration fetchByEmailAddress(long userId) {
+		return getPersistence().fetchByEmailAddress(userId);
+	}
+
+	/**
+	 * Returns the registration where userId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param userId the user ID
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the matching registration, or <code>null</code> if a matching registration could not be found
+	 */
+	public static Registration fetchByEmailAddress(
+		long userId, boolean useFinderCache) {
+
+		return getPersistence().fetchByEmailAddress(userId, useFinderCache);
+	}
+
+	/**
+	 * Removes the registration where userId = &#63; from the database.
+	 *
+	 * @param userId the user ID
+	 * @return the registration that was removed
+	 */
+	public static Registration removeByEmailAddress(long userId)
+		throws com.liferay.amf.exception.NoSuchRegistrationException {
+
+		return getPersistence().removeByEmailAddress(userId);
+	}
+
+	/**
+	 * Returns the number of registrations where userId = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @return the number of matching registrations
+	 */
+	public static int countByEmailAddress(long userId) {
+		return getPersistence().countByEmailAddress(userId);
+	}
+
+	/**
 	 * Caches the registration in the entity cache if it is enabled.
 	 *
 	 * @param registration the registration

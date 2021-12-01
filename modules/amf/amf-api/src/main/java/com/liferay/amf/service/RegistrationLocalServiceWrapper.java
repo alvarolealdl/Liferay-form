@@ -33,6 +33,21 @@ public class RegistrationLocalServiceWrapper
 		_registrationLocalService = registrationLocalService;
 	}
 
+	@Override
+	public com.liferay.amf.model.Registration addRegistration(
+			long groupId, String userName, String firstName, String lastName,
+			String emailAddress, String gender, java.util.Date birthday,
+			String password, String homePhone, String mobilePhone,
+			String address1, String address2, String city, String state,
+			long zipCode, String securityAnswer)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _registrationLocalService.addRegistration(
+			groupId, userName, firstName, lastName, emailAddress, gender,
+			birthday, password, homePhone, mobilePhone, address1, address2,
+			city, state, zipCode, securityAnswer);
+	}
+
 	/**
 	 * Adds the registration to the database. Also notifies the appropriate model listeners.
 	 *
@@ -48,21 +63,6 @@ public class RegistrationLocalServiceWrapper
 		com.liferay.amf.model.Registration registration) {
 
 		return _registrationLocalService.addRegistration(registration);
-	}
-
-	@Override
-	public com.liferay.amf.model.Registration addRegistration(
-			String userName, String firstName, String lastName,
-			String emailAddress, String gender, java.util.Date birthday,
-			String password, String homePhone, String mobilePhone,
-			String address1, String address2, String city, String state,
-			long zipCode, String securityAnswer)
-		throws com.liferay.portal.kernel.exception.PortalException {
-
-		return _registrationLocalService.addRegistration(
-			userName, firstName, lastName, emailAddress, gender, birthday,
-			password, homePhone, mobilePhone, address1, address2, city, state,
-			zipCode, securityAnswer);
 	}
 
 	/**
@@ -253,6 +253,13 @@ public class RegistrationLocalServiceWrapper
 	}
 
 	@Override
+	public com.liferay.amf.model.Registration getEmailAddressByUserId(
+		long userId) {
+
+		return _registrationLocalService.getEmailAddressByUserId(userId);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery
 		getIndexableActionableDynamicQuery() {
 
@@ -295,6 +302,13 @@ public class RegistrationLocalServiceWrapper
 		return _registrationLocalService.getRegistration(amfRegistrationId);
 	}
 
+	@Override
+	public java.util.List<com.liferay.amf.model.Registration>
+		getRegistrationById(long registrationId) {
+
+		return _registrationLocalService.getRegistrationById(registrationId);
+	}
+
 	/**
 	 * Returns a range of all the registrations.
 	 *
@@ -321,6 +335,16 @@ public class RegistrationLocalServiceWrapper
 	@Override
 	public int getRegistrationsCount() {
 		return _registrationLocalService.getRegistrationsCount();
+	}
+
+	@Override
+	public com.liferay.amf.model.Registration updateRegistration(
+			long registrationId, String firstName, String lastName,
+			String emailAddress, String address1)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _registrationLocalService.updateRegistration(
+			registrationId, firstName, lastName, emailAddress, address1);
 	}
 
 	/**
