@@ -46,13 +46,13 @@ import java.util.Date;
 public class RegistrationServiceImpl extends RegistrationServiceBaseImpl {
 
 
-	public Registration addRegistration( String userName, String firstName,
+	public Registration addRegistration( long groupId, String userName, String firstName,
 										   String lastName, String emailAddress, String gender, Date birthday,
 										   String password, String homePhone, String mobilePhone, String address1,
 										   String address2, String city, String state, long zipCode, String securityAnswer)
 			throws PortalException {
 
-		return _registrationLocalServiceImpl.addRegistration(userName, firstName, lastName, emailAddress, gender,
+		return _registrationLocalServiceImpl.addRegistration(groupId, userName, firstName, lastName, emailAddress, gender,
 				birthday, password, homePhone, mobilePhone, address1, address2, city, state, zipCode, securityAnswer);
 	}
 

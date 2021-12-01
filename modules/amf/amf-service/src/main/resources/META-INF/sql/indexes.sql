@@ -1,0 +1,1 @@
+create index IX_D74F35BF on Registration_Registration (userId);

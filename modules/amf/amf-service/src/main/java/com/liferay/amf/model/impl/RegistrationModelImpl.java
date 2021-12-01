@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.model.impl.BaseModelImpl;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.service.UserLocalServiceUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 
 import java.io.Serializable;
@@ -119,10 +120,10 @@ public class RegistrationModelImpl
 		"drop table Registration_Registration";
 
 	public static final String ORDER_BY_JPQL =
-		" ORDER BY registration.amfRegistrationId ASC";
+		" ORDER BY registration.userName ASC";
 
 	public static final String ORDER_BY_SQL =
-		" ORDER BY Registration_Registration.amfRegistrationId ASC";
+		" ORDER BY Registration_Registration.userName ASC";
 
 	public static final String DATA_SOURCE = "liferayDataSource";
 
@@ -131,11 +132,23 @@ public class RegistrationModelImpl
 	public static final String TX_MANAGER = "liferayTransactionManager";
 
 	/**
+	 * @deprecated As of Athanasius (7.3.x), replaced by {@link #getColumnBitmask(String)}
+	 */
+	@Deprecated
+	public static final long AMFREGISTRATIONID_COLUMN_BITMASK = 1L;
+
+	/**
+	 * @deprecated As of Athanasius (7.3.x), replaced by {@link #getColumnBitmask(String)}
+	 */
+	@Deprecated
+	public static final long USERID_COLUMN_BITMASK = 2L;
+
+	/**
 	 * @deprecated As of Athanasius (7.3.x), replaced by {@link
 	 *		#getColumnBitmask(String)}
 	 */
 	@Deprecated
-	public static final long AMFREGISTRATIONID_COLUMN_BITMASK = 1L;
+	public static final long USERNAME_COLUMN_BITMASK = 4L;
 
 	/**
 	 * @deprecated As of Athanasius (7.3.x), with no direct replacement
@@ -446,6 +459,16 @@ public class RegistrationModelImpl
 		_amfRegistrationId = amfRegistrationId;
 	}
 
+	/**
+	 * @deprecated As of Athanasius (7.3.x), replaced by {@link
+	 *             #getColumnOriginalValue(String)}
+	 */
+	@Deprecated
+	public long getOriginalAmfRegistrationId() {
+		return GetterUtil.getLong(
+			this.<Long>getColumnOriginalValue("amfRegistrationId"));
+	}
+
 	@JSON
 	@Override
 	public long getGroupId() {
@@ -505,6 +528,15 @@ public class RegistrationModelImpl
 
 	@Override
 	public void setUserUuid(String userUuid) {
+	}
+
+	/**
+	 * @deprecated As of Athanasius (7.3.x), replaced by {@link
+	 *             #getColumnOriginalValue(String)}
+	 */
+	@Deprecated
+	public long getOriginalUserId() {
+		return GetterUtil.getLong(this.<Long>getColumnOriginalValue("userId"));
 	}
 
 	@JSON
@@ -918,17 +950,15 @@ public class RegistrationModelImpl
 
 	@Override
 	public int compareTo(Registration registration) {
-		long primaryKey = registration.getPrimaryKey();
+		int value = 0;
 
-		if (getPrimaryKey() < primaryKey) {
-			return -1;
+		value = getUserName().compareTo(registration.getUserName());
+
+		if (value != 0) {
+			return value;
 		}
-		else if (getPrimaryKey() > primaryKey) {
-			return 1;
-		}
-		else {
-			return 0;
-		}
+
+		return 0;
 	}
 
 	@Override

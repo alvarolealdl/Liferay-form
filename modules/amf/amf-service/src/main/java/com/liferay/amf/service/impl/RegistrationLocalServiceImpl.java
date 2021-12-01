@@ -50,7 +50,7 @@ public class RegistrationLocalServiceImpl
 	extends RegistrationLocalServiceBaseImpl {
 
 
-	public Registration addRegistration(  String userName, String firstName,
+	public Registration addRegistration( long groupId, String userName, String firstName,
 										String lastName, String emailAddress, String gender, Date birthday,
 										String password, String homePhone, String mobilePhone, String address1,
 										String address2, String city, String state, long zipCode, String securityAnswer)
@@ -59,10 +59,16 @@ public class RegistrationLocalServiceImpl
 
 		long userId = _serviceContext.getUserId();
 		User user = userLocalService.getUser(userId);
+		user.setScreenName("");
+		user.setFirstName(firstName);
+		user.setLastName(lastName);
+		user.setEmailAddress(emailAddress);
+		userLocalService.addUser(user);
+
 		long amfRegistrationId = counterLocalService.increment(Registration.class.getName());
 
 		Registration registration = _registrationPersistence.create(amfRegistrationId);
-
+		registration.setGroupId(groupId);
 		registration.setCompanyId(user.getCompanyId());
 		registration.setUserId(userId);
 		registration.setCreateDate(new Date());
@@ -83,9 +89,20 @@ public class RegistrationLocalServiceImpl
 		registration.setSecurityAnswer(securityAnswer);
 
 		return  _registrationPersistence.update(registration);
+	}
 
+	public Registration updateRegistration( long registrationId, String firstName, String lastName, String emailAddress,
+											String address1) throws PortalException{
 
+			Registration registration = getRegistration(registrationId);
+			registration.setModifiedDate(new Date());
+			registration.setFirstName(firstName);
+			registration.setLastName(lastName);
+			registration.setEmailAddress(emailAddress);
+			registration.setAddress1(address1);
 
+			registration = super.updateRegistration(registration);
+			return registration;
 
 	}
 

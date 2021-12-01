@@ -35,6 +35,21 @@
 		<column name="state" type="String"></column>
 		<column name="zipCode" type="Long"></column>
 		<column name="securityAnswer" type="String"></column>
+
+		<!-- Order -->
+		<order by="asc">
+			<order-column name="userName" />
+		</order>
+
+		<!-- Finders -->
+		<finder name="RegistrationId" return-type="Collection">
+			<finder-column name="amfRegistrationId"/>
+		</finder>
+		<finder name="EmailAddress" return-type="String">
+			<finder-column name="userId"/>
+		</finder>
+
+
 	</entity>
 	<exceptions>
 		<exception>EmailAddressNotFoundException</exception>

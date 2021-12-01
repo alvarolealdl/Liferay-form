@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.dao.orm.EntityCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.FinderPath;
 import com.liferay.portal.kernel.dao.orm.Query;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.dao.orm.SessionFactory;
@@ -43,11 +44,13 @@ import com.liferay.portal.kernel.util.HashMapDictionary;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.SetUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.Serializable;
 
 import java.lang.reflect.InvocationHandler;
 
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -96,6 +99,573 @@ public class RegistrationPersistenceImpl
 	private FinderPath _finderPathWithPaginationFindAll;
 	private FinderPath _finderPathWithoutPaginationFindAll;
 	private FinderPath _finderPathCountAll;
+	private FinderPath _finderPathWithPaginationFindByRegistrationId;
+	private FinderPath _finderPathWithoutPaginationFindByRegistrationId;
+	private FinderPath _finderPathCountByRegistrationId;
+
+	/**
+	 * Returns all the registrations where amfRegistrationId = &#63;.
+	 *
+	 * @param amfRegistrationId the amf registration ID
+	 * @return the matching registrations
+	 */
+	@Override
+	public List<Registration> findByRegistrationId(long amfRegistrationId) {
+		return findByRegistrationId(
+			amfRegistrationId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the registrations where amfRegistrationId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>RegistrationModelImpl</code>.
+	 * </p>
+	 *
+	 * @param amfRegistrationId the amf registration ID
+	 * @param start the lower bound of the range of registrations
+	 * @param end the upper bound of the range of registrations (not inclusive)
+	 * @return the range of matching registrations
+	 */
+	@Override
+	public List<Registration> findByRegistrationId(
+		long amfRegistrationId, int start, int end) {
+
+		return findByRegistrationId(amfRegistrationId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the registrations where amfRegistrationId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>RegistrationModelImpl</code>.
+	 * </p>
+	 *
+	 * @param amfRegistrationId the amf registration ID
+	 * @param start the lower bound of the range of registrations
+	 * @param end the upper bound of the range of registrations (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching registrations
+	 */
+	@Override
+	public List<Registration> findByRegistrationId(
+		long amfRegistrationId, int start, int end,
+		OrderByComparator<Registration> orderByComparator) {
+
+		return findByRegistrationId(
+			amfRegistrationId, start, end, orderByComparator, true);
+	}
+
+	/**
+	 * Returns an ordered range of all the registrations where amfRegistrationId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to <code>QueryUtil#ALL_POS</code> will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent, then the query will include the default ORDER BY logic from <code>RegistrationModelImpl</code>.
+	 * </p>
+	 *
+	 * @param amfRegistrationId the amf registration ID
+	 * @param start the lower bound of the range of registrations
+	 * @param end the upper bound of the range of registrations (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the ordered range of matching registrations
+	 */
+	@Override
+	public List<Registration> findByRegistrationId(
+		long amfRegistrationId, int start, int end,
+		OrderByComparator<Registration> orderByComparator,
+		boolean useFinderCache) {
+
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+			(orderByComparator == null)) {
+
+			if (useFinderCache) {
+				finderPath = _finderPathWithoutPaginationFindByRegistrationId;
+				finderArgs = new Object[] {amfRegistrationId};
+			}
+		}
+		else if (useFinderCache) {
+			finderPath = _finderPathWithPaginationFindByRegistrationId;
+			finderArgs = new Object[] {
+				amfRegistrationId, start, end, orderByComparator
+			};
+		}
+
+		List<Registration> list = null;
+
+		if (useFinderCache) {
+			list = (List<Registration>)finderCache.getResult(
+				finderPath, finderArgs);
+
+			if ((list != null) && !list.isEmpty()) {
+				for (Registration registration : list) {
+					if (amfRegistrationId !=
+							registration.getAmfRegistrationId()) {
+
+						list = null;
+
+						break;
+					}
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler sb = null;
+
+			if (orderByComparator != null) {
+				sb = new StringBundler(
+					3 + (orderByComparator.getOrderByFields().length * 2));
+			}
+			else {
+				sb = new StringBundler(3);
+			}
+
+			sb.append(_SQL_SELECT_REGISTRATION_WHERE);
+
+			sb.append(_FINDER_COLUMN_REGISTRATIONID_AMFREGISTRATIONID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(
+					sb, _ORDER_BY_ENTITY_ALIAS, orderByComparator);
+			}
+			else {
+				sb.append(RegistrationModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = sb.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query query = session.createQuery(sql);
+
+				QueryPos queryPos = QueryPos.getInstance(query);
+
+				queryPos.add(amfRegistrationId);
+
+				list = (List<Registration>)QueryUtil.list(
+					query, getDialect(), start, end);
+
+				cacheResult(list);
+
+				if (useFinderCache) {
+					finderCache.putResult(finderPath, finderArgs, list);
+				}
+			}
+			catch (Exception exception) {
+				throw processException(exception);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first registration in the ordered set where amfRegistrationId = &#63;.
+	 *
+	 * @param amfRegistrationId the amf registration ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching registration
+	 * @throws NoSuchRegistrationException if a matching registration could not be found
+	 */
+	@Override
+	public Registration findByRegistrationId_First(
+			long amfRegistrationId,
+			OrderByComparator<Registration> orderByComparator)
+		throws NoSuchRegistrationException {
+
+		Registration registration = fetchByRegistrationId_First(
+			amfRegistrationId, orderByComparator);
+
+		if (registration != null) {
+			return registration;
+		}
+
+		StringBundler sb = new StringBundler(4);
+
+		sb.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		sb.append("amfRegistrationId=");
+		sb.append(amfRegistrationId);
+
+		sb.append("}");
+
+		throw new NoSuchRegistrationException(sb.toString());
+	}
+
+	/**
+	 * Returns the first registration in the ordered set where amfRegistrationId = &#63;.
+	 *
+	 * @param amfRegistrationId the amf registration ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching registration, or <code>null</code> if a matching registration could not be found
+	 */
+	@Override
+	public Registration fetchByRegistrationId_First(
+		long amfRegistrationId,
+		OrderByComparator<Registration> orderByComparator) {
+
+		List<Registration> list = findByRegistrationId(
+			amfRegistrationId, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last registration in the ordered set where amfRegistrationId = &#63;.
+	 *
+	 * @param amfRegistrationId the amf registration ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching registration
+	 * @throws NoSuchRegistrationException if a matching registration could not be found
+	 */
+	@Override
+	public Registration findByRegistrationId_Last(
+			long amfRegistrationId,
+			OrderByComparator<Registration> orderByComparator)
+		throws NoSuchRegistrationException {
+
+		Registration registration = fetchByRegistrationId_Last(
+			amfRegistrationId, orderByComparator);
+
+		if (registration != null) {
+			return registration;
+		}
+
+		StringBundler sb = new StringBundler(4);
+
+		sb.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		sb.append("amfRegistrationId=");
+		sb.append(amfRegistrationId);
+
+		sb.append("}");
+
+		throw new NoSuchRegistrationException(sb.toString());
+	}
+
+	/**
+	 * Returns the last registration in the ordered set where amfRegistrationId = &#63;.
+	 *
+	 * @param amfRegistrationId the amf registration ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching registration, or <code>null</code> if a matching registration could not be found
+	 */
+	@Override
+	public Registration fetchByRegistrationId_Last(
+		long amfRegistrationId,
+		OrderByComparator<Registration> orderByComparator) {
+
+		int count = countByRegistrationId(amfRegistrationId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<Registration> list = findByRegistrationId(
+			amfRegistrationId, count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Removes all the registrations where amfRegistrationId = &#63; from the database.
+	 *
+	 * @param amfRegistrationId the amf registration ID
+	 */
+	@Override
+	public void removeByRegistrationId(long amfRegistrationId) {
+		for (Registration registration :
+				findByRegistrationId(
+					amfRegistrationId, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+					null)) {
+
+			remove(registration);
+		}
+	}
+
+	/**
+	 * Returns the number of registrations where amfRegistrationId = &#63;.
+	 *
+	 * @param amfRegistrationId the amf registration ID
+	 * @return the number of matching registrations
+	 */
+	@Override
+	public int countByRegistrationId(long amfRegistrationId) {
+		FinderPath finderPath = _finderPathCountByRegistrationId;
+
+		Object[] finderArgs = new Object[] {amfRegistrationId};
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs);
+
+		if (count == null) {
+			StringBundler sb = new StringBundler(2);
+
+			sb.append(_SQL_COUNT_REGISTRATION_WHERE);
+
+			sb.append(_FINDER_COLUMN_REGISTRATIONID_AMFREGISTRATIONID_2);
+
+			String sql = sb.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query query = session.createQuery(sql);
+
+				QueryPos queryPos = QueryPos.getInstance(query);
+
+				queryPos.add(amfRegistrationId);
+
+				count = (Long)query.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception exception) {
+				throw processException(exception);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String
+		_FINDER_COLUMN_REGISTRATIONID_AMFREGISTRATIONID_2 =
+			"registration.amfRegistrationId = ?";
+
+	private FinderPath _finderPathFetchByEmailAddress;
+	private FinderPath _finderPathCountByEmailAddress;
+
+	/**
+	 * Returns the registration where userId = &#63; or throws a <code>NoSuchRegistrationException</code> if it could not be found.
+	 *
+	 * @param userId the user ID
+	 * @return the matching registration
+	 * @throws NoSuchRegistrationException if a matching registration could not be found
+	 */
+	@Override
+	public Registration findByEmailAddress(long userId)
+		throws NoSuchRegistrationException {
+
+		Registration registration = fetchByEmailAddress(userId);
+
+		if (registration == null) {
+			StringBundler sb = new StringBundler(4);
+
+			sb.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			sb.append("userId=");
+			sb.append(userId);
+
+			sb.append("}");
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(sb.toString());
+			}
+
+			throw new NoSuchRegistrationException(sb.toString());
+		}
+
+		return registration;
+	}
+
+	/**
+	 * Returns the registration where userId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param userId the user ID
+	 * @return the matching registration, or <code>null</code> if a matching registration could not be found
+	 */
+	@Override
+	public Registration fetchByEmailAddress(long userId) {
+		return fetchByEmailAddress(userId, true);
+	}
+
+	/**
+	 * Returns the registration where userId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param userId the user ID
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the matching registration, or <code>null</code> if a matching registration could not be found
+	 */
+	@Override
+	public Registration fetchByEmailAddress(
+		long userId, boolean useFinderCache) {
+
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {userId};
+		}
+
+		Object result = null;
+
+		if (useFinderCache) {
+			result = finderCache.getResult(
+				_finderPathFetchByEmailAddress, finderArgs);
+		}
+
+		if (result instanceof Registration) {
+			Registration registration = (Registration)result;
+
+			if (userId != registration.getUserId()) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler sb = new StringBundler(3);
+
+			sb.append(_SQL_SELECT_REGISTRATION_WHERE);
+
+			sb.append(_FINDER_COLUMN_EMAILADDRESS_USERID_2);
+
+			String sql = sb.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query query = session.createQuery(sql);
+
+				QueryPos queryPos = QueryPos.getInstance(query);
+
+				queryPos.add(userId);
+
+				List<Registration> list = query.list();
+
+				if (list.isEmpty()) {
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByEmailAddress, finderArgs, list);
+					}
+				}
+				else {
+					if (list.size() > 1) {
+						Collections.sort(list, Collections.reverseOrder());
+
+						if (_log.isWarnEnabled()) {
+							if (!useFinderCache) {
+								finderArgs = new Object[] {userId};
+							}
+
+							_log.warn(
+								"RegistrationPersistenceImpl.fetchByEmailAddress(long, boolean) with parameters (" +
+									StringUtil.merge(finderArgs) +
+										") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+						}
+					}
+
+					Registration registration = list.get(0);
+
+					result = registration;
+
+					cacheResult(registration);
+				}
+			}
+			catch (Exception exception) {
+				throw processException(exception);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (Registration)result;
+		}
+	}
+
+	/**
+	 * Removes the registration where userId = &#63; from the database.
+	 *
+	 * @param userId the user ID
+	 * @return the registration that was removed
+	 */
+	@Override
+	public Registration removeByEmailAddress(long userId)
+		throws NoSuchRegistrationException {
+
+		Registration registration = findByEmailAddress(userId);
+
+		return remove(registration);
+	}
+
+	/**
+	 * Returns the number of registrations where userId = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @return the number of matching registrations
+	 */
+	@Override
+	public int countByEmailAddress(long userId) {
+		FinderPath finderPath = _finderPathCountByEmailAddress;
+
+		Object[] finderArgs = new Object[] {userId};
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs);
+
+		if (count == null) {
+			StringBundler sb = new StringBundler(2);
+
+			sb.append(_SQL_COUNT_REGISTRATION_WHERE);
+
+			sb.append(_FINDER_COLUMN_EMAILADDRESS_USERID_2);
+
+			String sql = sb.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query query = session.createQuery(sql);
+
+				QueryPos queryPos = QueryPos.getInstance(query);
+
+				queryPos.add(userId);
+
+				count = (Long)query.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception exception) {
+				throw processException(exception);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_EMAILADDRESS_USERID_2 =
+		"registration.userId = ?";
 
 	public RegistrationPersistenceImpl() {
 		Map<String, String> dbColumnNames = new HashMap<String, String>();
@@ -122,6 +692,10 @@ public class RegistrationPersistenceImpl
 	public void cacheResult(Registration registration) {
 		entityCache.putResult(
 			RegistrationImpl.class, registration.getPrimaryKey(), registration);
+
+		finderCache.putResult(
+			_finderPathFetchByEmailAddress,
+			new Object[] {registration.getUserId()}, registration);
 	}
 
 	/**
@@ -181,6 +755,17 @@ public class RegistrationPersistenceImpl
 		for (Serializable primaryKey : primaryKeys) {
 			entityCache.removeResult(RegistrationImpl.class, primaryKey);
 		}
+	}
+
+	protected void cacheUniqueFindersCache(
+		RegistrationModelImpl registrationModelImpl) {
+
+		Object[] args = new Object[] {registrationModelImpl.getUserId()};
+
+		finderCache.putResult(
+			_finderPathCountByEmailAddress, args, Long.valueOf(1));
+		finderCache.putResult(
+			_finderPathFetchByEmailAddress, args, registrationModelImpl);
 	}
 
 	/**
@@ -354,7 +939,9 @@ public class RegistrationPersistenceImpl
 		}
 
 		entityCache.putResult(
-			RegistrationImpl.class, registration, false, true);
+			RegistrationImpl.class, registrationModelImpl, false, true);
+
+		cacheUniqueFindersCache(registrationModelImpl);
 
 		if (isNew) {
 			registration.setNew(false);
@@ -641,6 +1228,33 @@ public class RegistrationPersistenceImpl
 		_finderPathCountAll = new FinderPath(
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countAll",
 			new String[0], new String[0], false);
+
+		_finderPathWithPaginationFindByRegistrationId = new FinderPath(
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByRegistrationId",
+			new String[] {
+				Long.class.getName(), Integer.class.getName(),
+				Integer.class.getName(), OrderByComparator.class.getName()
+			},
+			new String[] {"amfRegistrationId"}, true);
+
+		_finderPathWithoutPaginationFindByRegistrationId = new FinderPath(
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByRegistrationId",
+			new String[] {Long.class.getName()},
+			new String[] {"amfRegistrationId"}, true);
+
+		_finderPathCountByRegistrationId = new FinderPath(
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByRegistrationId",
+			new String[] {Long.class.getName()},
+			new String[] {"amfRegistrationId"}, false);
+
+		_finderPathFetchByEmailAddress = new FinderPath(
+			FINDER_CLASS_NAME_ENTITY, "fetchByEmailAddress",
+			new String[] {Long.class.getName()}, new String[] {"userId"}, true);
+
+		_finderPathCountByEmailAddress = new FinderPath(
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByEmailAddress",
+			new String[] {Long.class.getName()}, new String[] {"userId"},
+			false);
 	}
 
 	@Deactivate
@@ -687,13 +1301,22 @@ public class RegistrationPersistenceImpl
 	private static final String _SQL_SELECT_REGISTRATION =
 		"SELECT registration FROM Registration registration";
 
+	private static final String _SQL_SELECT_REGISTRATION_WHERE =
+		"SELECT registration FROM Registration registration WHERE ";
+
 	private static final String _SQL_COUNT_REGISTRATION =
 		"SELECT COUNT(registration) FROM Registration registration";
+
+	private static final String _SQL_COUNT_REGISTRATION_WHERE =
+		"SELECT COUNT(registration) FROM Registration registration WHERE ";
 
 	private static final String _ORDER_BY_ENTITY_ALIAS = "registration.";
 
 	private static final String _NO_SUCH_ENTITY_WITH_PRIMARY_KEY =
 		"No Registration exists with the primary key ";
+
+	private static final String _NO_SUCH_ENTITY_WITH_KEY =
+		"No Registration exists with the key {";
 
 	private static final Log _log = LogFactoryUtil.getLog(
 		RegistrationPersistenceImpl.class);
@@ -747,6 +1370,13 @@ public class RegistrationPersistenceImpl
 						registrationModelImpl.getColumnBitmask(columnName);
 				}
 
+				if (finderPath.isBaseModelResult() &&
+					(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION ==
+						finderPath.getCacheName())) {
+
+					finderPathColumnBitmask |= _ORDER_BY_COLUMNS_BITMASK;
+				}
+
 				_finderPathColumnBitmasksCache.put(
 					finderPath, finderPathColumnBitmask);
 			}
@@ -792,6 +1422,17 @@ public class RegistrationPersistenceImpl
 
 		private static final Map<FinderPath, Long>
 			_finderPathColumnBitmasksCache = new ConcurrentHashMap<>();
+
+		private static final long _ORDER_BY_COLUMNS_BITMASK;
+
+		static {
+			long orderByColumnsBitmask = 0;
+
+			orderByColumnsBitmask |= RegistrationModelImpl.getColumnBitmask(
+				"userName");
+
+			_ORDER_BY_COLUMNS_BITMASK = orderByColumnsBitmask;
+		}
 
 	}
 
