@@ -22,6 +22,7 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * The implementation of the registration remote service.
@@ -55,6 +56,31 @@ public class RegistrationServiceImpl extends RegistrationServiceBaseImpl {
 		return _registrationLocalServiceImpl.addRegistration(groupId, userName, firstName, lastName, emailAddress, gender,
 				birthday, password, homePhone, mobilePhone, address1, address2, city, state, zipCode, securityAnswer);
 	}
+
+	public Registration updateRegistration( long registrationId, String firstName, String lastName, String emailAddress,
+											String address1) throws PortalException{
+
+			return _registrationLocalServiceImpl.updateRegistration(registrationId, firstName, lastName, emailAddress,
+					address1);
+	}
+
+	public Registration deleteRegistration(long registrationId) throws PortalException{
+
+		Registration registration = _registrationLocalServiceImpl.getRegistration(registrationId);
+		return _registrationLocalServiceImpl.deleteRegistration(registration);
+	}
+
+	public List<Registration> getRegistrationById(long registrationId) throws PortalException{
+
+		return _registrationLocalServiceImpl.getRegistrationById(registrationId);
+	}
+
+	public Registration getEmailAddressByUserId(long userId){
+		return _registrationLocalServiceImpl.getEmailAddressByUserId(userId);
+	}
+
+
+
 
 	@Reference
 	private RegistrationLocalServiceImpl _registrationLocalServiceImpl;
