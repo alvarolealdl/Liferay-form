@@ -1,7 +1,7 @@
 dependencies {
 	compile project(":modules:amf:amf-api")
-
 	compileOnly group: "com.liferay.portal", name: "release.dxp.api"
+
 }
 
 buildService {
@@ -10,7 +10,7 @@ buildService {
 apply plugin: "com.liferay.plugin"
 
 liferay {
-	deployDir = file("/home/me/dev/projects/bundles/master/deploy")
+	deployDir = file("/home/me/dev/bundles/master/deploy/")
 }
 
 group = "com.liferay.amf"

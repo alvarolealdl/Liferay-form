@@ -39,6 +39,11 @@ public class RegistrationWrapper
 	}
 
 	@Override
+	public Registration cloneWithOriginalValues() {
+		return null;
+	}
+
+	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
