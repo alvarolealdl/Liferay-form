@@ -17,7 +17,7 @@
 
 <h1><liferay-ui:message key="registration.caption" /></h1>
 
-<portlet:actionURL name="<%= MCVCommandNames.ADD_REGISTRATION %>" var="addRegistrationURL" />
+<portlet:actionURL name="<%=MCVCommandNames.ADD_REGISTRATION%>" var="addRegistrationURL" />
 
 <c:if test="<%= !themeDisplay.isSignedIn() %>">
 	<aui:form action="<%= addRegistrationURL %>" method="post" name="amfRegistration">
