@@ -15,6 +15,8 @@ package com.liferay.amf.exception;
 
 import com.liferay.portal.kernel.exception.PortalException;
 
+import java.util.List;
+
 /**
  * @author Bruno Queiroz
  */
@@ -34,5 +36,16 @@ public class LoginValidationExceptionException extends PortalException {
 	public LoginValidationExceptionException(Throwable throwable) {
 		super(throwable);
 	}
+
+	public LoginValidationExceptionException(List<String> errors){
+		super(String.join(",", errors));
+
+		_errors = errors;
+	}
+	public List<String> getErrors(){
+		return _errors;
+	}
+
+	private List<String> _errors;
 
 }

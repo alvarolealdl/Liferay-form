@@ -16,6 +16,7 @@ package com.liferay.amf.service.impl;
 
 import com.liferay.amf.service.base.RegistrationLocalServiceBaseImpl;
 import com.liferay.amf.service.persistence.RegistrationPersistence;
+import com.liferay.amf.validator.RegistrationValidator;
 import com.liferay.portal.aop.AopService;
 import com.liferay.amf.model.Registration;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -57,6 +58,7 @@ public class RegistrationLocalServiceImpl
 										String address2, String city, String state, long zipCode, String securityAnswer)
 	throws PortalException {
 
+		_registrationValidator.validate(userName, firstName, lastName, emailAddress);
 
 		long userId = _serviceContext.getUserId();
 		User user = userLocalService.getUser(userId);
@@ -95,6 +97,8 @@ public class RegistrationLocalServiceImpl
 	public Registration updateRegistration( long registrationId, String firstName, String lastName, String emailAddress,
 											String address1) throws PortalException{
 
+		_registrationValidator.validate(null,	 firstName, lastName, emailAddress);
+
 			Registration registration = getRegistration(registrationId);
 			registration.setModifiedDate(new Date());
 			registration.setFirstName(firstName);
@@ -129,4 +133,7 @@ public class RegistrationLocalServiceImpl
 
 	@Reference
 	private ServiceContext _serviceContext;
+
+	@Reference
+	private RegistrationValidator _registrationValidator;
 }
