@@ -74,7 +74,7 @@ import org.osgi.service.component.annotations.Reference;
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author Bruno Queiroz
  * @generated
  */
 @Component(service = {RegistrationPersistence.class, BasePersistence.class})

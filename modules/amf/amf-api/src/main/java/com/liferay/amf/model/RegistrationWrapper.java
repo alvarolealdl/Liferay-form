@@ -26,7 +26,7 @@ import java.util.Map;
  * This class is a wrapper for {@link Registration}.
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author Bruno Queiroz
  * @see Registration
  * @generated
  */
@@ -36,11 +36,6 @@ public class RegistrationWrapper
 
 	public RegistrationWrapper(Registration registration) {
 		super(registration);
-	}
-
-	@Override
-	public Registration cloneWithOriginalValues() {
-		return null;
 	}
 
 	@Override

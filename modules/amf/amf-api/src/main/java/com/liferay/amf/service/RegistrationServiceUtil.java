@@ -27,7 +27,7 @@ import java.util.List;
  * based on the propagated JAAS credentials because this service can be
  * accessed remotely.
  *
- * @author Brian Wing Shun Chan
+ * @author Bruno Queiroz
  * @see RegistrationService
  * @generated
  */

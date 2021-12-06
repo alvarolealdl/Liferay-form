@@ -29,7 +29,7 @@ import java.util.Date;
 /**
  * The cache model class for representing Registration in entity cache.
  *
- * @author Brian Wing Shun Chan
+ * @author Bruno Queiroz
  * @generated
  */
 public class RegistrationCacheModel

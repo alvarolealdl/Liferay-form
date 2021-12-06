@@ -21,27 +21,27 @@ import com.liferay.portal.kernel.util.Accessor;
 import org.osgi.annotation.versioning.ProviderType;
 
 /**
- * The extended model interface for the Registration service. Represents a row in the &quot;Registration_Registration&quot; database table, with each column mapped to a property of this class.
+ * The extended model interface for the Login service. Represents a row in the &quot;Registration_Login&quot; database table, with each column mapped to a property of this class.
  *
  * @author Bruno Queiroz
- * @see RegistrationModel
+ * @see LoginModel
  * @generated
  */
-@ImplementationClassName("com.liferay.amf.model.impl.RegistrationImpl")
+@ImplementationClassName("com.liferay.amf.model.impl.LoginImpl")
 @ProviderType
-public interface Registration extends PersistedModel, RegistrationModel {
+public interface Login extends LoginModel, PersistedModel {
 
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
-	 * Never modify this interface directly. Add methods to <code>com.liferay.amf.model.impl.RegistrationImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
+	 * Never modify this interface directly. Add methods to <code>com.liferay.amf.model.impl.LoginImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface.
 	 */
-	public static final Accessor<Registration, Long>
-		AMF_REGISTRATION_ID_ACCESSOR = new Accessor<Registration, Long>() {
+	public static final Accessor<Login, Long> LOGIN_ID_ACCESSOR =
+		new Accessor<Login, Long>() {
 
 			@Override
-			public Long get(Registration registration) {
-				return registration.getAmfRegistrationId();
+			public Long get(Login login) {
+				return login.getLoginId();
 			}
 
 			@Override
@@ -50,8 +50,8 @@ public interface Registration extends PersistedModel, RegistrationModel {
 			}
 
 			@Override
-			public Class<Registration> getTypeClass() {
-				return Registration.class;
+			public Class<Login> getTypeClass() {
+				return Login.class;
 			}
 
 		};

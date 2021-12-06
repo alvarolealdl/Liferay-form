@@ -19,7 +19,7 @@ import com.liferay.portal.kernel.service.ServiceWrapper;
 /**
  * Provides a wrapper for {@link RegistrationLocalService}.
  *
- * @author Brian Wing Shun Chan
+ * @author Bruno Queiroz
  * @see RegistrationLocalService
  * @generated
  */

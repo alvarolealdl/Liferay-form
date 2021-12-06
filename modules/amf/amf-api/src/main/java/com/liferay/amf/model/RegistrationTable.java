@@ -24,7 +24,7 @@ import java.util.Date;
 /**
  * The table class for the &quot;Registration_Registration&quot; database table.
  *
- * @author Brian Wing Shun Chan
+ * @author Bruno Queiroz
  * @see Registration
  * @generated
  */
