@@ -1,7 +1,7 @@
 package com.liferay.amf.web.portlet.action;
 
 import com.liferay.amf.web.constants.MCVCommandNames;
-import com.liferay.amf.web.constants.RegistrationPortletKeys;
+import com.liferay.amf.web.constants.AcmeMoviePortletKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCRenderCommand;
 import com.liferay.portal.kernel.theme.ThemeDisplay;
 import com.liferay.portal.kernel.util.WebKeys;
@@ -15,7 +15,7 @@ import javax.portlet.RenderResponse;
 
         immediate = true,
         property = {
-                "javax.portlet.name=" + RegistrationPortletKeys.REGISTRATION,
+                "javax.portlet.name=" + AcmeMoviePortletKeys.REGISTRATION,
                 "mvc.command.name=" + MCVCommandNames.VIEW_REGISTRATION
         },
         service = MVCRenderCommand.class

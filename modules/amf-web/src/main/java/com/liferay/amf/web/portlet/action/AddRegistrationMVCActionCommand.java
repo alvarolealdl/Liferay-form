@@ -4,7 +4,7 @@ import com.liferay.amf.exception.RegistrationValidationExceptionException;
 import com.liferay.amf.model.Registration;
 import com.liferay.amf.service.RegistrationService;
 import com.liferay.amf.web.constants.MCVCommandNames;
-import com.liferay.amf.web.constants.RegistrationPortletKeys;
+import com.liferay.amf.web.constants.AcmeMoviePortletKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -31,7 +31,7 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	immediate = true,
 	property = {
-		"javax.portlet.name=" + RegistrationPortletKeys.REGISTRATION,
+		"javax.portlet.name=" + AcmeMoviePortletKeys.REGISTRATION,
 		"mvc.command.name=" + MCVCommandNames.ADD_REGISTRATION,
 		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.init-param.add-process-action-success-action=false"

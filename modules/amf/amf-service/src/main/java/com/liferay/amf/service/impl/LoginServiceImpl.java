@@ -52,7 +52,7 @@ public class LoginServiceImpl extends LoginServiceBaseImpl {
 		public Login addLogin(long groupId,String emailAddress, String password) throws  PortalException {
 
 			_loginModelResourcePermission.check(getPermissionChecker(), _serviceContext.getScopeGroupId(),
-					ActionKeys.ADD_ENTRY);
+					ActionKeys.ACCESS);
 
 			return  _loginLocalService.addLogin(groupId, emailAddress, password);
 		}

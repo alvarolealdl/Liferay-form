@@ -1,11 +1,14 @@
 package com.liferay.amf.web.constants;
 
 /**
- * @author me
+ * @author Bruno Queiroz
  */
-public class RegistrationPortletKeys {
+public class AcmeMoviePortletKeys {
 
 	public static final String REGISTRATION =
 		"com_liferay_amf_web_RegistrationPortlet";
+
+	public static final String LOGIN =
+			"com_liferay_amf_web_LoginPortlet";
 
 }
