@@ -77,6 +77,7 @@ public class AddRegistrationMVCActionCommand extends BaseMVCActionCommand {
 				city, state, zipCode, securityAnswer);
 
 			SessionMessages.add(actionRequest, "addRegistration");
+			sendRedirect(actionRequest, actionResponse);
 		}
                 catch (RegistrationValidationExceptionException e ){{
 				SessionErrors.add(actionRequest, "emailAddressValidation");

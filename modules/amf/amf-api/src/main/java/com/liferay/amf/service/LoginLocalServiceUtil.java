@@ -59,6 +59,13 @@ public class LoginLocalServiceUtil {
 		return getService().addLogin(login);
 	}
 
+	public static Login addLogin(
+			long groupId, String emailAddress, String password)
+		throws PortalException {
+
+		return getService().addLogin(groupId, emailAddress, password);
+	}
+
 	/**
 	 * Creates a new login with the primary key. Does not add the login to the database.
 	 *

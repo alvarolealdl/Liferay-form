@@ -47,6 +47,14 @@ public class LoginLocalServiceWrapper
 		return _loginLocalService.addLogin(login);
 	}
 
+	@Override
+	public com.liferay.amf.model.Login addLogin(
+			long groupId, String emailAddress, String password)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _loginLocalService.addLogin(groupId, emailAddress, password);
+	}
+
 	/**
 	 * Creates a new login with the primary key. Does not add the login to the database.
 	 *

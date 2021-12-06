@@ -14,6 +14,9 @@
 
 package com.liferay.amf.service;
 
+import com.liferay.amf.model.Login;
+import com.liferay.portal.kernel.exception.PortalException;
+
 /**
  * Provides the remote service utility for Login. This utility wraps
  * <code>com.liferay.amf.service.impl.LoginServiceImpl</code> and is an
@@ -33,13 +36,19 @@ public class LoginServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>com.liferay.amf.service.impl.LoginServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static Login addLogin(
+			long groupId, String emailAddress, String password)
+		throws PortalException {
+
+		return getService().addLogin(groupId, emailAddress, password);
+	}
 
 	/**
 	 * Returns the OSGi service identifier.
 	 *
 	 * @return the OSGi service identifier
 	 */
-	public static java.lang.String getOSGiServiceIdentifier() {
+	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
 	}
 

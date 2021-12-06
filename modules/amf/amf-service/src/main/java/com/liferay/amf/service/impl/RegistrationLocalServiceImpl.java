@@ -20,6 +20,7 @@ import com.liferay.amf.validator.RegistrationValidator;
 import com.liferay.portal.aop.AopService;
 import com.liferay.amf.model.Registration;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.security.pwd.PasswordEncryptorUtil;
 import com.liferay.portal.kernel.service.GroupLocalService;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -81,7 +82,7 @@ public class RegistrationLocalServiceImpl
 		registration.setEmailAddress(emailAddress);
 		registration.setEmailAddress(gender);
 		registration.setBirthday(birthday);
-		registration.setPassword(password);
+		registration.setPassword(PasswordEncryptorUtil.encrypt(password));
 		registration.setHomePhone(homePhone);
 		registration.setMobilePhone(mobilePhone);
 		registration.setAddress1(address1);
@@ -97,7 +98,7 @@ public class RegistrationLocalServiceImpl
 	public Registration updateRegistration( long registrationId, String firstName, String lastName, String emailAddress,
 											String address1) throws PortalException{
 
-		_registrationValidator.validate(null,	 firstName, lastName, emailAddress);
+		_registrationValidator.validate(null, firstName, lastName, emailAddress);
 
 			Registration registration = getRegistration(registrationId);
 			registration.setModifiedDate(new Date());

@@ -30,6 +30,14 @@ public class LoginServiceWrapper
 		_loginService = loginService;
 	}
 
+	@Override
+	public com.liferay.amf.model.Login addLogin(
+			long groupId, String emailAddress, String password)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _loginService.addLogin(groupId, emailAddress, password);
+	}
+
 	/**
 	 * Returns the OSGi service identifier.
 	 *

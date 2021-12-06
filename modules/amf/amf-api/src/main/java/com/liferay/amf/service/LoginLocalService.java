@@ -75,6 +75,9 @@ public interface LoginLocalService
 	@Indexable(type = IndexableType.REINDEX)
 	public Login addLogin(Login login);
 
+	public Login addLogin(long groupId, String emailAddress, String password)
+		throws PortalException;
+
 	/**
 	 * Creates a new login with the primary key. Does not add the login to the database.
 	 *

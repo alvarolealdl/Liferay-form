@@ -14,13 +14,21 @@
 
 package com.liferay.amf.service.http;
 
+import com.liferay.amf.service.LoginServiceUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.security.auth.HttpPrincipal;
+import com.liferay.portal.kernel.service.http.TunnelUtil;
+import com.liferay.portal.kernel.util.MethodHandler;
+import com.liferay.portal.kernel.util.MethodKey;
+
 /**
  * Provides the HTTP utility for the
- * <code>com.liferay.amf.service.LoginServiceUtil</code> service
+ * <code>LoginServiceUtil</code> service
  * utility. The
  * static methods of this class calls the same methods of the service utility.
  * However, the signatures are different because it requires an additional
- * <code>com.liferay.portal.kernel.security.auth.HttpPrincipal</code> parameter.
+ * <code>HttpPrincipal</code> parameter.
  *
  * <p>
  * The benefits of using the HTTP utility is that it is fast and allows for
@@ -42,4 +50,51 @@ package com.liferay.amf.service.http;
  * @generated
  */
 public class LoginServiceHttp {
+
+	public static com.liferay.amf.model.Login addLogin(
+			HttpPrincipal httpPrincipal, long groupId, String emailAddress,
+			String password)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				LoginServiceUtil.class, "addLogin", _addLoginParameterTypes0);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, groupId, emailAddress, password);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				if (exception instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						exception;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (com.liferay.amf.model.Login)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(LoginServiceHttp.class);
+
+	private static final Class<?>[] _addLoginParameterTypes0 = new Class[] {
+		long.class, String.class, String.class
+	};
+
 }

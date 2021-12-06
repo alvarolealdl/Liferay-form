@@ -14,9 +14,15 @@
 
 package com.liferay.amf.service.http;
 
+import com.liferay.amf.service.LoginServiceUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
- * <code>com.liferay.amf.service.LoginServiceUtil</code> service
+ * <code>LoginServiceUtil</code> service
  * utility. The static methods of this class call the same methods of the
  * service utility. However, the signatures are different because it is
  * difficult for SOAP to support certain types.
@@ -56,4 +62,24 @@ package com.liferay.amf.service.http;
  */
 @Deprecated
 public class LoginServiceSoap {
+
+	public static com.liferay.amf.model.LoginSoap addLogin(
+			long groupId, String emailAddress, String password)
+		throws RemoteException {
+
+		try {
+			com.liferay.amf.model.Login returnValue = LoginServiceUtil.addLogin(
+				groupId, emailAddress, password);
+
+			return com.liferay.amf.model.LoginSoap.toSoapModel(returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(LoginServiceSoap.class);
+
 }
