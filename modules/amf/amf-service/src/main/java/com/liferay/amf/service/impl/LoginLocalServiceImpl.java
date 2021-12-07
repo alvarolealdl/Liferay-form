@@ -53,9 +53,6 @@ public class LoginLocalServiceImpl extends LoginLocalServiceBaseImpl {
 
 		_loginValidator.validate(emailAddress);
 
-		long userId = _serviceContext.getUserId();
-		User user = userLocalService.getUser(userId);
-
 		long loginId = counterLocalService.increment(Login.class.getName());
 		Login login = _loginPersistence.create(loginId);
 
@@ -73,9 +70,6 @@ public class LoginLocalServiceImpl extends LoginLocalServiceBaseImpl {
 
 	@Reference
 	private ServiceContext _serviceContext;
-
-	@Reference
-	private UserLocalService userLocalService;
 
 	@Reference
 	private LoginPersistence _loginPersistence;
