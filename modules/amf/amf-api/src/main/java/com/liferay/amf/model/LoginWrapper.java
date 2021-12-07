@@ -38,6 +38,11 @@ public class LoginWrapper
 	}
 
 	@Override
+	public Login cloneWithOriginalValues() {
+		return null;
+	}
+
+	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
