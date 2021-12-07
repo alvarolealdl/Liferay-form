@@ -125,6 +125,8 @@
 				<aui:validator name="maxLength">255</aui:validator>
 			</aui:input>
 			<aui:input label="Term of Use" name="termOfUse" type="checkbox" />
+			<button  class="btn btn-link" onclick="modal()">Read terms of use</button>
+
 		</aui:fieldset-group>
 
 
@@ -136,5 +138,17 @@
 		</liferay-frontend:edit-form-footer>
 	</aui:form>
 </c:if>
+
+<%@ include file="/META-INF/resources/touContent.jsp" %>
+
+<aui:script>
+	var touContent = document.getElementById("tou-content").innerHTML;
+	function modal () {
+		Liferay.Util.openModal({
+			title:"Terms of Use",
+			bodyHTML: touContent
+		});
+	}
+</aui:script>
 
 <input name="redirect" type="hidden" value="<%= currentURL %>" />
