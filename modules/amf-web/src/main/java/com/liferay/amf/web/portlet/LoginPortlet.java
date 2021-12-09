@@ -13,8 +13,8 @@ import javax.portlet.Portlet;
                 "com.liferay.portlet.header-portlet-css=/css/main.css",
                 "com.liferay.portlet.instance=false",
                 "javax.portlet.display-name=Login",
-                "javax.portlet.init-param.template-path=/",
-                "javax.portlet.init-param.view-template=/entry_login.jsp",
+                "javax.portlet.init-param.template-path=/", //A template-path propriedade informa à estrutura MVC onde seus arquivos JSP reside.
+                "javax.portlet.init-param.view-template=/entry_login.jsp", // direciona a renderizacao para a view entry_login.jsp.
                 "javax.portlet.name=" + AcmeMoviePortletKeys.LOGIN,
                 "javax.portlet.resource-bundle=content.Language",
                 "javax.portlet.security-role-ref=power-user,user",

@@ -28,8 +28,8 @@ public class AddRegistrationMVCRenderCommand implements MVCRenderCommand {
 
         ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(WebKeys.THEME_DISPLAY);
 
-        if(!themeDisplay.isSignedIn()){
-            return "view.jsp";
+        if(themeDisplay.isSignedIn()){
+            return "entry_login.jsp";
         }
         return null;
 

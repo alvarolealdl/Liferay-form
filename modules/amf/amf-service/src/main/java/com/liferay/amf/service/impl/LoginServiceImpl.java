@@ -14,7 +14,7 @@
 
 package com.liferay.amf.service.impl;
 
-import com.liferay.amf.internal.security.permission.resource.LoginModelResourcePermission;
+//import com.liferay.amf.internal.security.permission.resource.LoginModelResourcePermission;
 import com.liferay.amf.model.Login;
 import com.liferay.amf.service.LoginLocalService;
 import com.liferay.amf.service.base.LoginServiceBaseImpl;
@@ -51,8 +51,8 @@ public class LoginServiceImpl extends LoginServiceBaseImpl {
 
 		public Login addLogin(long groupId,String emailAddress, String password) throws  PortalException {
 
-			_loginModelResourcePermission.check(getPermissionChecker(), _serviceContext.getScopeGroupId(),
-					ActionKeys.ACCESS);
+//			_loginModelResourcePermission.check(getPermissionChecker(), _serviceContext.getScopeGroupId(),
+//					ActionKeys.ACCESS);
 
 			return  _loginLocalService.addLogin(groupId, emailAddress, password);
 		}
@@ -60,8 +60,8 @@ public class LoginServiceImpl extends LoginServiceBaseImpl {
 		@Reference
 		private LoginLocalService _loginLocalService;
 
-		@Reference
-		private  LoginModelResourcePermission _loginModelResourcePermission;
+//		@Reference
+//		private  LoginModelResourcePermission _loginModelResourcePermission;
 
 		@Reference
 		private ServiceContext _serviceContext;

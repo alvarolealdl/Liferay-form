@@ -14,7 +14,7 @@
 
 package com.liferay.amf.service.impl;
 
-import com.liferay.amf.internal.security.permission.resource.RegistrationModelResourcePermission;
+//import com.liferay.amf.internal.security.permission.resource.RegistrationModelResourcePermission;
 import com.liferay.amf.service.base.RegistrationServiceBaseImpl;
 import com.liferay.portal.aop.AopService;
 import com.liferay.amf.model.Registration;
@@ -56,8 +56,8 @@ public class RegistrationServiceImpl extends RegistrationServiceBaseImpl {
 										   String address2, String city, String state, long zipCode, String securityAnswer)
 			throws PortalException {
 
-		_registrationModelResourcePermission.check(getPermissionChecker(), _serviceContext.getScopeGroupId(),
-				ActionKeys.ADD_ENTRY);
+//		_registrationModelResourcePermission.check(getPermissionChecker(), _serviceContext.getScopeGroupId(),
+//				ActionKeys.ADD_ENTRY);
 
 		return _registrationLocalServiceImpl.addRegistration(groupId, userName, firstName, lastName, emailAddress, gender,
 				birthday, password, homePhone, mobilePhone, address1, address2, city, state, zipCode, securityAnswer);
@@ -91,8 +91,8 @@ public class RegistrationServiceImpl extends RegistrationServiceBaseImpl {
 	@Reference
 	private RegistrationLocalServiceImpl _registrationLocalServiceImpl;
 
-	@Reference
-	private RegistrationModelResourcePermission _registrationModelResourcePermission;
+//	@Reference
+//	private RegistrationModelResourcePermission _registrationModelResourcePermission;
 
 	@Reference
 	private ServiceContext _serviceContext;

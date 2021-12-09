@@ -33,7 +33,6 @@ import org.osgi.service.component.annotations.Reference;
 	property = {
 		"javax.portlet.name=" + AcmeMoviePortletKeys.REGISTRATION,
 		"mvc.command.name=" + MCVCommandNames.ADD_REGISTRATION,
-		"javax.portlet.resource-bundle=content.Language",
 		"javax.portlet.init-param.add-process-action-success-action=false"
 	},
 	service = MVCActionCommand.class
@@ -79,10 +78,11 @@ public class AddRegistrationMVCActionCommand extends BaseMVCActionCommand {
 			SessionMessages.add(actionRequest, "addRegistration");
 			sendRedirect(actionRequest, actionResponse);
 		}
-                catch (RegistrationValidationExceptionException e ){{
+		catch (RegistrationValidationExceptionException e ){{
 				SessionErrors.add(actionRequest, "emailAddressValidation");
 
-                        }
+				actionResponse.setRenderParameter("mvcPath", "/error.jsp");
+		}
 		}
 	}
 

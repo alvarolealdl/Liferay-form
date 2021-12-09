@@ -129,7 +129,6 @@
 
 		</aui:fieldset-group>
 
-
 		<!--Buttons-->
 		<liferay-frontend:edit-form-footer>
 			<aui:button type="submit" value="save" />
