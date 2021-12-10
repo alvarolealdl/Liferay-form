@@ -15,14 +15,20 @@
 package com.liferay.amf.service.impl;
 
 //import com.liferay.amf.internal.security.permission.resource.RegistrationModelResourcePermission;
+import com.liferay.amf.exception.NoSuchRegistrationException;
 import com.liferay.amf.service.base.RegistrationServiceBaseImpl;
 import com.liferay.portal.aop.AopService;
 import com.liferay.amf.model.Registration;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.security.auth.PrincipalException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.security.permission.resource.ModelResourcePermission;
+import com.liferay.portal.kernel.security.permission.resource.PortletResourcePermission;
 import com.liferay.portal.kernel.service.ServiceContext;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.component.annotations.ReferencePolicy;
+import org.osgi.service.component.annotations.ReferencePolicyOption;
 
 import java.util.Date;
 import java.util.List;
@@ -56,8 +62,8 @@ public class RegistrationServiceImpl extends RegistrationServiceBaseImpl {
 										   String address2, String city, String state, long zipCode, String securityAnswer)
 			throws PortalException {
 
-//		_registrationModelResourcePermission.check(getPermissionChecker(), _serviceContext.getScopeGroupId(),
-//				ActionKeys.ADD_ENTRY);
+		_portletResourcePermission.check(getPermissionChecker(), _serviceContext.getScopeGroupId(),
+				ActionKeys.ADD_ENTRY);
 
 		return _registrationLocalServiceImpl.addRegistration(groupId, userName, firstName, lastName, emailAddress, gender,
 				birthday, password, homePhone, mobilePhone, address1, address2, city, state, zipCode, securityAnswer);
@@ -72,17 +78,30 @@ public class RegistrationServiceImpl extends RegistrationServiceBaseImpl {
 
 	public Registration deleteRegistration(long registrationId) throws PortalException{
 
+		_registrationModelResourcePermission.check(getPermissionChecker(), registrationId,
+				ActionKeys.DELETE);
+
 		Registration registration = _registrationLocalServiceImpl.getRegistration(registrationId);
 		return _registrationLocalServiceImpl.deleteRegistration(registration);
 	}
 
-	public List<Registration> getRegistrationById(long registrationId) throws PortalException{
+	public List<Registration> getAllRegistrationById(long registrationId) throws PortalException{
 
-		return _registrationLocalServiceImpl.getRegistrationById(registrationId);
+		return _registrationLocalServiceImpl.getAllRegistrationById(registrationId);
+
 	}
 
 	public Registration getEmailAddressByUserId(long userId){
+
 		return _registrationLocalServiceImpl.getEmailAddressByUserId(userId);
+	}
+
+	public Registration getById(long userId) throws PortalException {
+
+		Registration registration = _registrationLocalServiceImpl.getById(userId);
+		_registrationModelResourcePermission.check(getPermissionChecker(), registration, ActionKeys.VIEW);
+
+		return registration;
 	}
 
 
@@ -91,9 +110,20 @@ public class RegistrationServiceImpl extends RegistrationServiceBaseImpl {
 	@Reference
 	private RegistrationLocalServiceImpl _registrationLocalServiceImpl;
 
-//	@Reference
-//	private RegistrationModelResourcePermission _registrationModelResourcePermission;
-
 	@Reference
 	private ServiceContext _serviceContext;
+
+	@Reference(
+			policy = ReferencePolicy.DYNAMIC,
+			policyOption = ReferencePolicyOption.GREEDY,
+			target = "(model.class.name=com.liferay.amf.model.Registration)"
+	)
+	private volatile ModelResourcePermission<Registration> _registrationModelResourcePermission;
+
+	@Reference(
+			policy = ReferencePolicy.DYNAMIC,
+			policyOption = ReferencePolicyOption.GREEDY,
+			target = "(resource.name= com_liferay_amf_web_RegistrationPortlet)"
+	)
+	private PortletResourcePermission _portletResourcePermission;
 }

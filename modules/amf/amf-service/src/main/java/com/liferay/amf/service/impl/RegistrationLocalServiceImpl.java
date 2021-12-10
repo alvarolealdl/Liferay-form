@@ -14,6 +14,7 @@
 
 package com.liferay.amf.service.impl;
 
+import com.liferay.amf.exception.NoSuchRegistrationException;
 import com.liferay.amf.service.base.RegistrationLocalServiceBaseImpl;
 import com.liferay.amf.service.persistence.RegistrationPersistence;
 import com.liferay.amf.validator.RegistrationValidator;
@@ -24,11 +25,9 @@ import com.liferay.portal.kernel.security.pwd.PasswordEncryptorUtil;
 import com.liferay.portal.kernel.service.GroupLocalService;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
-import com.liferay.portal.kernel.model.Group;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.service.ServiceContext;
 
-import java.time.Instant;
 import java.util.Date;
 import java.util.List;
 
@@ -118,13 +117,19 @@ public class RegistrationLocalServiceImpl
 	}
 
 	//Finders Methods
-	public List<Registration> getRegistrationById(long registrationId){
-		return _registrationPersistence.findByRegistrationId(registrationId);
+	public List<Registration> getAllRegistrationById(long registrationId)  {
+		 return _registrationPersistence.findByRegistrationId(registrationId);
+
 	}
 
 	public Registration getEmailAddressByUserId(long userId){
 		return _registrationPersistence.fetchByEmailAddress(userId);
 	}
+
+	public Registration getById(long userId) throws NoSuchRegistrationException{
+		return _registrationPersistence.findByRegistrationById(userId);
+	}
+
 
 	@Reference
 	private RegistrationPersistence _registrationPersistence;

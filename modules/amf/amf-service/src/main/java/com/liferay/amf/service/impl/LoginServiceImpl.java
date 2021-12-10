@@ -14,16 +14,13 @@
 
 package com.liferay.amf.service.impl;
 
-//import com.liferay.amf.internal.security.permission.resource.LoginModelResourcePermission;
+
 import com.liferay.amf.model.Login;
 import com.liferay.amf.service.LoginLocalService;
 import com.liferay.amf.service.base.LoginServiceBaseImpl;
 import com.liferay.portal.aop.AopService;
 
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.kernel.service.ServiceContext;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -51,19 +48,11 @@ public class LoginServiceImpl extends LoginServiceBaseImpl {
 
 		public Login addLogin(long groupId,String emailAddress, String password) throws  PortalException {
 
-//			_loginModelResourcePermission.check(getPermissionChecker(), _serviceContext.getScopeGroupId(),
-//					ActionKeys.ACCESS);
-
 			return  _loginLocalService.addLogin(groupId, emailAddress, password);
 		}
 
 		@Reference
 		private LoginLocalService _loginLocalService;
 
-//		@Reference
-//		private  LoginModelResourcePermission _loginModelResourcePermission;
-
-		@Reference
-		private ServiceContext _serviceContext;
 
 }

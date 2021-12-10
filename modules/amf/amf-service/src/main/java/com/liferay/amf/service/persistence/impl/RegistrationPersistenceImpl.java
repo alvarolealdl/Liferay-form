@@ -667,6 +667,220 @@ public class RegistrationPersistenceImpl
 	private static final String _FINDER_COLUMN_EMAILADDRESS_USERID_2 =
 		"registration.userId = ?";
 
+	private FinderPath _finderPathFetchByRegistrationById;
+	private FinderPath _finderPathCountByRegistrationById;
+
+	/**
+	 * Returns the registration where userId = &#63; or throws a <code>NoSuchRegistrationException</code> if it could not be found.
+	 *
+	 * @param userId the user ID
+	 * @return the matching registration
+	 * @throws NoSuchRegistrationException if a matching registration could not be found
+	 */
+	@Override
+	public Registration findByRegistrationById(long userId)
+		throws NoSuchRegistrationException {
+
+		Registration registration = fetchByRegistrationById(userId);
+
+		if (registration == null) {
+			StringBundler sb = new StringBundler(4);
+
+			sb.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			sb.append("userId=");
+			sb.append(userId);
+
+			sb.append("}");
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(sb.toString());
+			}
+
+			throw new NoSuchRegistrationException(sb.toString());
+		}
+
+		return registration;
+	}
+
+	/**
+	 * Returns the registration where userId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param userId the user ID
+	 * @return the matching registration, or <code>null</code> if a matching registration could not be found
+	 */
+	@Override
+	public Registration fetchByRegistrationById(long userId) {
+		return fetchByRegistrationById(userId, true);
+	}
+
+	/**
+	 * Returns the registration where userId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param userId the user ID
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the matching registration, or <code>null</code> if a matching registration could not be found
+	 */
+	@Override
+	public Registration fetchByRegistrationById(
+		long userId, boolean useFinderCache) {
+
+		Object[] finderArgs = null;
+
+		if (useFinderCache) {
+			finderArgs = new Object[] {userId};
+		}
+
+		Object result = null;
+
+		if (useFinderCache) {
+			result = finderCache.getResult(
+				_finderPathFetchByRegistrationById, finderArgs);
+		}
+
+		if (result instanceof Registration) {
+			Registration registration = (Registration)result;
+
+			if (userId != registration.getUserId()) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler sb = new StringBundler(3);
+
+			sb.append(_SQL_SELECT_REGISTRATION_WHERE);
+
+			sb.append(_FINDER_COLUMN_REGISTRATIONBYID_USERID_2);
+
+			String sql = sb.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query query = session.createQuery(sql);
+
+				QueryPos queryPos = QueryPos.getInstance(query);
+
+				queryPos.add(userId);
+
+				List<Registration> list = query.list();
+
+				if (list.isEmpty()) {
+					if (useFinderCache) {
+						finderCache.putResult(
+							_finderPathFetchByRegistrationById, finderArgs,
+							list);
+					}
+				}
+				else {
+					if (list.size() > 1) {
+						Collections.sort(list, Collections.reverseOrder());
+
+						if (_log.isWarnEnabled()) {
+							if (!useFinderCache) {
+								finderArgs = new Object[] {userId};
+							}
+
+							_log.warn(
+								"RegistrationPersistenceImpl.fetchByRegistrationById(long, boolean) with parameters (" +
+									StringUtil.merge(finderArgs) +
+										") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+						}
+					}
+
+					Registration registration = list.get(0);
+
+					result = registration;
+
+					cacheResult(registration);
+				}
+			}
+			catch (Exception exception) {
+				throw processException(exception);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (Registration)result;
+		}
+	}
+
+	/**
+	 * Removes the registration where userId = &#63; from the database.
+	 *
+	 * @param userId the user ID
+	 * @return the registration that was removed
+	 */
+	@Override
+	public Registration removeByRegistrationById(long userId)
+		throws NoSuchRegistrationException {
+
+		Registration registration = findByRegistrationById(userId);
+
+		return remove(registration);
+	}
+
+	/**
+	 * Returns the number of registrations where userId = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @return the number of matching registrations
+	 */
+	@Override
+	public int countByRegistrationById(long userId) {
+		FinderPath finderPath = _finderPathCountByRegistrationById;
+
+		Object[] finderArgs = new Object[] {userId};
+
+		Long count = (Long)finderCache.getResult(finderPath, finderArgs);
+
+		if (count == null) {
+			StringBundler sb = new StringBundler(2);
+
+			sb.append(_SQL_COUNT_REGISTRATION_WHERE);
+
+			sb.append(_FINDER_COLUMN_REGISTRATIONBYID_USERID_2);
+
+			String sql = sb.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query query = session.createQuery(sql);
+
+				QueryPos queryPos = QueryPos.getInstance(query);
+
+				queryPos.add(userId);
+
+				count = (Long)query.uniqueResult();
+
+				finderCache.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception exception) {
+				throw processException(exception);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_REGISTRATIONBYID_USERID_2 =
+		"registration.userId = ?";
+
 	public RegistrationPersistenceImpl() {
 		Map<String, String> dbColumnNames = new HashMap<String, String>();
 
@@ -695,6 +909,10 @@ public class RegistrationPersistenceImpl
 
 		finderCache.putResult(
 			_finderPathFetchByEmailAddress,
+			new Object[] {registration.getUserId()}, registration);
+
+		finderCache.putResult(
+			_finderPathFetchByRegistrationById,
 			new Object[] {registration.getUserId()}, registration);
 	}
 
@@ -766,6 +984,13 @@ public class RegistrationPersistenceImpl
 			_finderPathCountByEmailAddress, args, Long.valueOf(1));
 		finderCache.putResult(
 			_finderPathFetchByEmailAddress, args, registrationModelImpl);
+
+		args = new Object[] {registrationModelImpl.getUserId()};
+
+		finderCache.putResult(
+			_finderPathCountByRegistrationById, args, Long.valueOf(1));
+		finderCache.putResult(
+			_finderPathFetchByRegistrationById, args, registrationModelImpl);
 	}
 
 	/**
@@ -1255,6 +1480,15 @@ public class RegistrationPersistenceImpl
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByEmailAddress",
 			new String[] {Long.class.getName()}, new String[] {"userId"},
 			false);
+
+		_finderPathFetchByRegistrationById = new FinderPath(
+			FINDER_CLASS_NAME_ENTITY, "fetchByRegistrationById",
+			new String[] {Long.class.getName()}, new String[] {"userId"}, true);
+
+		_finderPathCountByRegistrationById = new FinderPath(
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"countByRegistrationById", new String[] {Long.class.getName()},
+			new String[] {"userId"}, false);
 	}
 
 	@Deactivate

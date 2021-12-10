@@ -127,13 +127,13 @@ public class RegistrationServiceSoap {
 		}
 	}
 
-	public static com.liferay.amf.model.RegistrationSoap[] getRegistrationById(
-			long registrationId)
+	public static com.liferay.amf.model.RegistrationSoap[]
+			getAllRegistrationById(long registrationId)
 		throws RemoteException {
 
 		try {
 			java.util.List<com.liferay.amf.model.Registration> returnValue =
-				RegistrationServiceUtil.getRegistrationById(registrationId);
+				RegistrationServiceUtil.getAllRegistrationById(registrationId);
 
 			return com.liferay.amf.model.RegistrationSoap.toSoapModels(
 				returnValue);
@@ -152,6 +152,23 @@ public class RegistrationServiceSoap {
 		try {
 			com.liferay.amf.model.Registration returnValue =
 				RegistrationServiceUtil.getEmailAddressByUserId(userId);
+
+			return com.liferay.amf.model.RegistrationSoap.toSoapModel(
+				returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
+	public static com.liferay.amf.model.RegistrationSoap getById(long userId)
+		throws RemoteException {
+
+		try {
+			com.liferay.amf.model.Registration returnValue =
+				RegistrationServiceUtil.getById(userId);
 
 			return com.liferay.amf.model.RegistrationSoap.toSoapModel(
 				returnValue);

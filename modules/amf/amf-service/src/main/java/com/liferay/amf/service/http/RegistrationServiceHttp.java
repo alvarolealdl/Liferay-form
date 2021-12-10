@@ -181,14 +181,14 @@ public class RegistrationServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.amf.model.Registration>
-			getRegistrationById(
+			getAllRegistrationById(
 				HttpPrincipal httpPrincipal, long registrationId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		try {
 			MethodKey methodKey = new MethodKey(
-				RegistrationServiceUtil.class, "getRegistrationById",
-				_getRegistrationByIdParameterTypes3);
+				RegistrationServiceUtil.class, "getAllRegistrationById",
+				_getAllRegistrationByIdParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, registrationId);
@@ -253,6 +253,45 @@ public class RegistrationServiceHttp {
 		}
 	}
 
+	public static com.liferay.amf.model.Registration getById(
+			HttpPrincipal httpPrincipal, long userId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				RegistrationServiceUtil.class, "getById",
+				_getByIdParameterTypes5);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey, userId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				if (exception instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						exception;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (com.liferay.amf.model.Registration)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(
 		RegistrationServiceHttp.class);
 
@@ -269,9 +308,12 @@ public class RegistrationServiceHttp {
 		};
 	private static final Class<?>[] _deleteRegistrationParameterTypes2 =
 		new Class[] {long.class};
-	private static final Class<?>[] _getRegistrationByIdParameterTypes3 =
+	private static final Class<?>[] _getAllRegistrationByIdParameterTypes3 =
 		new Class[] {long.class};
 	private static final Class<?>[] _getEmailAddressByUserIdParameterTypes4 =
 		new Class[] {long.class};
+	private static final Class<?>[] _getByIdParameterTypes5 = new Class[] {
+		long.class
+	};
 
 }
