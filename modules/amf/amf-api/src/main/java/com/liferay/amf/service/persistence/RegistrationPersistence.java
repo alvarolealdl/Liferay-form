@@ -215,6 +215,51 @@ public interface RegistrationPersistence extends BasePersistence<Registration> {
 	public int countByEmailAddress(long userId);
 
 	/**
+	 * Returns the registration where userId = &#63; or throws a <code>NoSuchRegistrationException</code> if it could not be found.
+	 *
+	 * @param userId the user ID
+	 * @return the matching registration
+	 * @throws NoSuchRegistrationException if a matching registration could not be found
+	 */
+	public Registration findByRegistrationById(long userId)
+		throws NoSuchRegistrationException;
+
+	/**
+	 * Returns the registration where userId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param userId the user ID
+	 * @return the matching registration, or <code>null</code> if a matching registration could not be found
+	 */
+	public Registration fetchByRegistrationById(long userId);
+
+	/**
+	 * Returns the registration where userId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param userId the user ID
+	 * @param useFinderCache whether to use the finder cache
+	 * @return the matching registration, or <code>null</code> if a matching registration could not be found
+	 */
+	public Registration fetchByRegistrationById(
+		long userId, boolean useFinderCache);
+
+	/**
+	 * Removes the registration where userId = &#63; from the database.
+	 *
+	 * @param userId the user ID
+	 * @return the registration that was removed
+	 */
+	public Registration removeByRegistrationById(long userId)
+		throws NoSuchRegistrationException;
+
+	/**
+	 * Returns the number of registrations where userId = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @return the number of matching registrations
+	 */
+	public int countByRegistrationById(long userId);
+
+	/**
 	 * Caches the registration in the entity cache if it is enabled.
 	 *
 	 * @param registration the registration

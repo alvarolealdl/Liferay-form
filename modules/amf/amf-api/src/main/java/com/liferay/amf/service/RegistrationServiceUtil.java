@@ -58,6 +58,16 @@ public class RegistrationServiceUtil {
 		return getService().deleteRegistration(registrationId);
 	}
 
+	public static List<Registration> getAllRegistrationById(long registrationId)
+		throws PortalException {
+
+		return getService().getAllRegistrationById(registrationId);
+	}
+
+	public static Registration getById(long userId) throws PortalException {
+		return getService().getById(userId);
+	}
+
 	public static Registration getEmailAddressByUserId(long userId) {
 		return getService().getEmailAddressByUserId(userId);
 	}
@@ -69,12 +79,6 @@ public class RegistrationServiceUtil {
 	 */
 	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
-	}
-
-	public static List<Registration> getRegistrationById(long registrationId)
-		throws PortalException {
-
-		return getService().getRegistrationById(registrationId);
 	}
 
 	public static Registration updateRegistration(

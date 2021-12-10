@@ -54,6 +54,21 @@ public class RegistrationServiceWrapper
 	}
 
 	@Override
+	public java.util.List<com.liferay.amf.model.Registration>
+			getAllRegistrationById(long registrationId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _registrationService.getAllRegistrationById(registrationId);
+	}
+
+	@Override
+	public com.liferay.amf.model.Registration getById(long userId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _registrationService.getById(userId);
+	}
+
+	@Override
 	public com.liferay.amf.model.Registration getEmailAddressByUserId(
 		long userId) {
 
@@ -68,14 +83,6 @@ public class RegistrationServiceWrapper
 	@Override
 	public String getOSGiServiceIdentifier() {
 		return _registrationService.getOSGiServiceIdentifier();
-	}
-
-	@Override
-	public java.util.List<com.liferay.amf.model.Registration>
-			getRegistrationById(long registrationId)
-		throws com.liferay.portal.kernel.exception.PortalException {
-
-		return _registrationService.getRegistrationById(registrationId);
 	}
 
 	@Override

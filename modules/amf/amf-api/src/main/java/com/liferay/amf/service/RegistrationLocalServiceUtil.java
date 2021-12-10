@@ -228,6 +228,18 @@ public class RegistrationLocalServiceUtil {
 		return getService().getActionableDynamicQuery();
 	}
 
+	public static List<Registration> getAllRegistrationById(
+		long registrationId) {
+
+		return getService().getAllRegistrationById(registrationId);
+	}
+
+	public static Registration getById(long userId)
+		throws com.liferay.amf.exception.NoSuchRegistrationException {
+
+		return getService().getById(userId);
+	}
+
 	public static Registration getEmailAddressByUserId(long userId) {
 		return getService().getEmailAddressByUserId(userId);
 	}
@@ -268,10 +280,6 @@ public class RegistrationLocalServiceUtil {
 		throws PortalException {
 
 		return getService().getRegistration(amfRegistrationId);
-	}
-
-	public static List<Registration> getRegistrationById(long registrationId) {
-		return getService().getRegistrationById(registrationId);
 	}
 
 	/**

@@ -64,6 +64,13 @@ public interface RegistrationService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Registration> getAllRegistrationById(long registrationId)
+		throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public Registration getById(long userId) throws PortalException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Registration getEmailAddressByUserId(long userId);
 
 	/**
@@ -72,10 +79,6 @@ public interface RegistrationService extends BaseService {
 	 * @return the OSGi service identifier
 	 */
 	public String getOSGiServiceIdentifier();
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<Registration> getRegistrationById(long registrationId)
-		throws PortalException;
 
 	public Registration updateRegistration(
 			long registrationId, String firstName, String lastName,

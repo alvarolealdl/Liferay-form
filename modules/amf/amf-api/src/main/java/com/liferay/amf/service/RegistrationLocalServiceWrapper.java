@@ -253,6 +253,20 @@ public class RegistrationLocalServiceWrapper
 	}
 
 	@Override
+	public java.util.List<com.liferay.amf.model.Registration>
+		getAllRegistrationById(long registrationId) {
+
+		return _registrationLocalService.getAllRegistrationById(registrationId);
+	}
+
+	@Override
+	public com.liferay.amf.model.Registration getById(long userId)
+		throws com.liferay.amf.exception.NoSuchRegistrationException {
+
+		return _registrationLocalService.getById(userId);
+	}
+
+	@Override
 	public com.liferay.amf.model.Registration getEmailAddressByUserId(
 		long userId) {
 
@@ -300,13 +314,6 @@ public class RegistrationLocalServiceWrapper
 		throws com.liferay.portal.kernel.exception.PortalException {
 
 		return _registrationLocalService.getRegistration(amfRegistrationId);
-	}
-
-	@Override
-	public java.util.List<com.liferay.amf.model.Registration>
-		getRegistrationById(long registrationId) {
-
-		return _registrationLocalService.getRegistrationById(registrationId);
 	}
 
 	/**

@@ -14,6 +14,7 @@
 
 package com.liferay.amf.service;
 
+import com.liferay.amf.exception.NoSuchRegistrationException;
 import com.liferay.amf.model.Registration;
 import com.liferay.petra.sql.dsl.query.DSLQuery;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
@@ -212,6 +213,12 @@ public interface RegistrationLocalService
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<Registration> getAllRegistrationById(long registrationId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public Registration getById(long userId) throws NoSuchRegistrationException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Registration getEmailAddressByUserId(long userId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -242,9 +249,6 @@ public interface RegistrationLocalService
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Registration getRegistration(long amfRegistrationId)
 		throws PortalException;
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<Registration> getRegistrationById(long registrationId);
 
 	/**
 	 * Returns a range of all the registrations.
