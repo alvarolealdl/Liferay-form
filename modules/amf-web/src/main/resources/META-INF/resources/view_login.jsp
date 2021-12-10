@@ -1,16 +1,19 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: me
-  Date: 12/9/21
-  Time: 3:00 PM
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <body>
-  $END$
-  </body>
-</html>
+<%@ include file="/META-INF/resources/init.jsp" %>
+<%@include file="/META-INF/resources/entry_login.jsp"%>
+
+
+<c:if test="<%=themeDisplay.isSignedIn()%>">
+    <button  class="btn btn-link" onclick="modal2()">Sign In </button>
+
+</c:if>
+
+<aui:script>
+        var login = document.getElementById("entry_login").innerHTML;
+        function modal2 () {
+            Liferay.Util.openModal({
+                title:"Login Acme Movie Fanatics",
+                bodyHTML: login
+            });
+        }
+</aui:script>
+
