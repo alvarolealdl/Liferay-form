@@ -78,7 +78,7 @@ public class RegistrationModelImpl
 		{"userName", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
 		{"modifiedDate", Types.TIMESTAMP}, {"firstName", Types.VARCHAR},
 		{"lastName", Types.VARCHAR}, {"emailAddress", Types.VARCHAR},
-		{"gender", Types.BOOLEAN}, {"birthday", Types.TIMESTAMP},
+		{"male", Types.BOOLEAN}, {"birthday", Types.TIMESTAMP},
 		{"password_", Types.VARCHAR}, {"homePhone", Types.VARCHAR},
 		{"mobilePhone", Types.VARCHAR}, {"address1", Types.VARCHAR},
 		{"address2", Types.VARCHAR}, {"city", Types.VARCHAR},
@@ -100,7 +100,7 @@ public class RegistrationModelImpl
 		TABLE_COLUMNS_MAP.put("firstName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("lastName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("emailAddress", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("gender", Types.BOOLEAN);
+		TABLE_COLUMNS_MAP.put("male", Types.BOOLEAN);
 		TABLE_COLUMNS_MAP.put("birthday", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("password_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("homePhone", Types.VARCHAR);
@@ -114,7 +114,7 @@ public class RegistrationModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table Registration_Registration (amfRegistrationId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,firstName VARCHAR(50) null,lastName VARCHAR(255) null,emailAddress VARCHAR(50) null,gender BOOLEAN,birthday DATE null,password_ VARCHAR(75) null,homePhone VARCHAR(75) null,mobilePhone VARCHAR(75) null,address1 VARCHAR(255) null,address2 VARCHAR(255) null,city VARCHAR(255) null,state_ VARCHAR(75) null,zipCode LONG,securityAnswer VARCHAR(255) null)";
+		"create table Registration_Registration (amfRegistrationId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,firstName VARCHAR(50) null,lastName VARCHAR(255) null,emailAddress VARCHAR(50) null,male BOOLEAN,birthday DATE null,password_ VARCHAR(75) null,homePhone VARCHAR(75) null,mobilePhone VARCHAR(75) null,address1 VARCHAR(255) null,address2 VARCHAR(255) null,city VARCHAR(255) null,state_ VARCHAR(75) null,zipCode LONG,securityAnswer VARCHAR(255) null)";
 
 	public static final String TABLE_SQL_DROP =
 		"drop table Registration_Registration";
@@ -189,7 +189,7 @@ public class RegistrationModelImpl
 		model.setFirstName(soapModel.getFirstName());
 		model.setLastName(soapModel.getLastName());
 		model.setEmailAddress(soapModel.getEmailAddress());
-		model.setGender(soapModel.isGender());
+		model.setMale(soapModel.isMale());
 		model.setBirthday(soapModel.getBirthday());
 		model.setPassword(soapModel.getPassword());
 		model.setHomePhone(soapModel.getHomePhone());
@@ -393,10 +393,9 @@ public class RegistrationModelImpl
 		attributeSetterBiConsumers.put(
 			"emailAddress",
 			(BiConsumer<Registration, String>)Registration::setEmailAddress);
-		attributeGetterFunctions.put("gender", Registration::getGender);
+		attributeGetterFunctions.put("male", Registration::getMale);
 		attributeSetterBiConsumers.put(
-			"gender",
-			(BiConsumer<Registration, Boolean>)Registration::setGender);
+			"male", (BiConsumer<Registration, Boolean>)Registration::setMale);
 		attributeGetterFunctions.put("birthday", Registration::getBirthday);
 		attributeSetterBiConsumers.put(
 			"birthday",
@@ -657,23 +656,23 @@ public class RegistrationModelImpl
 
 	@JSON
 	@Override
-	public boolean getGender() {
-		return _gender;
+	public boolean getMale() {
+		return _male;
 	}
 
 	@JSON
 	@Override
-	public boolean isGender() {
-		return _gender;
+	public boolean isMale() {
+		return _male;
 	}
 
 	@Override
-	public void setGender(boolean gender) {
+	public void setMale(boolean male) {
 		if (_columnOriginalValues == Collections.EMPTY_MAP) {
 			_setColumnOriginalValues();
 		}
 
-		_gender = gender;
+		_male = male;
 	}
 
 	@JSON
@@ -932,7 +931,7 @@ public class RegistrationModelImpl
 		registrationImpl.setFirstName(getFirstName());
 		registrationImpl.setLastName(getLastName());
 		registrationImpl.setEmailAddress(getEmailAddress());
-		registrationImpl.setGender(isGender());
+		registrationImpl.setMale(isMale());
 		registrationImpl.setBirthday(getBirthday());
 		registrationImpl.setPassword(getPassword());
 		registrationImpl.setHomePhone(getHomePhone());
@@ -947,6 +946,11 @@ public class RegistrationModelImpl
 		registrationImpl.resetOriginalValues();
 
 		return registrationImpl;
+	}
+
+	@Override
+	public Registration cloneWithOriginalValues() {
+		return null;
 	}
 
 	@Override
@@ -1079,7 +1083,7 @@ public class RegistrationModelImpl
 			registrationCacheModel.emailAddress = null;
 		}
 
-		registrationCacheModel.gender = isGender();
+		registrationCacheModel.male = isMale();
 
 		Date birthday = getBirthday();
 
@@ -1244,7 +1248,7 @@ public class RegistrationModelImpl
 	private String _firstName;
 	private String _lastName;
 	private String _emailAddress;
-	private boolean _gender;
+	private boolean _male;
 	private Date _birthday;
 	private String _password;
 	private String _homePhone;
@@ -1295,7 +1299,7 @@ public class RegistrationModelImpl
 		_columnOriginalValues.put("firstName", _firstName);
 		_columnOriginalValues.put("lastName", _lastName);
 		_columnOriginalValues.put("emailAddress", _emailAddress);
-		_columnOriginalValues.put("gender", _gender);
+		_columnOriginalValues.put("male", _male);
 		_columnOriginalValues.put("birthday", _birthday);
 		_columnOriginalValues.put("password_", _password);
 		_columnOriginalValues.put("homePhone", _homePhone);
@@ -1350,7 +1354,7 @@ public class RegistrationModelImpl
 
 		columnBitmasks.put("emailAddress", 512L);
 
-		columnBitmasks.put("gender", 1024L);
+		columnBitmasks.put("male", 1024L);
 
 		columnBitmasks.put("birthday", 2048L);
 

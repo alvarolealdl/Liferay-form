@@ -25,7 +25,7 @@
 		<column name="firstName" type="String"></column>
 		<column name="lastName" type="String"></column>
 		<column name="emailAddress" type="String"></column>
-		<column name="gender" type="boolean"></column>
+		<column name="male" type="boolean"></column>
 		<column name="birthday" type="Date"></column>
 		<column name="password" type="String"></column>
 		<column name="homePhone" type="String"></column>

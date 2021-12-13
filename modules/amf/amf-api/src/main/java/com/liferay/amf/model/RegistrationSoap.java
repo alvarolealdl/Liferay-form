@@ -43,7 +43,7 @@ public class RegistrationSoap implements Serializable {
 		soapModel.setFirstName(model.getFirstName());
 		soapModel.setLastName(model.getLastName());
 		soapModel.setEmailAddress(model.getEmailAddress());
-		soapModel.setGender(model.isGender());
+		soapModel.setMale(model.isMale());
 		soapModel.setBirthday(model.getBirthday());
 		soapModel.setPassword(model.getPassword());
 		soapModel.setHomePhone(model.getHomePhone());
@@ -187,16 +187,16 @@ public class RegistrationSoap implements Serializable {
 		_emailAddress = emailAddress;
 	}
 
-	public boolean getGender() {
-		return _gender;
+	public boolean getMale() {
+		return _male;
 	}
 
-	public boolean isGender() {
-		return _gender;
+	public boolean isMale() {
+		return _male;
 	}
 
-	public void setGender(boolean gender) {
-		_gender = gender;
+	public void setMale(boolean male) {
+		_male = male;
 	}
 
 	public Date getBirthday() {
@@ -289,7 +289,7 @@ public class RegistrationSoap implements Serializable {
 	private String _firstName;
 	private String _lastName;
 	private String _emailAddress;
-	private boolean _gender;
+	private boolean _male;
 	private Date _birthday;
 	private String _password;
 	private String _homePhone;

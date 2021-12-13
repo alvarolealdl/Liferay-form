@@ -57,7 +57,7 @@ public class RegistrationWrapper
 		attributes.put("firstName", getFirstName());
 		attributes.put("lastName", getLastName());
 		attributes.put("emailAddress", getEmailAddress());
-		attributes.put("gender", isGender());
+		attributes.put("male", isMale());
 		attributes.put("birthday", getBirthday());
 		attributes.put("password", getPassword());
 		attributes.put("homePhone", getHomePhone());
@@ -134,10 +134,10 @@ public class RegistrationWrapper
 			setEmailAddress(emailAddress);
 		}
 
-		Boolean gender = (Boolean)attributes.get("gender");
+		Boolean male = (Boolean)attributes.get("male");
 
-		if (gender != null) {
-			setGender(gender);
+		if (male != null) {
+			setMale(male);
 		}
 
 		Date birthday = (Date)attributes.get("birthday");
@@ -292,16 +292,6 @@ public class RegistrationWrapper
 	}
 
 	/**
-	 * Returns the gender of this registration.
-	 *
-	 * @return the gender of this registration
-	 */
-	@Override
-	public boolean getGender() {
-		return model.getGender();
-	}
-
-	/**
 	 * Returns the group ID of this registration.
 	 *
 	 * @return the group ID of this registration
@@ -329,6 +319,16 @@ public class RegistrationWrapper
 	@Override
 	public String getLastName() {
 		return model.getLastName();
+	}
+
+	/**
+	 * Returns the male of this registration.
+	 *
+	 * @return the male of this registration
+	 */
+	@Override
+	public boolean getMale() {
+		return model.getMale();
 	}
 
 	/**
@@ -432,13 +432,13 @@ public class RegistrationWrapper
 	}
 
 	/**
-	 * Returns <code>true</code> if this registration is gender.
+	 * Returns <code>true</code> if this registration is male.
 	 *
-	 * @return <code>true</code> if this registration is gender; <code>false</code> otherwise
+	 * @return <code>true</code> if this registration is male; <code>false</code> otherwise
 	 */
 	@Override
-	public boolean isGender() {
-		return model.isGender();
+	public boolean isMale() {
+		return model.isMale();
 	}
 
 	@Override
@@ -537,16 +537,6 @@ public class RegistrationWrapper
 	}
 
 	/**
-	 * Sets whether this registration is gender.
-	 *
-	 * @param gender the gender of this registration
-	 */
-	@Override
-	public void setGender(boolean gender) {
-		model.setGender(gender);
-	}
-
-	/**
 	 * Sets the group ID of this registration.
 	 *
 	 * @param groupId the group ID of this registration
@@ -574,6 +564,16 @@ public class RegistrationWrapper
 	@Override
 	public void setLastName(String lastName) {
 		model.setLastName(lastName);
+	}
+
+	/**
+	 * Sets whether this registration is male.
+	 *
+	 * @param male the male of this registration
+	 */
+	@Override
+	public void setMale(boolean male) {
+		model.setMale(male);
 	}
 
 	/**

@@ -230,25 +230,25 @@ public interface RegistrationModel
 	public void setEmailAddress(String emailAddress);
 
 	/**
-	 * Returns the gender of this registration.
+	 * Returns the male of this registration.
 	 *
-	 * @return the gender of this registration
+	 * @return the male of this registration
 	 */
-	public boolean getGender();
+	public boolean getMale();
 
 	/**
-	 * Returns <code>true</code> if this registration is gender.
+	 * Returns <code>true</code> if this registration is male.
 	 *
-	 * @return <code>true</code> if this registration is gender; <code>false</code> otherwise
+	 * @return <code>true</code> if this registration is male; <code>false</code> otherwise
 	 */
-	public boolean isGender();
+	public boolean isMale();
 
 	/**
-	 * Sets whether this registration is gender.
+	 * Sets whether this registration is male.
 	 *
-	 * @param gender the gender of this registration
+	 * @param male the male of this registration
 	 */
-	public void setGender(boolean gender);
+	public void setMale(boolean male);
 
 	/**
 	 * Returns the birthday of this registration.

@@ -5,7 +5,6 @@ import com.liferay.amf.model.Registration;
 import com.liferay.amf.service.RegistrationService;
 import com.liferay.amf.web.constants.AcmeMoviePortletKeys;
 import com.liferay.amf.web.constants.MCVCommandNames;
-import com.liferay.amf.web.internal.security.permission.resource.RegistrationPermission;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -69,7 +68,6 @@ public class AddRegistrationMVCActionCommand extends BaseMVCActionCommand {
 		String securityAnswer = ParamUtil.getString(actionRequest, "answer");
 
 		try {
-			actionRequest.setAttribute("registrationPermission", _registrationPermission);
 
 			_registrationService.addRegistration(
 				groupId, userName, firstName, lastName, emailAddress, gender,
@@ -90,7 +88,5 @@ public class AddRegistrationMVCActionCommand extends BaseMVCActionCommand {
 	@Reference
 	protected RegistrationService _registrationService;
 
-	@Reference
-	protected RegistrationPermission _registrationPermission;
 
 }

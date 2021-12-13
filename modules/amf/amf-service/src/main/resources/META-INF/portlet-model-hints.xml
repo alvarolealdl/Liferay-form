@@ -33,9 +33,7 @@
 			<hint name="max-length">50</hint>
 			<validator name="required" />
 		</field>
-		<field name="gender" type="boolean">
-			<validator name="required" />
-		</field>
+		<field name="male" type="boolean" />
 		<field name="birthday" type="Date">
 			<validator name="required" />
 		</field>
