@@ -3,10 +3,12 @@
 
 <h1><liferay-ui:message key="registration.caption" /></h1>
 
-<portlet:actionURL name="<%=MCVCommandNames.ADD_REGISTRATION%>" var="addRegistrationURL" />
+<portlet:actionURL name="<%=MCVCommandNames.ADD_REGISTRATION%>" var="addRegistrationURL">
+	<portlet:param name="redirect" value="${param.redirect}"/>
+</portlet:actionURL>
 
 <c:if test="<%= !themeDisplay.isSignedIn() %>">
-	<aui:form action="<%= addRegistrationURL %>" method="post" name="amfRegistration">
+	<aui:form action="${ addRegistrationURL}" method="post" name="fm">
 
 		<aui:fieldset-group>
 			<h2><liferay-ui:message key="personal-info"/></h2>
@@ -62,11 +64,13 @@
 					<aui:input label="Password" name="password" type="password" placeholder="Password">
 						<aui:validator name="required"/>
 						<aui:validator name="minLength">6</aui:validator>
+						<aui:validator name="alphanum"/>
 					</aui:input>
 				</aui:col>
 				<aui:col width="50">
 					<aui:input label=" Confirm Password" name="confirmPassword" type="password" placeholder="Confirm Password">
-						<aui:validator name="equalTo">"#password"</aui:validator>
+						<aui:validator name="required"/>
+						<aui:validator name="equalTo" >"#<portlet:namespace/>password"</aui:validator>
 					</aui:input>
 				</aui:col>
 			</aui:row>
@@ -77,6 +81,7 @@
 			<aui:row>
 				<aui:col width="50">
 					<aui:input label="Home Phone" name="homePhone" type="text" placeholder="Home Phone">
+						<aui:validator name="required"/>
 						<aui:validator name="maxLength">10</aui:validator>
 					</aui:input>
 				</aui:col>
@@ -89,6 +94,7 @@
 			<aui:row>
 				<aui:col width="50">
 					<aui:input label="Address 1" name="address1" type="text" placeholder="Address 1">
+						<aui:validator name="required"/>
 						<aui:validator name="maxLength">255</aui:validator>
 					</aui:input>
 				</aui:col>
@@ -102,11 +108,14 @@
 			<aui:row>
 				<aui:col width="50">
 					<aui:input label="City" name="city" type="text" placeholder="City">
+						<aui:validator name="required"/>
 						<aui:validator name="maxLength">255</aui:validator>
 					</aui:input>
 				</aui:col>
 				<aui:col width="50">
-					<aui:input label="State" name="state" type="text" placeholder="State"/>
+					<aui:input label="State" name="state" type="text" placeholder="State">
+						<aui:validator name="required"/>
+					</aui:input>
 				</aui:col>
 			</aui:row>
 
@@ -154,5 +163,3 @@
 		});
 	}
 </aui:script>
-
-<input name="redirect" type="hidden" value="<%= currentURL %>" />

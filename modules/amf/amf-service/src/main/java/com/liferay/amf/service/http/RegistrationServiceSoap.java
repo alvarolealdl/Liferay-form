@@ -65,7 +65,7 @@ public class RegistrationServiceSoap {
 
 	public static com.liferay.amf.model.RegistrationSoap addRegistration(
 			long groupId, String userName, String firstName, String lastName,
-			String emailAddress, String gender, java.util.Date birthday,
+			String emailAddress, boolean gender, java.util.Date birthday,
 			String password, String homePhone, String mobilePhone,
 			String address1, String address2, String city, String state,
 			long zipCode, String securityAnswer)

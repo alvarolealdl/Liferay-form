@@ -32,13 +32,11 @@ import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import org.osgi.annotation.versioning.ProviderType;
 
 import java.io.Serializable;
-
 import java.util.Date;
 import java.util.List;
-
-import org.osgi.annotation.versioning.ProviderType;
 
 /**
  * Provides the local service interface for Registration. Methods of this
@@ -65,7 +63,7 @@ public interface RegistrationLocalService
 	 */
 	public Registration addRegistration(
 			long groupId, String userName, String firstName, String lastName,
-			String emailAddress, String gender, Date birthday, String password,
+			String emailAddress, boolean gender, Date birthday, String password,
 			String homePhone, String mobilePhone, String address1,
 			String address2, String city, String state, long zipCode,
 			String securityAnswer)

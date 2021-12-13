@@ -49,22 +49,17 @@ import java.util.List;
 public class RegistrationServiceImpl extends RegistrationServiceBaseImpl {
 
 
-	public Registration addRegistration(long groupId, String userName, String firstName,
-										String lastName, String emailAddress, String gender, Date birthday,
-										String password, String homePhone, String mobilePhone, String address1,
-										String address2, String city, String state, long zipCode, String securityAnswer)
-			throws PortalException {
-
-
-		return _registrationLocalServiceImpl.addRegistration(groupId, userName, firstName, lastName, emailAddress, gender,
-				birthday, password, homePhone, mobilePhone, address1, address2, city, state, zipCode, securityAnswer);
-	}
-
 	public Registration updateRegistration(long registrationId, String firstName, String lastName, String emailAddress,
 										   String address1) throws PortalException {
 
 		return _registrationLocalServiceImpl.updateRegistration(registrationId, firstName, lastName, emailAddress,
 				address1);
+	}
+
+	@Override
+	public Registration addRegistration(long groupId, String userName, String firstName, String lastName, String emailAddress, boolean gender, Date birthday, String password, String homePhone, String mobilePhone, String address1, String address2, String city, String state, long zipCode, String securityAnswer) throws PortalException {
+		return _registrationLocalServiceImpl.addRegistration(groupId, userName, firstName, lastName, emailAddress, gender,
+				birthday, password, homePhone, mobilePhone, address1, address2, city, state, zipCode, securityAnswer);
 	}
 
 	public Registration deleteRegistration(long registrationId) throws PortalException {

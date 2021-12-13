@@ -2,10 +2,9 @@ package com.liferay.amf.web.portlet;
 
 import com.liferay.amf.web.constants.AcmeMoviePortletKeys;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCPortlet;
+import org.osgi.service.component.annotations.Component;
 
 import javax.portlet.Portlet;
-
-import org.osgi.service.component.annotations.Component;
 
 /**
  * @author Bruno Queiroz
@@ -22,7 +21,6 @@ import org.osgi.service.component.annotations.Component;
 			"javax.portlet.name=" + AcmeMoviePortletKeys.REGISTRATION,
 			"javax.portlet.resource-bundle=content.Language",
 			"javax.portlet.security-role-ref=power-user,user",
-			"javax.portlet.init-param.add-process-action-success-action=false"
 
 	},
 	service = Portlet.class

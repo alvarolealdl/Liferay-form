@@ -23,11 +23,10 @@ import com.liferay.portal.kernel.service.BaseService;
 import com.liferay.portal.kernel.transaction.Isolation;
 import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
+import org.osgi.annotation.versioning.ProviderType;
 
 import java.util.Date;
 import java.util.List;
-
-import org.osgi.annotation.versioning.ProviderType;
 
 /**
  * Provides the remote service interface for Registration. Methods of this
@@ -54,7 +53,7 @@ public interface RegistrationService extends BaseService {
 	 */
 	public Registration addRegistration(
 			long groupId, String userName, String firstName, String lastName,
-			String emailAddress, String gender, Date birthday, String password,
+			String emailAddress, boolean gender, Date birthday, String password,
 			String homePhone, String mobilePhone, String address1,
 			String address2, String city, String state, long zipCode,
 			String securityAnswer)
@@ -64,8 +63,7 @@ public interface RegistrationService extends BaseService {
 		throws PortalException;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public List<Registration> getAllRegistrationById(long registrationId)
-		throws PortalException;
+	public List<Registration> getAllRegistrationById(long registrationId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public Registration getById(long userId) throws PortalException;

@@ -53,7 +53,7 @@ public class RegistrationLocalServiceImpl
 
 
 	public Registration addRegistration( long groupId, String userName, String firstName,
-										String lastName, String emailAddress, String gender, Date birthday,
+										String lastName, String emailAddress, boolean gender, Date birthday,
 										String password, String homePhone, String mobilePhone, String address1,
 										String address2, String city, String state, long zipCode, String securityAnswer)
 	throws PortalException {
@@ -79,7 +79,7 @@ public class RegistrationLocalServiceImpl
 		registration.setFirstName(firstName);
 		registration.setLastName(lastName);
 		registration.setEmailAddress(emailAddress);
-		registration.setEmailAddress(gender);
+		registration.isMale();
 		registration.setBirthday(birthday);
 		registration.setPassword(PasswordEncryptorUtil.encrypt(password));
 		registration.setHomePhone(homePhone);

@@ -14,7 +14,11 @@
 
 package com.liferay.amf.service;
 
+import com.liferay.amf.model.Registration;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.service.ServiceWrapper;
+
+import java.util.Date;
 
 /**
  * Provides a wrapper for {@link RegistrationService}.
@@ -30,19 +34,14 @@ public class RegistrationServiceWrapper
 		_registrationService = registrationService;
 	}
 
-	@Override
-	public com.liferay.amf.model.Registration addRegistration(
-			long groupId, String userName, String firstName, String lastName,
-			String emailAddress, String gender, java.util.Date birthday,
-			String password, String homePhone, String mobilePhone,
-			String address1, String address2, String city, String state,
-			long zipCode, String securityAnswer)
-		throws com.liferay.portal.kernel.exception.PortalException {
 
-		return _registrationService.addRegistration(
-			groupId, userName, firstName, lastName, emailAddress, gender,
-			birthday, password, homePhone, mobilePhone, address1, address2,
-			city, state, zipCode, securityAnswer);
+	@Override
+	public Registration addRegistration(long groupId, String userName, String firstName, String lastName,
+										String emailAddress, boolean gender, Date birthday, String password,
+										String homePhone, String mobilePhone, String address1, String address2,
+										String city, String state, long zipCode, String securityAnswer)
+			throws PortalException {
+		return null;
 	}
 
 	@Override
@@ -55,8 +54,7 @@ public class RegistrationServiceWrapper
 
 	@Override
 	public java.util.List<com.liferay.amf.model.Registration>
-			getAllRegistrationById(long registrationId)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		getAllRegistrationById(long registrationId) {
 
 		return _registrationService.getAllRegistrationById(registrationId);
 	}

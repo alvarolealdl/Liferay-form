@@ -181,9 +181,8 @@ public class RegistrationServiceHttp {
 	}
 
 	public static java.util.List<com.liferay.amf.model.Registration>
-			getAllRegistrationById(
-				HttpPrincipal httpPrincipal, long registrationId)
-		throws com.liferay.portal.kernel.exception.PortalException {
+		getAllRegistrationById(
+			HttpPrincipal httpPrincipal, long registrationId) {
 
 		try {
 			MethodKey methodKey = new MethodKey(
@@ -199,13 +198,6 @@ public class RegistrationServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception exception) {
-				if (exception instanceof
-						com.liferay.portal.kernel.exception.PortalException) {
-
-					throw (com.liferay.portal.kernel.exception.PortalException)
-						exception;
-				}
-
 				throw new com.liferay.portal.kernel.exception.SystemException(
 					exception);
 			}

@@ -1,10 +1,10 @@
 package com.liferay.amf.web.portlet.action;
 
-import com.liferay.amf.exception.RegistrationValidationExceptionException;
 import com.liferay.amf.model.Registration;
 import com.liferay.amf.service.RegistrationService;
 import com.liferay.amf.web.constants.AcmeMoviePortletKeys;
 import com.liferay.amf.web.constants.MCVCommandNames;
+import com.liferay.petra.string.StringPool;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -30,7 +30,6 @@ import java.util.Date;
 	property = {
 			"javax.portlet.name=" + AcmeMoviePortletKeys.REGISTRATION,
 			"mvc.command.name=" + MCVCommandNames.ADD_REGISTRATION,
-			"javax.portlet.init-param.add-process-action-success-action=false",
 			"javax.portlet.resource-bundle=content.Language"
 	},
 	service = MVCActionCommand.class
@@ -47,25 +46,24 @@ public class AddRegistrationMVCActionCommand extends BaseMVCActionCommand {
 
 		long groupId = serviceContext.getScopeGroupId();
 
-		String firstName = ParamUtil.getString(actionRequest, "firstName");
-		String lastName = ParamUtil.getString(actionRequest, "lastName");
-		String emailAddress = ParamUtil.getString(
-			actionRequest, "emailAddress");
-		String userName = ParamUtil.getString(actionRequest, "userName");
-		String gender = ParamUtil.getString(actionRequest, "male");
+		String firstName = ParamUtil.getString(actionRequest, "firstName", StringPool.BLANK);
+		String lastName = ParamUtil.getString(actionRequest, "lastName", StringPool.BLANK);
+		String emailAddress = ParamUtil.getString(actionRequest, "emailAddress", StringPool.BLANK);
+		String userName = ParamUtil.getString(actionRequest, "userName", StringPool.BLANK);
+		boolean gender = ParamUtil.getBoolean(actionRequest, "male");
 		Date birthday = ParamUtil.getDate(
 			actionRequest, "birthday", new SimpleDateFormat("yyyy-MM-dd"));
-		String password = ParamUtil.getString(actionRequest, "password");
+		String password = ParamUtil.getString(actionRequest, "password", StringPool.BLANK);
 		String confirmPassword = ParamUtil.getString(
-			actionRequest, "confirmPassword");
-		String homePhone = ParamUtil.getString(actionRequest, "homePhone");
-		String mobilePhone = ParamUtil.getString(actionRequest, "mobilePhone");
-		String address1 = ParamUtil.getString(actionRequest, "address1");
-		String address2 = ParamUtil.getString(actionRequest, "address2");
-		String city = ParamUtil.getString(actionRequest, "city");
-		String state = ParamUtil.getString(actionRequest, "state");
+			actionRequest, "confirmPassword", StringPool.BLANK);
+		String homePhone = ParamUtil.getString(actionRequest, "homePhone", StringPool.BLANK);
+		String mobilePhone = ParamUtil.getString(actionRequest, "mobilePhone", StringPool.BLANK);
+		String address1 = ParamUtil.getString(actionRequest, "address1", StringPool.BLANK);
+		String address2 = ParamUtil.getString(actionRequest, "address2", StringPool.BLANK);
+		String city = ParamUtil.getString(actionRequest, "city", StringPool.BLANK);
+		String state = ParamUtil.getString(actionRequest, "state", StringPool.BLANK);
 		long zipCode = ParamUtil.getLong(actionRequest, "zipCode");
-		String securityAnswer = ParamUtil.getString(actionRequest, "answer");
+		String securityAnswer = ParamUtil.getString(actionRequest, "answer", StringPool.BLANK);
 
 		try {
 
@@ -77,8 +75,11 @@ public class AddRegistrationMVCActionCommand extends BaseMVCActionCommand {
 			SessionMessages.add(actionRequest, "addRegistration");
 			sendRedirect(actionRequest, actionResponse);
 		}
-		catch (RegistrationValidationExceptionException e ){{
+		catch (Exception e ){{
+
+				e.printStackTrace();
 				SessionErrors.add(actionRequest, "emailAddressValidation");
+
 
 				actionResponse.setRenderParameter("mvcPath", "/error.jsp");
 		}
