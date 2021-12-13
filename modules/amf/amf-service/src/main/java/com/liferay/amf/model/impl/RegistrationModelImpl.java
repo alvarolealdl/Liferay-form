@@ -78,7 +78,7 @@ public class RegistrationModelImpl
 		{"userName", Types.VARCHAR}, {"createDate", Types.TIMESTAMP},
 		{"modifiedDate", Types.TIMESTAMP}, {"firstName", Types.VARCHAR},
 		{"lastName", Types.VARCHAR}, {"emailAddress", Types.VARCHAR},
-		{"gender", Types.VARCHAR}, {"birthday", Types.TIMESTAMP},
+		{"gender", Types.BOOLEAN}, {"birthday", Types.TIMESTAMP},
 		{"password_", Types.VARCHAR}, {"homePhone", Types.VARCHAR},
 		{"mobilePhone", Types.VARCHAR}, {"address1", Types.VARCHAR},
 		{"address2", Types.VARCHAR}, {"city", Types.VARCHAR},
@@ -100,7 +100,7 @@ public class RegistrationModelImpl
 		TABLE_COLUMNS_MAP.put("firstName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("lastName", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("emailAddress", Types.VARCHAR);
-		TABLE_COLUMNS_MAP.put("gender", Types.VARCHAR);
+		TABLE_COLUMNS_MAP.put("gender", Types.BOOLEAN);
 		TABLE_COLUMNS_MAP.put("birthday", Types.TIMESTAMP);
 		TABLE_COLUMNS_MAP.put("password_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("homePhone", Types.VARCHAR);
@@ -114,7 +114,7 @@ public class RegistrationModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table Registration_Registration (amfRegistrationId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,firstName VARCHAR(50) null,lastName VARCHAR(255) null,emailAddress VARCHAR(50) null,gender VARCHAR(75) null,birthday DATE null,password_ VARCHAR(75) null,homePhone VARCHAR(75) null,mobilePhone VARCHAR(75) null,address1 VARCHAR(255) null,address2 VARCHAR(255) null,city VARCHAR(255) null,state_ VARCHAR(75) null,zipCode LONG,securityAnswer VARCHAR(255) null)";
+		"create table Registration_Registration (amfRegistrationId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,firstName VARCHAR(50) null,lastName VARCHAR(255) null,emailAddress VARCHAR(50) null,gender BOOLEAN,birthday DATE null,password_ VARCHAR(75) null,homePhone VARCHAR(75) null,mobilePhone VARCHAR(75) null,address1 VARCHAR(255) null,address2 VARCHAR(255) null,city VARCHAR(255) null,state_ VARCHAR(75) null,zipCode LONG,securityAnswer VARCHAR(255) null)";
 
 	public static final String TABLE_SQL_DROP =
 		"drop table Registration_Registration";
@@ -189,7 +189,7 @@ public class RegistrationModelImpl
 		model.setFirstName(soapModel.getFirstName());
 		model.setLastName(soapModel.getLastName());
 		model.setEmailAddress(soapModel.getEmailAddress());
-		model.setGender(soapModel.getGender());
+		model.setGender(soapModel.isGender());
 		model.setBirthday(soapModel.getBirthday());
 		model.setPassword(soapModel.getPassword());
 		model.setHomePhone(soapModel.getHomePhone());
@@ -396,7 +396,7 @@ public class RegistrationModelImpl
 		attributeGetterFunctions.put("gender", Registration::getGender);
 		attributeSetterBiConsumers.put(
 			"gender",
-			(BiConsumer<Registration, String>)Registration::setGender);
+			(BiConsumer<Registration, Boolean>)Registration::setGender);
 		attributeGetterFunctions.put("birthday", Registration::getBirthday);
 		attributeSetterBiConsumers.put(
 			"birthday",
@@ -657,17 +657,18 @@ public class RegistrationModelImpl
 
 	@JSON
 	@Override
-	public String getGender() {
-		if (_gender == null) {
-			return "";
-		}
-		else {
-			return _gender;
-		}
+	public boolean getGender() {
+		return _gender;
+	}
+
+	@JSON
+	@Override
+	public boolean isGender() {
+		return _gender;
 	}
 
 	@Override
-	public void setGender(String gender) {
+	public void setGender(boolean gender) {
 		if (_columnOriginalValues == Collections.EMPTY_MAP) {
 			_setColumnOriginalValues();
 		}
@@ -931,7 +932,7 @@ public class RegistrationModelImpl
 		registrationImpl.setFirstName(getFirstName());
 		registrationImpl.setLastName(getLastName());
 		registrationImpl.setEmailAddress(getEmailAddress());
-		registrationImpl.setGender(getGender());
+		registrationImpl.setGender(isGender());
 		registrationImpl.setBirthday(getBirthday());
 		registrationImpl.setPassword(getPassword());
 		registrationImpl.setHomePhone(getHomePhone());
@@ -1078,13 +1079,7 @@ public class RegistrationModelImpl
 			registrationCacheModel.emailAddress = null;
 		}
 
-		registrationCacheModel.gender = getGender();
-
-		String gender = registrationCacheModel.gender;
-
-		if ((gender != null) && (gender.length() == 0)) {
-			registrationCacheModel.gender = null;
-		}
+		registrationCacheModel.gender = isGender();
 
 		Date birthday = getBirthday();
 
@@ -1249,7 +1244,7 @@ public class RegistrationModelImpl
 	private String _firstName;
 	private String _lastName;
 	private String _emailAddress;
-	private String _gender;
+	private boolean _gender;
 	private Date _birthday;
 	private String _password;
 	private String _homePhone;

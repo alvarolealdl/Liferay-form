@@ -9,6 +9,7 @@ taglib uri="http://liferay.com/tld/item-selector" prefix="liferay-item-selector"
 taglib uri="http://liferay.com/tld/portlet" prefix="liferay-portlet" %><%@
 taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %><%@
 taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
+<%@taglib prefix="liferay-security" uri="http://liferay.com/tld/security" %>.
 
 <%@ page import="com.liferay.amf.web.constants.MCVCommandNames" %>
 <%@page import="com.liferay.portal.kernel.util.ParamUtil" %>

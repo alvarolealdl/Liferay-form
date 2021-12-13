@@ -57,7 +57,7 @@ public class RegistrationWrapper
 		attributes.put("firstName", getFirstName());
 		attributes.put("lastName", getLastName());
 		attributes.put("emailAddress", getEmailAddress());
-		attributes.put("gender", getGender());
+		attributes.put("gender", isGender());
 		attributes.put("birthday", getBirthday());
 		attributes.put("password", getPassword());
 		attributes.put("homePhone", getHomePhone());
@@ -134,7 +134,7 @@ public class RegistrationWrapper
 			setEmailAddress(emailAddress);
 		}
 
-		String gender = (String)attributes.get("gender");
+		Boolean gender = (Boolean)attributes.get("gender");
 
 		if (gender != null) {
 			setGender(gender);
@@ -297,7 +297,7 @@ public class RegistrationWrapper
 	 * @return the gender of this registration
 	 */
 	@Override
-	public String getGender() {
+	public boolean getGender() {
 		return model.getGender();
 	}
 
@@ -431,6 +431,16 @@ public class RegistrationWrapper
 		return model.getZipCode();
 	}
 
+	/**
+	 * Returns <code>true</code> if this registration is gender.
+	 *
+	 * @return <code>true</code> if this registration is gender; <code>false</code> otherwise
+	 */
+	@Override
+	public boolean isGender() {
+		return model.isGender();
+	}
+
 	@Override
 	public void persist() {
 		model.persist();
@@ -527,12 +537,12 @@ public class RegistrationWrapper
 	}
 
 	/**
-	 * Sets the gender of this registration.
+	 * Sets whether this registration is gender.
 	 *
 	 * @param gender the gender of this registration
 	 */
 	@Override
-	public void setGender(String gender) {
+	public void setGender(boolean gender) {
 		model.setGender(gender);
 	}
 

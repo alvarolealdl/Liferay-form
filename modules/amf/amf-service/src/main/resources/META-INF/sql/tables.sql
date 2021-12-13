@@ -44,7 +44,7 @@ create table Registration_Registration (
 	firstName VARCHAR(50) null,
 	lastName VARCHAR(255) null,
 	emailAddress VARCHAR(50) null,
-	gender VARCHAR(75) null,
+	gender BOOLEAN,
 	birthday DATE null,
 	password_ VARCHAR(75) null,
 	homePhone VARCHAR(75) null,

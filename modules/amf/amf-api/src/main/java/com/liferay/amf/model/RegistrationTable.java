@@ -53,8 +53,8 @@ public class RegistrationTable extends BaseTable<RegistrationTable> {
 		"lastName", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
 	public final Column<RegistrationTable, String> emailAddress = createColumn(
 		"emailAddress", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
-	public final Column<RegistrationTable, String> gender = createColumn(
-		"gender", String.class, Types.VARCHAR, Column.FLAG_DEFAULT);
+	public final Column<RegistrationTable, Boolean> gender = createColumn(
+		"gender", Boolean.class, Types.BOOLEAN, Column.FLAG_DEFAULT);
 	public final Column<RegistrationTable, Date> birthday = createColumn(
 		"birthday", Date.class, Types.TIMESTAMP, Column.FLAG_DEFAULT);
 	public final Column<RegistrationTable, String> password = createColumn(

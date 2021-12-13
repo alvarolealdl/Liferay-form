@@ -41,10 +41,15 @@
 			</aui:row>
 			<aui:row>
 				<aui:col width="50">
-					<aui:select label="Gender" name="gender" >
-						<aui:option>Male</aui:option>
-						<aui:option>Female</aui:option>
-					</aui:select>
+					<label>Gender</label>
+					<aui:row>
+						<aui:col width="50">
+							<aui:input checked="<%=true%>" label="Male" name="male" type="radio"/>
+						</aui:col>
+						<aui:col width="50">
+							<aui:input label="Female" name="male" type="radio"/>
+						</aui:col>
+					</aui:row>
 				</aui:col>
 				<aui:col width="50">
 					<aui:input label="Birthday" name="Birthday" type="date" placeholder="Birthday">

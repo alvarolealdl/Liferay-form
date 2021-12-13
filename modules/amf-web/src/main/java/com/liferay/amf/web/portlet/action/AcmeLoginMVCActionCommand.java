@@ -25,7 +25,8 @@ import javax.portlet.ActionResponse;
         property = {
                 "javax.portlet.name=" + AcmeMoviePortletKeys.LOGIN,
                 "mvc.command.name=" + MCVCommandNames.ACCESS_LOGIN,
-                "service.ranking: Integer=1"
+                "service.ranking: Integer=1",
+                "javax.portlet.resource-bundle=content.Language"
         },
         service = MVCActionCommand.class
 )

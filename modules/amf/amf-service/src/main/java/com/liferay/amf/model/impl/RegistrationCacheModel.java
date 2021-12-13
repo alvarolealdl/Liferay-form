@@ -162,12 +162,7 @@ public class RegistrationCacheModel
 			registrationImpl.setEmailAddress(emailAddress);
 		}
 
-		if (gender == null) {
-			registrationImpl.setGender("");
-		}
-		else {
-			registrationImpl.setGender(gender);
-		}
+		registrationImpl.setGender(gender);
 
 		if (birthday == Long.MIN_VALUE) {
 			registrationImpl.setBirthday(null);
@@ -254,7 +249,8 @@ public class RegistrationCacheModel
 		firstName = objectInput.readUTF();
 		lastName = objectInput.readUTF();
 		emailAddress = objectInput.readUTF();
-		gender = objectInput.readUTF();
+
+		gender = objectInput.readBoolean();
 		birthday = objectInput.readLong();
 		password = objectInput.readUTF();
 		homePhone = objectInput.readUTF();
@@ -309,13 +305,7 @@ public class RegistrationCacheModel
 			objectOutput.writeUTF(emailAddress);
 		}
 
-		if (gender == null) {
-			objectOutput.writeUTF("");
-		}
-		else {
-			objectOutput.writeUTF(gender);
-		}
-
+		objectOutput.writeBoolean(gender);
 		objectOutput.writeLong(birthday);
 
 		if (password == null) {
@@ -387,7 +377,7 @@ public class RegistrationCacheModel
 	public String firstName;
 	public String lastName;
 	public String emailAddress;
-	public String gender;
+	public boolean gender;
 	public long birthday;
 	public String password;
 	public String homePhone;

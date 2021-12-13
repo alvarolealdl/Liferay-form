@@ -3,8 +3,9 @@ package com.liferay.amf.web.portlet.action;
 import com.liferay.amf.exception.RegistrationValidationExceptionException;
 import com.liferay.amf.model.Registration;
 import com.liferay.amf.service.RegistrationService;
-import com.liferay.amf.web.constants.MCVCommandNames;
 import com.liferay.amf.web.constants.AcmeMoviePortletKeys;
+import com.liferay.amf.web.constants.MCVCommandNames;
+import com.liferay.amf.web.internal.security.permission.resource.RegistrationPermission;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -12,16 +13,13 @@ import com.liferay.portal.kernel.service.ServiceContextFactory;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
-
-import java.text.SimpleDateFormat;
-
-import java.util.Date;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
-
-import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * MVC Action Command for adding user.
@@ -31,9 +29,10 @@ import org.osgi.service.component.annotations.Reference;
 @Component(
 	immediate = true,
 	property = {
-		"javax.portlet.name=" + AcmeMoviePortletKeys.REGISTRATION,
-		"mvc.command.name=" + MCVCommandNames.ADD_REGISTRATION,
-		"javax.portlet.init-param.add-process-action-success-action=false"
+			"javax.portlet.name=" + AcmeMoviePortletKeys.REGISTRATION,
+			"mvc.command.name=" + MCVCommandNames.ADD_REGISTRATION,
+			"javax.portlet.init-param.add-process-action-success-action=false",
+			"javax.portlet.resource-bundle=content.Language"
 	},
 	service = MVCActionCommand.class
 )
@@ -54,7 +53,7 @@ public class AddRegistrationMVCActionCommand extends BaseMVCActionCommand {
 		String emailAddress = ParamUtil.getString(
 			actionRequest, "emailAddress");
 		String userName = ParamUtil.getString(actionRequest, "userName");
-		String gender = ParamUtil.getString(actionRequest, "gender");
+		String gender = ParamUtil.getString(actionRequest, "male");
 		Date birthday = ParamUtil.getDate(
 			actionRequest, "birthday", new SimpleDateFormat("yyyy-MM-dd"));
 		String password = ParamUtil.getString(actionRequest, "password");
@@ -70,6 +69,8 @@ public class AddRegistrationMVCActionCommand extends BaseMVCActionCommand {
 		String securityAnswer = ParamUtil.getString(actionRequest, "answer");
 
 		try {
+			actionRequest.setAttribute("registrationPermission", _registrationPermission);
+
 			_registrationService.addRegistration(
 				groupId, userName, firstName, lastName, emailAddress, gender,
 				birthday, password, homePhone, mobilePhone, address1, address2,
@@ -88,5 +89,8 @@ public class AddRegistrationMVCActionCommand extends BaseMVCActionCommand {
 
 	@Reference
 	protected RegistrationService _registrationService;
+
+	@Reference
+	protected RegistrationPermission _registrationPermission;
 
 }
