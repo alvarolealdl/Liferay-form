@@ -23,7 +23,6 @@ import com.liferay.portal.aop.AopService;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.security.pwd.PasswordEncryptorUtil;
-import com.liferay.portal.kernel.service.persistence.UserPersistence;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -60,20 +59,13 @@ public class RegistrationLocalServiceImpl
 
 		_registrationValidator.validate(userName, firstName, lastName, emailAddress);
 
-
 		long userId = counterLocalService.increment(User.class.getName());
-		User user = _userPersistence.create(userId);
-		user.setScreenName("");
-		user.setFirstName(firstName);
-		user.setLastName(lastName);
-		user.setEmailAddress(emailAddress);
-		userLocalService.addUser(user);
+
 
 		long amfRegistrationId = counterLocalService.increment(Registration.class.getName());
 
 		Registration registration = _registrationPersistence.create(amfRegistrationId);
 		registration.setGroupId(groupId);
-		registration.setCompanyId(user.getCompanyId());
 		registration.setUserId(userId);
 		registration.setCreateDate(new Date());
 		registration.setUserName(userName);
@@ -134,9 +126,6 @@ public class RegistrationLocalServiceImpl
 
 	@Reference
 	private RegistrationPersistence _registrationPersistence;
-
-	@Reference
-	private UserPersistence _userPersistence;
 
 
 	@Reference
