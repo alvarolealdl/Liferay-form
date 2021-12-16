@@ -3,7 +3,12 @@ package com.liferay.amf.util.validator;
 import com.liferay.amf.exception.RegistrationValidationExceptionException;
 import com.liferay.amf.validator.RegistrationValidator;
 import com.liferay.portal.kernel.util.Validator;
+import org.osgi.service.component.annotations.Component;
 
+@Component(
+        immediate = true,
+        service = RegistrationValidator.class
+)
 public class RegistrationValidatorImpl implements RegistrationValidator {
     @Override
     public void validate(String userName, String firstName, String lastName, String emailAddress) throws RegistrationValidationExceptionException {

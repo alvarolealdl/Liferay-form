@@ -3,12 +3,11 @@
 
 <h1><liferay-ui:message key="registration.caption" /></h1>
 
-<portlet:actionURL name="<%=MCVCommandNames.ADD_REGISTRATION%>" var="addRegistrationURL">
-	<portlet:param name="redirect" value="${param.redirect}"/>
-</portlet:actionURL>
-
 <c:if test="<%= !themeDisplay.isSignedIn() %>">
-	<aui:form action="${ addRegistrationURL}" method="post" name="fm">
+	<portlet:actionURL name="<%=MCVCommandNames.ADD_REGISTRATION%>" var="addRegistrationURL">
+		<portlet:param name="redirect" value="${param.redirect}"/>
+	</portlet:actionURL>
+	<aui:form action="${addRegistrationURL}" method="post" name="fm">
 
 		<aui:fieldset-group>
 			<h2><liferay-ui:message key="personal-info"/></h2>

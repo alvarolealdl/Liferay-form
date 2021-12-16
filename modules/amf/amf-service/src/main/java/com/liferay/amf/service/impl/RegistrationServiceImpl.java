@@ -16,10 +16,10 @@ package com.liferay.amf.service.impl;
 
 
 import com.liferay.amf.model.Registration;
+import com.liferay.amf.service.RegistrationLocalService;
 import com.liferay.amf.service.base.RegistrationServiceBaseImpl;
 import com.liferay.portal.aop.AopService;
 import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.service.ServiceContext;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
@@ -52,13 +52,13 @@ public class RegistrationServiceImpl extends RegistrationServiceBaseImpl {
 	public Registration updateRegistration(long registrationId, String firstName, String lastName, String emailAddress,
 										   String address1) throws PortalException {
 
-		return _registrationLocalServiceImpl.updateRegistration(registrationId, firstName, lastName, emailAddress,
+		return _registrationLocalService.updateRegistration(registrationId, firstName, lastName, emailAddress,
 				address1);
 	}
 
 	@Override
 	public Registration addRegistration(long groupId, String userName, String firstName, String lastName, String emailAddress, boolean gender, Date birthday, String password, String homePhone, String mobilePhone, String address1, String address2, String city, String state, long zipCode, String securityAnswer) throws PortalException {
-		return _registrationLocalServiceImpl.addRegistration(groupId, userName, firstName, lastName, emailAddress, gender,
+		return _registrationLocalService.addRegistration(groupId, userName, firstName, lastName, emailAddress, gender,
 				birthday, password, homePhone, mobilePhone, address1, address2, city, state, zipCode, securityAnswer);
 	}
 
@@ -66,33 +66,32 @@ public class RegistrationServiceImpl extends RegistrationServiceBaseImpl {
 
 
 
-		Registration registration = _registrationLocalServiceImpl.getRegistration(registrationId);
-		return _registrationLocalServiceImpl.deleteRegistration(registration);
+		Registration registration = _registrationLocalService.getRegistration(registrationId);
+		return _registrationLocalService.deleteRegistration(registration);
 	}
 
 	public List<Registration> getAllRegistrationById(long registrationId) {
 
-		return _registrationLocalServiceImpl.getAllRegistrationById(registrationId);
+		return _registrationLocalService.getAllRegistrationById(registrationId);
 
 	}
 
 	public Registration getEmailAddressByUserId(long userId) {
 
-		return _registrationLocalServiceImpl.getEmailAddressByUserId(userId);
+		return _registrationLocalService.getEmailAddressByUserId(userId);
 	}
 
 	public Registration getById(long userId) throws PortalException {
 
-		Registration registration = _registrationLocalServiceImpl.getById(userId);
+		Registration registration = _registrationLocalService.getById(userId);
 
 		return registration;
 	}
 
 
 	@Reference
-	private RegistrationLocalServiceImpl _registrationLocalServiceImpl;
+	private RegistrationLocalService _registrationLocalService;
 
-	@Reference
-	private ServiceContext _serviceContext;
+
 
 }

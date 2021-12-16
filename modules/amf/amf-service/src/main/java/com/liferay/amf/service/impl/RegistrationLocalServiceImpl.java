@@ -15,18 +15,17 @@
 package com.liferay.amf.service.impl;
 
 import com.liferay.amf.exception.NoSuchRegistrationException;
+import com.liferay.amf.model.Registration;
 import com.liferay.amf.service.base.RegistrationLocalServiceBaseImpl;
 import com.liferay.amf.service.persistence.RegistrationPersistence;
 import com.liferay.amf.validator.RegistrationValidator;
 import com.liferay.portal.aop.AopService;
-import com.liferay.amf.model.Registration;
 import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.User;
 import com.liferay.portal.kernel.security.pwd.PasswordEncryptorUtil;
-import com.liferay.portal.kernel.service.GroupLocalService;
+import com.liferay.portal.kernel.service.persistence.UserPersistence;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
-import com.liferay.portal.kernel.model.User;
-import com.liferay.portal.kernel.service.ServiceContext;
 
 import java.util.Date;
 import java.util.List;
@@ -45,6 +44,7 @@ import java.util.List;
  * @see RegistrationLocalServiceBaseImpl
  */
 @Component(
+		immediate = true,
 	property = "model.class.name=com.liferay.amf.model.Registration",
 	service = AopService.class
 )
@@ -60,8 +60,9 @@ public class RegistrationLocalServiceImpl
 
 		_registrationValidator.validate(userName, firstName, lastName, emailAddress);
 
-		long userId = _serviceContext.getUserId();
-		User user = userLocalService.getUser(userId);
+
+		long userId = counterLocalService.increment(User.class.getName());
+		User user = _userPersistence.create(userId);
 		user.setScreenName("");
 		user.setFirstName(firstName);
 		user.setLastName(lastName);
@@ -135,10 +136,8 @@ public class RegistrationLocalServiceImpl
 	private RegistrationPersistence _registrationPersistence;
 
 	@Reference
-	private GroupLocalService _groupLocalService;
+	private UserPersistence _userPersistence;
 
-	@Reference
-	private ServiceContext _serviceContext;
 
 	@Reference
 	private RegistrationValidator _registrationValidator;

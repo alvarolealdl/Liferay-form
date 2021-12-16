@@ -5,6 +5,8 @@ import com.liferay.amf.service.RegistrationService;
 import com.liferay.amf.web.constants.AcmeMoviePortletKeys;
 import com.liferay.amf.web.constants.MCVCommandNames;
 import com.liferay.petra.string.StringPool;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.portlet.bridges.mvc.BaseMVCActionCommand;
 import com.liferay.portal.kernel.portlet.bridges.mvc.MVCActionCommand;
 import com.liferay.portal.kernel.service.ServiceContext;
@@ -30,7 +32,6 @@ import java.util.Date;
 	property = {
 			"javax.portlet.name=" + AcmeMoviePortletKeys.REGISTRATION,
 			"mvc.command.name=" + MCVCommandNames.ADD_REGISTRATION,
-			"javax.portlet.resource-bundle=content.Language"
 	},
 	service = MVCActionCommand.class
 )
@@ -88,6 +89,8 @@ public class AddRegistrationMVCActionCommand extends BaseMVCActionCommand {
 
 	@Reference
 	protected RegistrationService _registrationService;
+
+	private static final Log _log = LogFactoryUtil.getLog(AddRegistrationMVCActionCommand.class);
 
 
 }
