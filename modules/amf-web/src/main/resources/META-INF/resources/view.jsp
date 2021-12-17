@@ -210,7 +210,6 @@
             placeholder="State"
             required="true"
             type="text"
-            value="<%=%>"
           />
         </aui:col>
       </aui:row>
