@@ -5,12 +5,10 @@
 </aui:col>
 
 <c:if test="<%= !themeDisplay.isSignedIn() %>">
-  <portlet:actionURL
-    name="<%=MCVCommandNames.ADD_REGISTRATION%>"
-    var="addRegistrationURL"
-  >
+  <portlet:actionURL name="<%=MCVCommandNames.ADD_REGISTRATION%>" var="addRegistrationURL">
     <portlet:param name="redirect" value="${param.redirect}" />
   </portlet:actionURL>
+
   <aui:form action="${addRegistrationURL}" method="post" name="fm">
     <aui:fieldset-group markupView="lexicon">
       <h2><liferay-ui:message key="personal-info" /></h2>
@@ -19,8 +17,8 @@
         <aui:col width="50">
           <aui:input
             autoFocus="<%= true %>"
-            label="First Nameeeeeeeeeee"
-            name="first_name"
+            label="First Name"
+            name="firstName"
             placeholder="First Name"
             required="true"
             type="text"
@@ -32,7 +30,7 @@
         <aui:col width="50">
           <aui:input
             label="Last Name"
-            name="last_name"
+            name="lastName"
             placeholder="Last Name"
             required="true"
             type="text"
@@ -46,7 +44,7 @@
         <aui:col width="50">
           <aui:input
             label="Email Address"
-            name="email_address"
+            name="emailAddress"
             placeholder="Email Address"
             required="true"
             type="email"
@@ -59,7 +57,7 @@
         <aui:col width="50">
           <aui:input
             label="Username"
-            name="username"
+            name="userName"
             placeholder="Username"
             required="true"
             type="text"
@@ -114,7 +112,7 @@
         <aui:col width="50">
           <aui:input
             label="Password"
-            name="password1"
+            name="password"
             pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}"
             placeholder="Password"
             required="true"
@@ -127,14 +125,12 @@
         <aui:col width="50">
           <aui:input
             label=" Confirm Password"
-            name="password2"
+            name="confirmPassword"
             placeholder="Confirm Password"
             required="true"
             type="password"
           >
-            <aui:validator name="equalTo"
-              >"#<portlet:namespace />password1"</aui:validator
-            >
+            <aui:validator name="equalTo">"#<portlet:namespace />password"</aui:validator>
           </aui:input>
         </aui:col>
       </aui:row>
@@ -147,7 +143,7 @@
         <aui:col width="50">
           <aui:input
             label="Home Phone"
-            name="home_phone"
+            name="homePhone"
             placeholder="Home Phone"
             type="number"
           >
@@ -159,7 +155,7 @@
         <aui:col width="50">
           <aui:input
             label="Mobile Phone"
-            name="mobile_phone"
+            name="mobilePhone"
             placeholder="Mobile Phone"
             type="number"
           >
@@ -209,11 +205,12 @@
 
         <aui:col width="50">
           <aui:input
-            label="State"
+            label="Region"
             name="state"
             placeholder="State"
             required="true"
             type="text"
+            value="<%=%>"
           />
         </aui:col>
       </aui:row>
@@ -222,7 +219,7 @@
         <aui:col width="50">
           <aui:input
             label="Zip Code"
-            name="zip"
+            name="zipCode"
             placeholder="Zip Code"
             required="true"
             type="number"
@@ -259,7 +256,7 @@
 
       <aui:input
         label="Answer"
-        name="security_answer"
+        name="answer"
         placeholder="Write your answer to the Security Question here"
         type="text"
       >
