@@ -74,15 +74,16 @@
                   <aui:input
                           checked="<%= true %>"
                           label="&nbsp;Male"
-                          name="male"
+                          name="gender"
                           type="radio"
+                          value="male"
                   />
                 </aui:col>
               </div>
 
               <div class="female">
               <aui:col width="50">
-                <aui:input label="&nbsp;Female" name="male" type="radio" />
+                <aui:input label="&nbsp;Female" name="gender" type="radio" value="female" />
               </aui:col>
             </aui:row>
             </div>

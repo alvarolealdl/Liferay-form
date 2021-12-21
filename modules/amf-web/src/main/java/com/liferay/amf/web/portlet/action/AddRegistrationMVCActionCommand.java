@@ -51,7 +51,7 @@ public class AddRegistrationMVCActionCommand extends BaseMVCActionCommand {
 		String lastName = ParamUtil.getString(actionRequest, "lastName", StringPool.BLANK);
 		String emailAddress = ParamUtil.getString(actionRequest, "emailAddress", StringPool.BLANK);
 		String userName = ParamUtil.getString(actionRequest, "userName", StringPool.BLANK);
-		boolean gender = ParamUtil.getBoolean(actionRequest, "male");
+		String gender = ParamUtil.getString(actionRequest, "gender");
 		Date birthday = ParamUtil.getDate(
 			actionRequest, "birthday", new SimpleDateFormat("yyyy-MM-dd"));
 		String password = ParamUtil.getString(actionRequest, "password", StringPool.BLANK);
@@ -66,10 +66,16 @@ public class AddRegistrationMVCActionCommand extends BaseMVCActionCommand {
 		long zipCode = ParamUtil.getLong(actionRequest, "zipCode");
 		String securityAnswer = ParamUtil.getString(actionRequest, "answer", StringPool.BLANK);
 
+		boolean male = false;
+
+		if(gender.equals("male")){
+			male = true;
+		}
+
 		try {
 
 			_registrationService.addRegistration(
-				groupId, userName, firstName, lastName, emailAddress, gender,
+				groupId, userName, firstName, lastName, emailAddress, male,
 				birthday, password, homePhone, mobilePhone, address1, address2,
 				city, state, zipCode, securityAnswer);
 
