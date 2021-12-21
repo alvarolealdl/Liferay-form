@@ -72,7 +72,7 @@ public class RegistrationLocalServiceImpl
 		registration.setFirstName(firstName);
 		registration.setLastName(lastName);
 		registration.setEmailAddress(emailAddress);
-		registration.isMale();
+		registration.setMale(gender);
 		registration.setBirthday(birthday);
 		registration.setPassword(PasswordEncryptorUtil.encrypt(password));
 		registration.setHomePhone(homePhone);

@@ -67,11 +67,9 @@ public class AddRegistrationMVCActionCommand extends BaseMVCActionCommand {
 		String securityAnswer = ParamUtil.getString(actionRequest, "answer", StringPool.BLANK);
 
 		boolean male = false;
-
 		if(gender.equals("male")){
 			male = true;
 		}
-
 		try {
 
 			_registrationService.addRegistration(
