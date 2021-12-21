@@ -1,2 +1,33 @@
-.amf-web {
+.title {
+  border: 1px solid #e7e7ed;
+  border-radius: 8px;
+  padding: 8px;
+  text-align: center;
+}
+.personal-data {
+  border: 1px solid #e7e7ed;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  padding: 20px;
+}
+.billing-data {
+  border: 1px solid #e7e7ed;
+  border-radius: 8px;
+  margin-top: 30px;
+  padding: 20px;
+}
+.male {
+  width: 200px;
+}
+.female {
+  margin-left: -80px;
+  width: 200px;
+}
+.btn.btn-link {
+  background-color: #f8f8ff;
+  border-radius: 16px;
+  font-weight: bold;
+}
+.buttons {
+  padding-left: 25px;
 }
