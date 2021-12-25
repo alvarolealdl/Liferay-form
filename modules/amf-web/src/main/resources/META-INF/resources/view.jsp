@@ -1,8 +1,6 @@
 <%@ include file="/META-INF/resources/init.jsp" %>
-<div class="container">
-
+<aui:container fluid="false">
   <h1 class="title"><liferay-ui:message key="registration.caption" /></h1>
-
   <c:if test="<%= !themeDisplay.isSignedIn() %>">
     <portlet:actionURL
             name="<%=MCVCommandNames.ADD_REGISTRATION%>"
@@ -11,13 +9,12 @@
       <portlet:param name="redirect" value="${param.redirect}" />
     </portlet:actionURL>
     <aui:form action="${addRegistrationURL}" method="post" name="fm">
-
       <div class="personal-data">
         <h2><liferay-ui:message key="personal-info" /></h2>
         <aui:row>
           <aui:col width="50">
             <aui:input
-                    autoFocus="<%= true %>"
+                    autoFocus="true"
                     label="First Name"
                     name="firstName"
                     placeholder="First Name"
@@ -80,7 +77,6 @@
                   />
                 </aui:col>
               </div>
-
               <div class="female">
               <aui:col width="50">
                 <aui:input label="&nbsp;Female" name="gender" type="radio" value="female" />
@@ -136,8 +132,6 @@
           </aui:col>
         </aui:row>
       </div>
-
-
       <div class="billing-data">
         <h2><liferay-ui:message key="billing-info" /></h2>
         <aui:row>
@@ -188,7 +182,7 @@
           </aui:col>
         </aui:row>
         <aui:row>
-          <aui:col width="50">
+          <aui:col width="40">
             <aui:input
                     label="City"
                     name="city"
@@ -199,18 +193,16 @@
               <aui:validator name="maxLength">255</aui:validator>
             </aui:input>
           </aui:col>
-          <aui:col width="50">
-            <aui:input
-                    label="State"
-                    name="state"
-                    placeholder="State"
-                    required="true"
-                    type="text"
-            />
+          <aui:col width="20">
+            <aui:select disabled="false" helpMessage="USA Resident" label="Country" name="country" />
           </aui:col>
+          <aui:col width="40">
+            <aui:select label="State" name="state" required="true" title="Please select some state" />
+          </aui:col>
+
         </aui:row>
         <aui:row>
-          <aui:col width="50">
+          <aui:col width="20">
             <aui:input
                     label="Zip Code"
                     name="zipCode"
@@ -222,7 +214,7 @@
               <aui:validator name="maxLength">5</aui:validator>
             </aui:input>
           </aui:col>
-          <aui:col width="50">
+          <aui:col width="30">
             <aui:select
                     label="Security Question"
                     name="securityQuestion"
@@ -249,23 +241,28 @@
               >
             </aui:select>
           </aui:col>
-        </aui:row>
-        <aui:input
-                label="Answer"
-                name="answer"
-                placeholder="Write your answer to the Security Question here"
-                type="text"
-        >
-          <aui:validator name="required" />
-          <aui:validator name="maxLength">255</aui:validator>
-        </aui:input>
-        <aui:input label="&nbsp;Term of Use" name="accepted_tou" type="checkbox">
-          <aui:validator name="required" />
-        </aui:input>
+          <aui:col width="50">
+            <aui:input
+                    label="Security Question Answer"
+                    name="answer"
+                    placeholder="Write your answer to the Security Question here"
+                    type="text"
+            >
+              <aui:validator name="required" />
+              <aui:validator name="maxLength">255</aui:validator>
+            </aui:input>
+          </aui:col>
 
-        <button class="btn btn-link" onclick="modal()">
-          Read terms of use
-        </button>
+          <aui:col width="50">
+            <aui:input label="&nbsp;Term of Use" name="accepted_tou" type="checkbox">
+              <aui:validator name="required" />
+            </aui:input>
+
+            <button class="btn btn-link" onclick="modal()">
+              Read terms of use
+            </button>
+          </aui:col>
+        </aui:row>
       </div>
 
       <!--Buttons-->
@@ -280,10 +277,32 @@
       </div>
     </aui:form>
   </c:if>
-</div>
+</aui:container>>
+<!--Modal script-->
 <%@ include file="/META-INF/resources/touContent.jsp" %>
 <aui:script>
   var touContent = document.getElementById("tou-content").innerHTML; function
   modal () { Liferay.Util.openModal({ title:"Terms of Use", bodyHTML: touContent
   }); }
+</aui:script>
+<!--State script-->
+<aui:script use="liferay-dynamic-select">
+  new Liferay.DynamicSelect(
+  [
+  {
+  select: '<portlet:namespace />country',
+  selectData: Liferay.Address.getCountries,
+  selectDesc: 'name',
+  selectId: 'countryId',
+  selectVal: '21539'
+  },
+  {
+  select: '<portlet:namespace />state',
+  selectData: Liferay.Address.getRegions,
+  selectDesc: 'name',
+  selectId: 'name',
+  selectVal: '&lt;%= regionId %&gt;'
+  }
+  ]
+  );
 </aui:script>

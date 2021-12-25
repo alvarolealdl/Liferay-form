@@ -52,6 +52,10 @@ public class RegistrationServiceUtil {
 			city, state, zipCode, securityAnswer);
 	}
 
+	public static Registration addRegistration(Registration registration) {
+		return getService().addRegistration(registration);
+	}
+
 	public static Registration deleteRegistration(long registrationId)
 		throws PortalException {
 
@@ -79,6 +83,12 @@ public class RegistrationServiceUtil {
 	 */
 	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
+	}
+
+	public static Registration getRegistration(long registrationId)
+		throws PortalException {
+
+		return getService().getRegistration(registrationId);
 	}
 
 	public static Registration updateRegistration(

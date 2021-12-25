@@ -51,10 +51,52 @@ import com.liferay.portal.kernel.util.MethodKey;
  */
 public class RegistrationServiceHttp {
 
+	public static com.liferay.amf.model.Registration updateRegistration(
+			HttpPrincipal httpPrincipal, long registrationId, String firstName,
+			String lastName, String emailAddress, String address1)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				RegistrationServiceUtil.class, "updateRegistration",
+				_updateRegistrationParameterTypes0);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, registrationId, firstName, lastName, emailAddress,
+				address1);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				if (exception instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						exception;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (com.liferay.amf.model.Registration)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
 	public static com.liferay.amf.model.Registration addRegistration(
 			HttpPrincipal httpPrincipal, long groupId, String userName,
 			String firstName, String lastName, String emailAddress,
-			String gender, java.util.Date birthday, String password,
+			boolean gender, java.util.Date birthday, String password,
 			String homePhone, String mobilePhone, String address1,
 			String address2, String city, String state, long zipCode,
 			String securityAnswer)
@@ -63,7 +105,7 @@ public class RegistrationServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				RegistrationServiceUtil.class, "addRegistration",
-				_addRegistrationParameterTypes0);
+				_addRegistrationParameterTypes1);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, groupId, userName, firstName, lastName, emailAddress,
@@ -98,19 +140,17 @@ public class RegistrationServiceHttp {
 		}
 	}
 
-	public static com.liferay.amf.model.Registration updateRegistration(
-			HttpPrincipal httpPrincipal, long registrationId, String firstName,
-			String lastName, String emailAddress, String address1)
-		throws com.liferay.portal.kernel.exception.PortalException {
+	public static com.liferay.amf.model.Registration addRegistration(
+		HttpPrincipal httpPrincipal,
+		com.liferay.amf.model.Registration registration) {
 
 		try {
 			MethodKey methodKey = new MethodKey(
-				RegistrationServiceUtil.class, "updateRegistration",
-				_updateRegistrationParameterTypes1);
+				RegistrationServiceUtil.class, "addRegistration",
+				_addRegistrationParameterTypes2);
 
 			MethodHandler methodHandler = new MethodHandler(
-				methodKey, registrationId, firstName, lastName, emailAddress,
-				address1);
+				methodKey, registration);
 
 			Object returnObj = null;
 
@@ -118,13 +158,6 @@ public class RegistrationServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
 			}
 			catch (Exception exception) {
-				if (exception instanceof
-						com.liferay.portal.kernel.exception.PortalException) {
-
-					throw (com.liferay.portal.kernel.exception.PortalException)
-						exception;
-				}
-
 				throw new com.liferay.portal.kernel.exception.SystemException(
 					exception);
 			}
@@ -147,7 +180,7 @@ public class RegistrationServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				RegistrationServiceUtil.class, "deleteRegistration",
-				_deleteRegistrationParameterTypes2);
+				_deleteRegistrationParameterTypes3);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, registrationId);
@@ -187,7 +220,7 @@ public class RegistrationServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				RegistrationServiceUtil.class, "getAllRegistrationById",
-				_getAllRegistrationByIdParameterTypes3);
+				_getAllRegistrationByIdParameterTypes4);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, registrationId);
@@ -214,13 +247,53 @@ public class RegistrationServiceHttp {
 		}
 	}
 
+	public static com.liferay.amf.model.Registration getRegistration(
+			HttpPrincipal httpPrincipal, long registrationId)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				RegistrationServiceUtil.class, "getRegistration",
+				_getRegistrationParameterTypes5);
+
+			MethodHandler methodHandler = new MethodHandler(
+				methodKey, registrationId);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				if (exception instanceof
+						com.liferay.portal.kernel.exception.PortalException) {
+
+					throw (com.liferay.portal.kernel.exception.PortalException)
+						exception;
+				}
+
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (com.liferay.amf.model.Registration)returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
 	public static com.liferay.amf.model.Registration getEmailAddressByUserId(
 		HttpPrincipal httpPrincipal, long userId) {
 
 		try {
 			MethodKey methodKey = new MethodKey(
 				RegistrationServiceUtil.class, "getEmailAddressByUserId",
-				_getEmailAddressByUserIdParameterTypes4);
+				_getEmailAddressByUserIdParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId);
 
@@ -252,7 +325,7 @@ public class RegistrationServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				RegistrationServiceUtil.class, "getById",
-				_getByIdParameterTypes5);
+				_getByIdParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId);
 
@@ -287,24 +360,28 @@ public class RegistrationServiceHttp {
 	private static Log _log = LogFactoryUtil.getLog(
 		RegistrationServiceHttp.class);
 
-	private static final Class<?>[] _addRegistrationParameterTypes0 =
-		new Class[] {
-			long.class, String.class, String.class, String.class, String.class,
-			String.class, java.util.Date.class, String.class, String.class,
-			String.class, String.class, String.class, String.class,
-			String.class, long.class, String.class
-		};
-	private static final Class<?>[] _updateRegistrationParameterTypes1 =
+	private static final Class<?>[] _updateRegistrationParameterTypes0 =
 		new Class[] {
 			long.class, String.class, String.class, String.class, String.class
 		};
-	private static final Class<?>[] _deleteRegistrationParameterTypes2 =
+	private static final Class<?>[] _addRegistrationParameterTypes1 =
+		new Class[] {
+			long.class, String.class, String.class, String.class, String.class,
+			boolean.class, java.util.Date.class, String.class, String.class,
+			String.class, String.class, String.class, String.class,
+			String.class, long.class, String.class
+		};
+	private static final Class<?>[] _addRegistrationParameterTypes2 =
+		new Class[] {com.liferay.amf.model.Registration.class};
+	private static final Class<?>[] _deleteRegistrationParameterTypes3 =
 		new Class[] {long.class};
-	private static final Class<?>[] _getAllRegistrationByIdParameterTypes3 =
+	private static final Class<?>[] _getAllRegistrationByIdParameterTypes4 =
 		new Class[] {long.class};
-	private static final Class<?>[] _getEmailAddressByUserIdParameterTypes4 =
+	private static final Class<?>[] _getRegistrationParameterTypes5 =
 		new Class[] {long.class};
-	private static final Class<?>[] _getByIdParameterTypes5 = new Class[] {
+	private static final Class<?>[] _getEmailAddressByUserIdParameterTypes6 =
+		new Class[] {long.class};
+	private static final Class<?>[] _getByIdParameterTypes7 = new Class[] {
 		long.class
 	};
 

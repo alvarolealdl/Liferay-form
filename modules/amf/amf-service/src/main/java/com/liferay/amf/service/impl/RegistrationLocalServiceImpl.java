@@ -44,18 +44,18 @@ import java.util.List;
  */
 @Component(
 		immediate = true,
-	property = "model.class.name=com.liferay.amf.model.Registration",
-	service = AopService.class
+		property = "model.class.name=com.liferay.amf.model.Registration",
+		service = AopService.class
 )
 public class RegistrationLocalServiceImpl
-	extends RegistrationLocalServiceBaseImpl {
+		extends RegistrationLocalServiceBaseImpl {
 
 
 	public Registration addRegistration( long groupId, String userName, String firstName,
-										String lastName, String emailAddress, boolean gender, Date birthday,
-										String password, String homePhone, String mobilePhone, String address1,
-										String address2, String city, String state, long zipCode, String securityAnswer)
-	throws PortalException {
+										 String lastName, String emailAddress, boolean gender, Date birthday,
+										 String password, String homePhone, String mobilePhone, String address1,
+										 String address2, String city, String state, long zipCode, String securityAnswer)
+			throws PortalException {
 
 		_registrationValidator.validate(userName, firstName, lastName, emailAddress);
 
@@ -87,20 +87,26 @@ public class RegistrationLocalServiceImpl
 		return  _registrationPersistence.update(registration);
 	}
 
+	public Registration addRegistration(Registration registration){
+
+		return _registrationPersistence.update(registration);
+
+	}
+
 	public Registration updateRegistration( long registrationId, String firstName, String lastName, String emailAddress,
 											String address1) throws PortalException{
 
 		_registrationValidator.validate(null, firstName, lastName, emailAddress);
 
-			Registration registration = getRegistration(registrationId);
-			registration.setModifiedDate(new Date());
-			registration.setFirstName(firstName);
-			registration.setLastName(lastName);
-			registration.setEmailAddress(emailAddress);
-			registration.setAddress1(address1);
+		Registration registration = getRegistration(registrationId);
+		registration.setModifiedDate(new Date());
+		registration.setFirstName(firstName);
+		registration.setLastName(lastName);
+		registration.setEmailAddress(emailAddress);
+		registration.setAddress1(address1);
 
-			registration = super.updateRegistration(registration);
-			return registration;
+		registration = super.updateRegistration(registration);
+		return registration;
 
 	}
 
@@ -111,7 +117,7 @@ public class RegistrationLocalServiceImpl
 
 	//Finders Methods
 	public List<Registration> getAllRegistrationById(long registrationId)  {
-		 return _registrationPersistence.findByRegistrationId(registrationId);
+		return _registrationPersistence.findByRegistrationId(registrationId);
 
 	}
 

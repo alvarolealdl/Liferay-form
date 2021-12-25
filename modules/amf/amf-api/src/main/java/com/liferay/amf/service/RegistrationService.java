@@ -59,6 +59,8 @@ public interface RegistrationService extends BaseService {
 			String securityAnswer)
 		throws PortalException;
 
+	public Registration addRegistration(Registration registration);
+
 	public Registration deleteRegistration(long registrationId)
 		throws PortalException;
 
@@ -77,6 +79,10 @@ public interface RegistrationService extends BaseService {
 	 * @return the OSGi service identifier
 	 */
 	public String getOSGiServiceIdentifier();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public Registration getRegistration(long registrationId)
+		throws PortalException;
 
 	public Registration updateRegistration(
 			long registrationId, String firstName, String lastName,

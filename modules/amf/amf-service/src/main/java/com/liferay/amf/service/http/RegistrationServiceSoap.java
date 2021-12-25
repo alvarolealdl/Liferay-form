@@ -63,6 +63,27 @@ import java.rmi.RemoteException;
 @Deprecated
 public class RegistrationServiceSoap {
 
+	public static com.liferay.amf.model.RegistrationSoap updateRegistration(
+			long registrationId, String firstName, String lastName,
+			String emailAddress, String address1)
+		throws RemoteException {
+
+		try {
+			com.liferay.amf.model.Registration returnValue =
+				RegistrationServiceUtil.updateRegistration(
+					registrationId, firstName, lastName, emailAddress,
+					address1);
+
+			return com.liferay.amf.model.RegistrationSoap.toSoapModel(
+				returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
 	public static com.liferay.amf.model.RegistrationSoap addRegistration(
 			long groupId, String userName, String firstName, String lastName,
 			String emailAddress, boolean gender, java.util.Date birthday,
@@ -88,16 +109,15 @@ public class RegistrationServiceSoap {
 		}
 	}
 
-	public static com.liferay.amf.model.RegistrationSoap updateRegistration(
-			long registrationId, String firstName, String lastName,
-			String emailAddress, String address1)
+	public static com.liferay.amf.model.RegistrationSoap addRegistration(
+			com.liferay.amf.model.RegistrationSoap registration)
 		throws RemoteException {
 
 		try {
 			com.liferay.amf.model.Registration returnValue =
-				RegistrationServiceUtil.updateRegistration(
-					registrationId, firstName, lastName, emailAddress,
-					address1);
+				RegistrationServiceUtil.addRegistration(
+					com.liferay.amf.model.impl.RegistrationModelImpl.toModel(
+						registration));
 
 			return com.liferay.amf.model.RegistrationSoap.toSoapModel(
 				returnValue);
@@ -136,6 +156,24 @@ public class RegistrationServiceSoap {
 				RegistrationServiceUtil.getAllRegistrationById(registrationId);
 
 			return com.liferay.amf.model.RegistrationSoap.toSoapModels(
+				returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
+	public static com.liferay.amf.model.RegistrationSoap getRegistration(
+			long registrationId)
+		throws RemoteException {
+
+		try {
+			com.liferay.amf.model.Registration returnValue =
+				RegistrationServiceUtil.getRegistration(registrationId);
+
+			return com.liferay.amf.model.RegistrationSoap.toSoapModel(
 				returnValue);
 		}
 		catch (Exception exception) {

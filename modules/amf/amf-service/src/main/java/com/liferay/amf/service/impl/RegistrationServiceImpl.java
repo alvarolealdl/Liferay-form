@@ -40,11 +40,11 @@ import java.util.List;
  * @see RegistrationServiceBaseImpl
  */
 @Component(
-	property = {
-		"json.web.service.context.name=amfRegistration",
-		"json.web.service.context.path=Registration"
-	},
-	service = AopService.class
+		property = {
+				"json.web.service.context.name=amfRegistration",
+				"json.web.service.context.path=Registration"
+		},
+		service = AopService.class
 )
 public class RegistrationServiceImpl extends RegistrationServiceBaseImpl {
 
@@ -62,6 +62,10 @@ public class RegistrationServiceImpl extends RegistrationServiceBaseImpl {
 				birthday, password, homePhone, mobilePhone, address1, address2, city, state, zipCode, securityAnswer);
 	}
 
+	public Registration addRegistration(Registration registration){
+		return _registrationLocalService.addRegistration(registration);
+	}
+
 	public Registration deleteRegistration(long registrationId) throws PortalException {
 
 
@@ -74,6 +78,10 @@ public class RegistrationServiceImpl extends RegistrationServiceBaseImpl {
 
 		return _registrationLocalService.getAllRegistrationById(registrationId);
 
+	}
+
+	public Registration getRegistration(long registrationId) throws PortalException {
+		return _registrationLocalService.getRegistration(registrationId);
 	}
 
 	public Registration getEmailAddressByUserId(long userId) {

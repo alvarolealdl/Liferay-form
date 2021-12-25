@@ -14,6 +14,8 @@
 
 package com.liferay.amf.model.impl;
 
+import com.liferay.amf.model.Registration;
+
 /**
  * The extended model implementation for the Registration service. Represents a row in the &quot;AmfRegistration_Registration&quot; database table, with each column mapped to a property of this class.
  *
@@ -33,4 +35,8 @@ public class RegistrationImpl extends RegistrationBaseImpl {
 	public RegistrationImpl() {
 	}
 
+	@Override
+	public Registration cloneWithOriginalValues() {
+		return null;
+	}
 }
