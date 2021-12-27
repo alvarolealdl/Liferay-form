@@ -234,6 +234,10 @@ public class RegistrationLocalServiceUtil {
 		return getService().getAllRegistrationById(registrationId);
 	}
 
+	public static List<Registration> getAllRegistrations() {
+		return getService().getAllRegistrations();
+	}
+
 	public static Registration getById(long userId)
 		throws com.liferay.amf.exception.NoSuchRegistrationException {
 

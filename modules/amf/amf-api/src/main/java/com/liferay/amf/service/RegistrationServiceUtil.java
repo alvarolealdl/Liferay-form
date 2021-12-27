@@ -68,6 +68,10 @@ public class RegistrationServiceUtil {
 		return getService().getAllRegistrationById(registrationId);
 	}
 
+	public static List<Registration> getAllRegistrations() {
+		return getService().getAllRegistrations();
+	}
+
 	public static Registration getById(long userId) throws PortalException {
 		return getService().getById(userId);
 	}

@@ -165,6 +165,23 @@ public class RegistrationServiceSoap {
 		}
 	}
 
+	public static com.liferay.amf.model.RegistrationSoap[] getAllRegistrations()
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.amf.model.Registration> returnValue =
+				RegistrationServiceUtil.getAllRegistrations();
+
+			return com.liferay.amf.model.RegistrationSoap.toSoapModels(
+				returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
 	public static com.liferay.amf.model.RegistrationSoap getRegistration(
 			long registrationId)
 		throws RemoteException {

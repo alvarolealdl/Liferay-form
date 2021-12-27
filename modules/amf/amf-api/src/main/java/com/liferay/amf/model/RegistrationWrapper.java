@@ -39,11 +39,6 @@ public class RegistrationWrapper
 	}
 
 	@Override
-	public Registration cloneWithOriginalValues() {
-		return null;
-	}
-
-	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
@@ -199,6 +194,11 @@ public class RegistrationWrapper
 		if (securityAnswer != null) {
 			setSecurityAnswer(securityAnswer);
 		}
+	}
+
+	@Override
+	public Registration cloneWithOriginalValues() {
+		return model.cloneWithOriginalValues();
 	}
 
 	/**

@@ -260,6 +260,13 @@ public class RegistrationLocalServiceWrapper
 	}
 
 	@Override
+	public java.util.List<com.liferay.amf.model.Registration>
+		getAllRegistrations() {
+
+		return _registrationLocalService.getAllRegistrations();
+	}
+
+	@Override
 	public com.liferay.amf.model.Registration getById(long userId)
 		throws com.liferay.amf.exception.NoSuchRegistrationException {
 

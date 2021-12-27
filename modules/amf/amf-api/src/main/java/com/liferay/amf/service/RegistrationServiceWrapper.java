@@ -68,6 +68,13 @@ public class RegistrationServiceWrapper
 	}
 
 	@Override
+	public java.util.List<com.liferay.amf.model.Registration>
+		getAllRegistrations() {
+
+		return _registrationService.getAllRegistrations();
+	}
+
+	@Override
 	public com.liferay.amf.model.Registration getById(long userId)
 		throws com.liferay.portal.kernel.exception.PortalException {
 

@@ -80,6 +80,10 @@ public class RegistrationServiceImpl extends RegistrationServiceBaseImpl {
 
 	}
 
+	public List<Registration> getAllRegistrations(){
+		return _registrationLocalService.getAllRegistrations();
+	}
+
 	public Registration getRegistration(long registrationId) throws PortalException {
 		return _registrationLocalService.getRegistration(registrationId);
 	}

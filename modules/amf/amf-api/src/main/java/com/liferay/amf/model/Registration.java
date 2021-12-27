@@ -56,4 +56,6 @@ public interface Registration extends PersistedModel, RegistrationModel {
 
 		};
 
+	public Registration cloneWithOriginalValues();
+
 }

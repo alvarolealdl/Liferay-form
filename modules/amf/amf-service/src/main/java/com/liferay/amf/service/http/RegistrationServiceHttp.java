@@ -247,6 +247,38 @@ public class RegistrationServiceHttp {
 		}
 	}
 
+	public static java.util.List<com.liferay.amf.model.Registration>
+		getAllRegistrations(HttpPrincipal httpPrincipal) {
+
+		try {
+			MethodKey methodKey = new MethodKey(
+				RegistrationServiceUtil.class, "getAllRegistrations",
+				_getAllRegistrationsParameterTypes5);
+
+			MethodHandler methodHandler = new MethodHandler(methodKey);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodHandler);
+			}
+			catch (Exception exception) {
+				throw new com.liferay.portal.kernel.exception.SystemException(
+					exception);
+			}
+
+			return (java.util.List<com.liferay.amf.model.Registration>)
+				returnObj;
+		}
+		catch (com.liferay.portal.kernel.exception.SystemException
+					systemException) {
+
+			_log.error(systemException, systemException);
+
+			throw systemException;
+		}
+	}
+
 	public static com.liferay.amf.model.Registration getRegistration(
 			HttpPrincipal httpPrincipal, long registrationId)
 		throws com.liferay.portal.kernel.exception.PortalException {
@@ -254,7 +286,7 @@ public class RegistrationServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				RegistrationServiceUtil.class, "getRegistration",
-				_getRegistrationParameterTypes5);
+				_getRegistrationParameterTypes6);
 
 			MethodHandler methodHandler = new MethodHandler(
 				methodKey, registrationId);
@@ -293,7 +325,7 @@ public class RegistrationServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				RegistrationServiceUtil.class, "getEmailAddressByUserId",
-				_getEmailAddressByUserIdParameterTypes6);
+				_getEmailAddressByUserIdParameterTypes7);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId);
 
@@ -325,7 +357,7 @@ public class RegistrationServiceHttp {
 		try {
 			MethodKey methodKey = new MethodKey(
 				RegistrationServiceUtil.class, "getById",
-				_getByIdParameterTypes7);
+				_getByIdParameterTypes8);
 
 			MethodHandler methodHandler = new MethodHandler(methodKey, userId);
 
@@ -377,11 +409,13 @@ public class RegistrationServiceHttp {
 		new Class[] {long.class};
 	private static final Class<?>[] _getAllRegistrationByIdParameterTypes4 =
 		new Class[] {long.class};
-	private static final Class<?>[] _getRegistrationParameterTypes5 =
+	private static final Class<?>[] _getAllRegistrationsParameterTypes5 =
+		new Class[] {};
+	private static final Class<?>[] _getRegistrationParameterTypes6 =
 		new Class[] {long.class};
-	private static final Class<?>[] _getEmailAddressByUserIdParameterTypes6 =
+	private static final Class<?>[] _getEmailAddressByUserIdParameterTypes7 =
 		new Class[] {long.class};
-	private static final Class<?>[] _getByIdParameterTypes7 = new Class[] {
+	private static final Class<?>[] _getByIdParameterTypes8 = new Class[] {
 		long.class
 	};
 

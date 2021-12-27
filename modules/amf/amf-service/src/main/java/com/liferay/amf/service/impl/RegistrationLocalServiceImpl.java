@@ -121,6 +121,10 @@ public class RegistrationLocalServiceImpl
 
 	}
 
+	public List<Registration> getAllRegistrations(){
+		return _registrationPersistence.findAll();
+	}
+
 	public Registration getEmailAddressByUserId(long userId){
 		return _registrationPersistence.fetchByEmailAddress(userId);
 	}
