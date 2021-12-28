@@ -14,6 +14,8 @@
 
 package com.liferay.amf.model.impl;
 
+import com.liferay.amf.model.Login;
+
 /**
  * The extended model implementation for the Login service. Represents a row in the &quot;Registration_Login&quot; database table, with each column mapped to a property of this class.
  *
@@ -33,4 +35,8 @@ public class LoginImpl extends LoginBaseImpl {
 	public LoginImpl() {
 	}
 
+	@Override
+	public Login cloneWithOriginalValues() {
+		return null;
+	}
 }

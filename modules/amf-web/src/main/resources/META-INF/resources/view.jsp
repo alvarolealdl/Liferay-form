@@ -1,3 +1,4 @@
+<%@ page import="java.util.Locale" %>
 <%@ include file="/META-INF/resources/init.jsp" %>
 <aui:container fluid="false">
 
