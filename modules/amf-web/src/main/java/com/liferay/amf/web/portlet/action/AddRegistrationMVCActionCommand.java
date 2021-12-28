@@ -71,6 +71,7 @@ public class AddRegistrationMVCActionCommand extends BaseMVCActionCommand {
 			male = true;
 		}
 		try {
+			_log.debug("Adding Registration to database...");
 
 			_registrationService.addRegistration(
 				groupId, userName, firstName, lastName, emailAddress, male,
@@ -81,12 +82,13 @@ public class AddRegistrationMVCActionCommand extends BaseMVCActionCommand {
 			sendRedirect(actionRequest, actionResponse);
 		}
 		catch (Exception e ){{
+			_log.error(new Date() + " :: " + _log.getClass().getName() + " :: " + e.getMessage());
 
-				e.printStackTrace();
-				SessionErrors.add(actionRequest, "emailAddressValidation");
+			SessionErrors.add(actionRequest, "emailAddressValidation");
+
+			actionResponse.setRenderParameter("mvcPath", "/error.jsp");
 
 
-				actionResponse.setRenderParameter("mvcPath", "/error.jsp");
 		}
 		}
 	}
