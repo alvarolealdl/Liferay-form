@@ -1,4 +1,3 @@
-<%@ page import="java.util.Locale" %>
 <%@ include file="/META-INF/resources/init.jsp" %>
 <aui:container fluid="false">
 
@@ -140,7 +139,7 @@
                   type="date"
           >
             <aui:validator
-                    errorMessage="Must be at least 13 to register"
+                    errorMessage="Must be at least 13 to register."
                     name="custom"
             >
               function (val, fieldNode, ruleValue) { var val = new
@@ -217,7 +216,7 @@
             </aui:input>
           </aui:col>
           <aui:col width="20">
-            <aui:select disabled="false" helpMessage="USA Resident" label="Country:" name="country" />
+            <aui:select disabled="true" helpMessage="USA Resident" label="Country:" name="country" />
           </aui:col>
           <aui:col width="40">
             <aui:select label="State:" name="state" required="true" title="Please select some state" />   
@@ -317,7 +316,7 @@
 					{
 						select: '<portlet:namespace />country',
 						selectData: Liferay.Address.getCountries,
-						selectDesc: 'name',
+						selectDesc: 'a3',
 						selectId: 'countryId',
 						selectVal: '21539'
 					},
