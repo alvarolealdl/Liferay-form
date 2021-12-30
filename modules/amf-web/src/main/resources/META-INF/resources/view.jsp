@@ -66,9 +66,8 @@
           </aui:col>
         </aui:row>
         
-        <div id="password-viewer">  
-          <aui:row>
-            <aui:col width="45">
+         <aui:row>
+            <aui:col width="50">
                 <aui:input
                         label="Password:"
                         name="password"
@@ -80,13 +79,9 @@
                 >
               </aui:input>
                </aui:col>
-    
-               <aui:col width="05">
-              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" onclick="mouseoverPass();" onmouseout="mouseoutPass();">
-            </aui:col>
 
             <aui:col width="50">
-              <label class="gender">Gender:</label>
+              <label>Gender:</label>
               <aui:row>
                 <div class="male">
                   <aui:col width="50">
@@ -107,14 +102,12 @@
               </aui:row>
               </div>
             </aui:col>
-            </aui:row>
-      </div>
+            </aui:row>   
 
-      <div id="password-viewer">
         <aui:row>
-          <aui:col width="45">
+          <aui:col width="50">
             <aui:input
-                    label=" Confirm Password:"
+                    label="Confirm Password:"
                     name="confirmPassword"
                     placeholder="Confirm Password"
                     required="true"
@@ -125,12 +118,8 @@
               >
             </aui:input>
           </aui:col>
-          <aui:col width="05">
-          <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAABDUlEQVQ4jd2SvW3DMBBGbwQVKlyo4BGC4FKFS4+TATKCNxAggkeoSpHSRQbwAB7AA7hQoUKFLH6E2qQQHfgHdpo0yQHX8T3exyPR/ytlQ8kOhgV7FvSx9+xglA3lM3DBgh0LPn/onbJhcQ0bv2SHlgVgQa/suFHVkCg7bm5gzB2OyvjlDFdDcoa19etZMN8Qp7oUDPEM2KFV1ZAQO2zPMBERO7Ra4JQNpRa4K4FDS0R0IdneCbQLb4/zh/c7QdH4NL40tPXrovFpjHQr6PJ6yr5hQV80PiUiIm1OKxZ0LICS8TWvpyyOf2DBQQtcXk8Zi3+JcKfNafVsjZ0WfGgJlZZQxZjdwzX+ykf6u/UF0Fwo5Apfcq8AAAAASUVORK5CYII=" onclick="mouseoverPass();" onmouseout="mouseoutPass();">
-          </aui:col>
 
-      <div class="birthday">
-        <aui:col width="100">
+        <aui:col width="50">
           <aui:input
                   label="Birthday:"
                   name="birthday"
@@ -149,10 +138,9 @@
               </aui:validator>
             </aui:input>
           </aui:col>
-        </div>
+        
       </aui:row>
     </div>
-  </div>
 
       <div class="billing-data">
         <h2><liferay-ui:message key="billing-info" /></h2>
@@ -268,24 +256,23 @@
                 label="Security Question Answer:"
                 name="answer"
                 placeholder="Write your answer to the Security Question here"
+                required="true"
                 type="text"
         >
-          <aui:validator name="required" />
+          
           <aui:validator name="maxLength">255</aui:validator>
           </aui:input>
         </aui:col>
        
       <aui:col width="50">   
-        <aui:input label="&nbsp;Term of Use" name="accepted_tou" type="checkbox">
-          <aui:validator name="required" />
-        </aui:input>
+        <aui:input label="&nbsp;Term of Use" name="accepted_tou" required="true" type="checkbox" /> 
         
         <button class="btn btn-link" onclick="modal()">
           Read terms of use
         </button> 
       </aui:col>    
     </aui:row>
-      </div>
+  </div>
       
       <!--Buttons-->
       <div class="buttons">
@@ -299,15 +286,15 @@
       </div>
     </aui:form>
   </c:if>
-</aui:container>>
+</aui:container>
 
 <!--Modal script-->
-<%@ include file="/META-INF/resources/touContent.jsp" %>
-<aui:script>
-  var touContent = document.getElementById("tou-content").innerHTML; function
-  modal () { Liferay.Util.openModal({ title:"Terms of Use", bodyHTML: touContent
-  }); }
-</aui:script>
+  <%@ include file="/META-INF/resources/touContent.jsp" %>
+    <aui:script>
+        var touContent = document.getElementById("tou-content").innerHTML; function
+        modal () { Liferay.Util.openModal({ title:"Terms of Use", bodyHTML: touContent
+        }); }
+    </aui:script>
 
 <!--State script-->
     <aui:script use="liferay-dynamic-select">
@@ -331,10 +318,4 @@
 			);
 		</aui:script>
 
-    <aui:script>
-      var input = document.querySelector('#password-viewer input');
-      var img = document.querySelector('#password-viewer img');
-      img.addEventListener('click', function () {
-        input.type = input.type == 'text' ? 'password' : 'text';
-      });
-    </aui:script>
+  
