@@ -1,17 +1,16 @@
 package com.liferay.amf.application;
 
+import com.liferay.amf.application.internal.dto.v1_0.RegistrationDTO;
+import com.liferay.amf.application.internal.dto.v1_0.converter.RegistrationResourceDTOConverter;
 import com.liferay.amf.exception.RegistrationValidationExceptionException;
 import com.liferay.amf.model.Registration;
 import com.liferay.amf.service.RegistrationService;
-import com.liferay.batch.engine.pagination.Page;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.util.Validator;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.jaxrs.whiteboard.JaxrsWhiteboardConstants;
-
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +20,11 @@ import javax.ws.rs.core.Application;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.*;
+import java.util.Collections;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 
 /**
@@ -34,7 +37,9 @@ import java.util.*;
 		},
 		service = Application.class
 )
-public class RegistrationApplicationApplication extends Application {
+
+@Produces(MediaType.APPLICATION_JSON)
+public class RegistrationApplication extends Application {
 
 	public Set<Object> getSingletons() {
 		return Collections.<Object>singleton(this);
@@ -77,7 +82,8 @@ public class RegistrationApplicationApplication extends Application {
 		if(Validator.isNull(registration)) {
 			return Response.status(Response.Status.NOT_FOUND).build();
 		}
-		return Response.ok(JSONFactoryUtil.looseSerialize(registration)).build();
+		RegistrationDTO registrationDto = _registrationResourceDTOConverter.toDTO(registration);
+		return Response.ok(JSONFactoryUtil.looseSerialize(registrationDto)).build();
 
 
 	}
@@ -93,9 +99,14 @@ public class RegistrationApplicationApplication extends Application {
 			if(registrations.isEmpty()){
 				throw new RegistrationValidationExceptionException("NO REGISTRATION AVAILABLE");
 			}
+
 			_logger.info(registrations.size() + "registration available");
 
-			return Response.ok(Page.of(registrations)).build();
+			registrations.stream()
+					.map(x -> _registrationResourceDTOConverter.toDTO(x))
+					.collect(Collectors.toList());
+
+			return Response.ok(registrations).build();
 
 		}
 		catch (Exception e){
@@ -115,5 +126,8 @@ public class RegistrationApplicationApplication extends Application {
 
 	@Reference
 	private RegistrationService _registrationService;
+
+	@Reference
+	private RegistrationResourceDTOConverter _registrationResourceDTOConverter;
 }
 

@@ -35,19 +35,6 @@ public class RegistrationDTO implements Serializable {
         this.address = registration.getAddress1();
     }
 
-    public RegistrationDTO(String firstName, String lastName, String userName, String emailAddress,
-                           String city, String state, Date birthday, String homePhone, String zipCode) {
-
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.userName = userName;
-        this.emailAddress = emailAddress;
-        this.city = city;
-        this.state = state;
-        this.birthday = birthday;
-        this.homePhone = homePhone;
-        this.zipCode = zipCode;
-    }
 
     public String getFirstName() {
         return firstName;
