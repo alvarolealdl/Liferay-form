@@ -549,6 +549,11 @@ public class LoginModelImpl extends BaseModelImpl<Login> implements LoginModel {
 	}
 
 	@Override
+	public Login cloneWithOriginalValues() {
+		return null;
+	}
+
+	@Override
 	public int compareTo(Login login) {
 		long primaryKey = login.getPrimaryKey();
 

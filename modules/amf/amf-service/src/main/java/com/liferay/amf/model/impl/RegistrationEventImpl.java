@@ -14,6 +14,8 @@
 
 package com.liferay.amf.model.impl;
 
+import com.liferay.amf.model.RegistrationEvent;
+
 /**
  * The extended model implementation for the RegistrationEvent service. Represents a row in the &quot;Registration_RegistrationEvent&quot; database table, with each column mapped to a property of this class.
  *
@@ -33,4 +35,8 @@ public class RegistrationEventImpl extends RegistrationEventBaseImpl {
 	public RegistrationEventImpl() {
 	}
 
+	@Override
+	public RegistrationEvent cloneWithOriginalValues() {
+		return null;
+	}
 }

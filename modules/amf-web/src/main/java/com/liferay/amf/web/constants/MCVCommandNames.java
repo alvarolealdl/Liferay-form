@@ -8,4 +8,6 @@ public class MCVCommandNames {
 
 	public static final String ACCESS_LOGIN = "/login/entry";
 
+	public static final String EVENTS = "/events/view";
+
 }

@@ -305,7 +305,7 @@
 						selectData: Liferay.Address.getCountries,
 						selectDesc: 'a3',
 						selectId: 'countryId',
-						selectVal: '21539'
+						selectVal: '21541'
 					},
 					{
 						select: '<portlet:namespace />state',
