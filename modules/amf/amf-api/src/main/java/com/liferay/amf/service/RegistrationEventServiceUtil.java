@@ -14,6 +14,11 @@
 
 package com.liferay.amf.service;
 
+import com.liferay.amf.model.RegistrationEvent;
+import com.liferay.portal.kernel.exception.PortalException;
+
+import java.util.List;
+
 /**
  * Provides the remote service utility for RegistrationEvent. This utility wraps
  * <code>com.liferay.amf.service.impl.RegistrationEventServiceImpl</code> and is an
@@ -33,13 +38,36 @@ public class RegistrationEventServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>com.liferay.amf.service.impl.RegistrationEventServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static RegistrationEvent addEvent(
+			long groupId, long companyId, String eventType, String ipAddress,
+			String userName, java.util.Date eventDate)
+		throws PortalException {
+
+		return getService().addEvent(
+			groupId, companyId, eventType, ipAddress, userName, eventDate);
+	}
+
+	public static RegistrationEvent addEvent(
+			RegistrationEvent registrationEvent)
+		throws PortalException {
+
+		return getService().addEvent(registrationEvent);
+	}
+
+	public static List<RegistrationEvent> getAllEvents() {
+		return getService().getAllEvents();
+	}
+
+	public static RegistrationEvent getEvent(long registrationEventId) {
+		return getService().getEvent(registrationEventId);
+	}
 
 	/**
 	 * Returns the OSGi service identifier.
 	 *
 	 * @return the OSGi service identifier
 	 */
-	public static java.lang.String getOSGiServiceIdentifier() {
+	public static String getOSGiServiceIdentifier() {
 		return getService().getOSGiServiceIdentifier();
 	}
 

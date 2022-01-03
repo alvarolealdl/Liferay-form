@@ -58,4 +58,6 @@ public interface RegistrationEvent
 
 			};
 
+	public RegistrationEvent cloneWithOriginalValues();
+
 }

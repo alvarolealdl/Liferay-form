@@ -44,6 +44,21 @@ public class RegistrationEventLocalServiceUtil {
 	 *
 	 * Never modify this class directly. Add custom service methods to <code>com.liferay.amf.service.impl.RegistrationEventLocalServiceImpl</code> and rerun ServiceBuilder to regenerate this class.
 	 */
+	public static RegistrationEvent addEvent(
+			long groupId, long companyId, String eventType, String ipAddress,
+			String userName, java.util.Date eventDate)
+		throws PortalException {
+
+		return getService().addEvent(
+			groupId, companyId, eventType, ipAddress, userName, eventDate);
+	}
+
+	public static RegistrationEvent addEvent(
+			RegistrationEvent registrationEvent)
+		throws PortalException {
+
+		return getService().addEvent(registrationEvent);
+	}
 
 	/**
 	 * Adds the registration event to the database. Also notifies the appropriate model listeners.
@@ -222,6 +237,14 @@ public class RegistrationEventLocalServiceUtil {
 		getActionableDynamicQuery() {
 
 		return getService().getActionableDynamicQuery();
+	}
+
+	public static List<RegistrationEvent> getAllEvents() {
+		return getService().getAllEvents();
+	}
+
+	public static RegistrationEvent getEvent(long registrationEventId) {
+		return getService().getEvent(registrationEventId);
 	}
 
 	public static

@@ -39,11 +39,6 @@ public class RegistrationEventWrapper
 	}
 
 	@Override
-	public RegistrationEvent cloneWithOriginalValues() {
-		return null;
-	}
-
-	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
@@ -115,6 +110,11 @@ public class RegistrationEventWrapper
 		if (ipAddress != null) {
 			setIpAddress(ipAddress);
 		}
+	}
+
+	@Override
+	public RegistrationEvent cloneWithOriginalValues() {
+		return model.cloneWithOriginalValues();
 	}
 
 	/**

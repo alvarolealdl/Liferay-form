@@ -615,11 +615,6 @@ public class RegistrationEventModelImpl
 	}
 
 	@Override
-	public RegistrationEvent cloneWithOriginalValues() {
-		return null;
-	}
-
-	@Override
 	public int compareTo(RegistrationEvent registrationEvent) {
 		long primaryKey = registrationEvent.getPrimaryKey();
 

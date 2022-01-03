@@ -33,6 +33,24 @@ public class RegistrationEventLocalServiceWrapper
 		_registrationEventLocalService = registrationEventLocalService;
 	}
 
+	@Override
+	public com.liferay.amf.model.RegistrationEvent addEvent(
+			long groupId, long companyId, String eventType, String ipAddress,
+			String userName, java.util.Date eventDate)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _registrationEventLocalService.addEvent(
+			groupId, companyId, eventType, ipAddress, userName, eventDate);
+	}
+
+	@Override
+	public com.liferay.amf.model.RegistrationEvent addEvent(
+			com.liferay.amf.model.RegistrationEvent registrationEvent)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _registrationEventLocalService.addEvent(registrationEvent);
+	}
+
 	/**
 	 * Adds the registration event to the database. Also notifies the appropriate model listeners.
 	 *
@@ -243,6 +261,20 @@ public class RegistrationEventLocalServiceWrapper
 		getActionableDynamicQuery() {
 
 		return _registrationEventLocalService.getActionableDynamicQuery();
+	}
+
+	@Override
+	public java.util.List<com.liferay.amf.model.RegistrationEvent>
+		getAllEvents() {
+
+		return _registrationEventLocalService.getAllEvents();
+	}
+
+	@Override
+	public com.liferay.amf.model.RegistrationEvent getEvent(
+		long registrationEventId) {
+
+		return _registrationEventLocalService.getEvent(registrationEventId);
 	}
 
 	@Override

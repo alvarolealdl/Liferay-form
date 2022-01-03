@@ -14,10 +14,17 @@
 
 package com.liferay.amf.service.impl;
 
+import com.liferay.amf.model.RegistrationEvent;
 import com.liferay.amf.service.base.RegistrationEventLocalServiceBaseImpl;
+import com.liferay.amf.service.persistence.RegistrationEventPersistence;
 import com.liferay.portal.aop.AopService;
-
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.model.User;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * The implementation of the registration event local service.
@@ -33,15 +40,47 @@ import org.osgi.service.component.annotations.Component;
  * @see RegistrationEventLocalServiceBaseImpl
  */
 @Component(
-	property = "model.class.name=com.liferay.amf.model.RegistrationEvent",
-	service = AopService.class
+		immediate = true,
+		property = "model.class.name=com.liferay.amf.model.RegistrationEvent",
+		service = AopService.class
 )
 public class RegistrationEventLocalServiceImpl
 	extends RegistrationEventLocalServiceBaseImpl {
 
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Use <code>com.liferay.amf.service.RegistrationEventLocalService</code> via injection or a <code>org.osgi.util.tracker.ServiceTracker</code> or use <code>com.liferay.amf.service.RegistrationEventLocalServiceUtil</code>.
-	 */
+	public RegistrationEvent addEvent(RegistrationEvent registrationEvent) throws PortalException {
+
+		return _registrationEventPersistence.update(registrationEvent);
+
+	}
+
+	public RegistrationEvent addEvent(long groupId, long companyId, String eventType,
+									  String ipAddress, String userName, Date eventDate ) throws PortalException{
+
+		long userId = counterLocalService.increment(User.class.getName());
+		long registrationEventId = counterLocalService.increment(RegistrationEvent.class.getName());
+		RegistrationEvent registrationEvent = _registrationEventPersistence.create(registrationEventId);
+		registrationEvent.setGroupId(groupId);
+		registrationEvent.setCompanyId(companyId);
+		registrationEvent.setEventType(eventType);
+		registrationEvent.setIpAddress(ipAddress);
+		registrationEvent.setUserName(userName);
+		registrationEvent.setCreateDate(eventDate);
+		registrationEvent.setUserId(userId);
+
+		return _registrationEventPersistence.update(registrationEvent);
+
+	}
+
+	//Finders Methods
+
+	public RegistrationEvent getEvent(long registrationEventId){
+		return _registrationEventPersistence.fetchByPrimaryKey(registrationEventId);
+	}
+
+	public List<RegistrationEvent> getAllEvents(){
+		return _registrationEventPersistence.findAll();
+	}
+
+	@Reference
+	private RegistrationEventPersistence _registrationEventPersistence;
 }

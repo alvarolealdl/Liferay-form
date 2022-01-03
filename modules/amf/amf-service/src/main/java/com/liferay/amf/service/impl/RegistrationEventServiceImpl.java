@@ -14,10 +14,16 @@
 
 package com.liferay.amf.service.impl;
 
+import com.liferay.amf.model.RegistrationEvent;
+import com.liferay.amf.service.RegistrationEventLocalService;
 import com.liferay.amf.service.base.RegistrationEventServiceBaseImpl;
 import com.liferay.portal.aop.AopService;
-
+import com.liferay.portal.kernel.exception.PortalException;
 import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+
+import java.util.Date;
+import java.util.List;
 
 /**
  * The implementation of the registration event remote service.
@@ -42,9 +48,25 @@ import org.osgi.service.component.annotations.Component;
 public class RegistrationEventServiceImpl
 	extends RegistrationEventServiceBaseImpl {
 
-	/*
-	 * NOTE FOR DEVELOPERS:
-	 *
-	 * Never reference this class directly. Always use <code>com.liferay.amf.service.RegistrationEventServiceUtil</code> to access the registration event remote service.
-	 */
+	public RegistrationEvent addEvent(RegistrationEvent registrationEvent) throws PortalException {
+		return _registrationEventLocalService.addEvent(registrationEvent);
+	}
+
+	public RegistrationEvent addEvent(long groupId, long companyId, String eventType,
+											String ipAddress, String userName, Date eventDate) throws PortalException{
+		return _registrationEventLocalService.addEvent(groupId, companyId, eventType, ipAddress, userName, eventDate);
+	}
+
+	public RegistrationEvent getEvent(long registrationEventId){
+
+		return _registrationEventLocalService.getEvent(registrationEventId);
+
+	}
+
+	public List<RegistrationEvent> getAllEvents(){
+		return _registrationEventLocalService.getAllEvents();
+	}
+
+	@Reference
+	private RegistrationEventLocalService _registrationEventLocalService;
 }

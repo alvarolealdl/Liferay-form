@@ -33,6 +33,38 @@ public class RegistrationEventServiceWrapper
 		_registrationEventService = registrationEventService;
 	}
 
+	@Override
+	public com.liferay.amf.model.RegistrationEvent addEvent(
+			long groupId, long companyId, String eventType, String ipAddress,
+			String userName, java.util.Date eventDate)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _registrationEventService.addEvent(
+			groupId, companyId, eventType, ipAddress, userName, eventDate);
+	}
+
+	@Override
+	public com.liferay.amf.model.RegistrationEvent addEvent(
+			com.liferay.amf.model.RegistrationEvent registrationEvent)
+		throws com.liferay.portal.kernel.exception.PortalException {
+
+		return _registrationEventService.addEvent(registrationEvent);
+	}
+
+	@Override
+	public java.util.List<com.liferay.amf.model.RegistrationEvent>
+		getAllEvents() {
+
+		return _registrationEventService.getAllEvents();
+	}
+
+	@Override
+	public com.liferay.amf.model.RegistrationEvent getEvent(
+		long registrationEventId) {
+
+		return _registrationEventService.getEvent(registrationEventId);
+	}
+
 	/**
 	 * Returns the OSGi service identifier.
 	 *

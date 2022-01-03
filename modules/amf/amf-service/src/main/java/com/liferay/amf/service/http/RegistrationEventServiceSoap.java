@@ -14,9 +14,15 @@
 
 package com.liferay.amf.service.http;
 
+import com.liferay.amf.service.RegistrationEventServiceUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
- * <code>com.liferay.amf.service.RegistrationEventServiceUtil</code> service
+ * <code>RegistrationEventServiceUtil</code> service
  * utility. The static methods of this class call the same methods of the
  * service utility. However, the signatures are different because it is
  * difficult for SOAP to support certain types.
@@ -56,4 +62,84 @@ package com.liferay.amf.service.http;
  */
 @Deprecated
 public class RegistrationEventServiceSoap {
+
+	public static com.liferay.amf.model.RegistrationEventSoap addEvent(
+			com.liferay.amf.model.RegistrationEventSoap registrationEvent)
+		throws RemoteException {
+
+		try {
+			com.liferay.amf.model.RegistrationEvent returnValue =
+				RegistrationEventServiceUtil.addEvent(
+					com.liferay.amf.model.impl.RegistrationEventModelImpl.
+						toModel(registrationEvent));
+
+			return com.liferay.amf.model.RegistrationEventSoap.toSoapModel(
+				returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
+	public static com.liferay.amf.model.RegistrationEventSoap addEvent(
+			long groupId, long companyId, String eventType, String ipAddress,
+			String userName, java.util.Date eventDate)
+		throws RemoteException {
+
+		try {
+			com.liferay.amf.model.RegistrationEvent returnValue =
+				RegistrationEventServiceUtil.addEvent(
+					groupId, companyId, eventType, ipAddress, userName,
+					eventDate);
+
+			return com.liferay.amf.model.RegistrationEventSoap.toSoapModel(
+				returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
+	public static com.liferay.amf.model.RegistrationEventSoap getEvent(
+			long registrationEventId)
+		throws RemoteException {
+
+		try {
+			com.liferay.amf.model.RegistrationEvent returnValue =
+				RegistrationEventServiceUtil.getEvent(registrationEventId);
+
+			return com.liferay.amf.model.RegistrationEventSoap.toSoapModel(
+				returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
+	public static com.liferay.amf.model.RegistrationEventSoap[] getAllEvents()
+		throws RemoteException {
+
+		try {
+			java.util.List<com.liferay.amf.model.RegistrationEvent>
+				returnValue = RegistrationEventServiceUtil.getAllEvents();
+
+			return com.liferay.amf.model.RegistrationEventSoap.toSoapModels(
+				returnValue);
+		}
+		catch (Exception exception) {
+			_log.error(exception, exception);
+
+			throw new RemoteException(exception.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(
+		RegistrationEventServiceSoap.class);
+
 }

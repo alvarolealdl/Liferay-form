@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 
 import java.io.Serializable;
 
+import java.util.Date;
 import java.util.List;
 
 import org.osgi.annotation.versioning.ProviderType;
@@ -61,6 +62,13 @@ public interface RegistrationEventLocalService
 	 *
 	 * Never modify this interface directly. Add custom service methods to <code>com.liferay.amf.service.impl.RegistrationEventLocalServiceImpl</code> and rerun ServiceBuilder to automatically copy the method declarations to this interface. Consume the registration event local service via injection or a <code>org.osgi.util.tracker.ServiceTracker</code>. Use {@link RegistrationEventLocalServiceUtil} if injection and service tracking are not available.
 	 */
+	public RegistrationEvent addEvent(
+			long groupId, long companyId, String eventType, String ipAddress,
+			String userName, Date eventDate)
+		throws PortalException;
+
+	public RegistrationEvent addEvent(RegistrationEvent registrationEvent)
+		throws PortalException;
 
 	/**
 	 * Adds the registration event to the database. Also notifies the appropriate model listeners.
@@ -204,6 +212,12 @@ public interface RegistrationEventLocalService
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public ActionableDynamicQuery getActionableDynamicQuery();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<RegistrationEvent> getAllEvents();
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public RegistrationEvent getEvent(long registrationEventId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
