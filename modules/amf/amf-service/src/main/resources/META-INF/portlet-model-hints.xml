@@ -65,4 +65,15 @@
 			<validator name="required" />
 		</field>
 	</model>
+	<model name="com.liferay.amf.model.RegistrationEvent">
+		<field name="registrationEventId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="eventType" type="String" />
+		<field name="ipAddress" type="String" />
+	</model>
 </model-hints>

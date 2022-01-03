@@ -74,6 +74,33 @@
 		<column name="emailAddress" type="String"></column>
 		<column name="password" type="String"></column>
 	</entity>
+	<entity name="RegistrationEvent" local-service="true">
+
+		<!-- PK fields -->
+
+		<!-- Group instance -->
+
+		<!-- Audit fields -->
+
+
+		<!-- PK fields -->
+
+		<column name="registrationEventId" primary="true" type="long"></column>
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long"></column>
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long"></column>
+		<column name="userId" type="long"></column>
+		<column name="userName" type="String"></column>
+		<column name="createDate" type="Date"></column>
+		<column name="modifiedDate" type="Date"></column>
+        <column name="eventType" type="String"></column>
+        <column name="ipAddress" type="String"></column>
+	</entity>
 	<exceptions>
 		<exception>RegistrationValidationException</exception>
 		<exception>LoginValidationException</exception>

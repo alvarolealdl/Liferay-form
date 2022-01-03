@@ -56,4 +56,6 @@ public interface Login extends LoginModel, PersistedModel {
 
 		};
 
+	public Login cloneWithOriginalValues();
+
 }

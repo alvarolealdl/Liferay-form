@@ -18,6 +18,7 @@ import com.liferay.amf.model.Registration;
 import com.liferay.amf.service.RegistrationService;
 import com.liferay.amf.service.RegistrationServiceUtil;
 import com.liferay.amf.service.persistence.LoginPersistence;
+import com.liferay.amf.service.persistence.RegistrationEventPersistence;
 import com.liferay.amf.service.persistence.RegistrationPersistence;
 import com.liferay.portal.aop.AopService;
 import com.liferay.portal.kernel.dao.db.DB;
@@ -144,6 +145,9 @@ public abstract class RegistrationServiceBaseImpl
 
 	@Reference
 	protected RegistrationPersistence registrationPersistence;
+
+	@Reference
+	protected RegistrationEventPersistence registrationEventPersistence;
 
 	@Reference
 	protected com.liferay.counter.kernel.service.CounterLocalService

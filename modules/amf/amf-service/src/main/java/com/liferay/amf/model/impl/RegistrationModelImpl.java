@@ -949,11 +949,6 @@ public class RegistrationModelImpl
 	}
 
 	@Override
-	public Registration cloneWithOriginalValues() {
-		return null;
-	}
-
-	@Override
 	public int compareTo(Registration registration) {
 		int value = 0;
 

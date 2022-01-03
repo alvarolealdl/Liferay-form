@@ -18,6 +18,7 @@ import com.liferay.amf.model.Registration;
 import com.liferay.amf.service.RegistrationLocalService;
 import com.liferay.amf.service.RegistrationLocalServiceUtil;
 import com.liferay.amf.service.persistence.LoginPersistence;
+import com.liferay.amf.service.persistence.RegistrationEventPersistence;
 import com.liferay.amf.service.persistence.RegistrationPersistence;
 import com.liferay.petra.sql.dsl.query.DSLQuery;
 import com.liferay.portal.aop.AopService;
@@ -465,6 +466,9 @@ public abstract class RegistrationLocalServiceBaseImpl
 
 	@Reference
 	protected RegistrationPersistence registrationPersistence;
+
+	@Reference
+	protected RegistrationEventPersistence registrationEventPersistence;
 
 	@Reference
 	protected com.liferay.counter.kernel.service.CounterLocalService
