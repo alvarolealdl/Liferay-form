@@ -1,6 +1,7 @@
 package com.liferay.amf.web.portlet.action;
 
 import com.liferay.amf.model.Registration;
+import com.liferay.amf.service.RegistrationEventService;
 import com.liferay.amf.service.RegistrationService;
 import com.liferay.amf.web.constants.AcmeMoviePortletKeys;
 import com.liferay.amf.web.constants.MCVCommandNames;
@@ -78,6 +79,9 @@ public class AddRegistrationMVCActionCommand extends BaseMVCActionCommand {
 				birthday, password, homePhone, mobilePhone, address1, address2,
 				city, state, zipCode, securityAnswer);
 
+			_eventTrack.addEvent(groupId, serviceContext.getCompanyId(), "registration", serviceContext.getRemoteAddr(),
+			userName, new Date());
+
 			SessionMessages.add(actionRequest, "addRegistration");
 			sendRedirect(actionRequest, actionResponse);
 		}
@@ -95,6 +99,9 @@ public class AddRegistrationMVCActionCommand extends BaseMVCActionCommand {
 
 	@Reference
 	protected RegistrationService _registrationService;
+
+	@Reference
+	private RegistrationEventService _eventTrack;
 
 	private static final Log _log = LogFactoryUtil.getLog(AddRegistrationMVCActionCommand.class);
 

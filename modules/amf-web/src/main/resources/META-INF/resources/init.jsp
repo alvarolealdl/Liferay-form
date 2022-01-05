@@ -13,6 +13,13 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 
 <%@ page import="com.liferay.amf.web.constants.MCVCommandNames" %>
 <%@page import="com.liferay.portal.kernel.util.ParamUtil" %>
+<%@ page import="com.liferay.amf.model.Registration" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.liferay.amf.service.RegistrationLocalServiceUtil" %>
+<%@ page import="com.liferay.amf.model.RegistrationEvent" %>
+<%@ page import="com.liferay.amf.service.RegistrationEventLocalServiceUtil" %>
+<%@ page import="com.liferay.portal.kernel.service.ServiceContext" %>
+<%@ page import="com.liferay.portal.kernel.service.ServiceContextFactory" %>
 
 <liferay-frontend:defineObjects />
 

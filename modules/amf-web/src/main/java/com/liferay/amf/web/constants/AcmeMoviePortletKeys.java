@@ -11,4 +11,7 @@ public class AcmeMoviePortletKeys {
 	public static final String LOGIN =
 			"com_liferay_amf_web_LoginPortlet";
 
+	public static final String EVENT =
+			"com_liferay_amf_web_RegistrationEvent";
+
 }
