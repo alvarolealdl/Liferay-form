@@ -65,8 +65,7 @@
             </aui:input>
           </aui:col>
         </aui:row>
-        
-         <aui:row>
+        <aui:row>
             <aui:col width="50">
                 <aui:input
                         label="Password:"
@@ -77,11 +76,10 @@
                         title="minimum 6 characters, must contain one uppercase, one number, one special character"
                         type="password"
                 >
-              </aui:input>
-               </aui:col>
-
+                </aui:input>
+                </aui:col>
             <aui:col width="50">
-              <label>Gender:</label>
+             <label>Gender:</label>
               <aui:row>
                 <div class="male">
                   <aui:col width="50">
@@ -94,7 +92,6 @@
                     />
                   </aui:col>
                 </div>
-  
                 <div class="female">
                 <aui:col width="50">
                   <aui:input label="&nbsp;Female" name="gender" type="radio" value="female" />
@@ -103,7 +100,6 @@
               </div>
             </aui:col>
             </aui:row>   
-
         <aui:row>
           <aui:col width="50">
             <aui:input
@@ -118,7 +114,6 @@
               >
             </aui:input>
           </aui:col>
-
         <aui:col width="50">
           <aui:input
                   label="Birthday:"
@@ -138,10 +133,8 @@
               </aui:validator>
             </aui:input>
           </aui:col>
-        
       </aui:row>
     </div>
-
       <div class="billing-data">
         <h2><liferay-ui:message key="billing-info" /></h2>
         <aui:row>
@@ -192,7 +185,7 @@
           </aui:col>
         </aui:row>
         <aui:row>
-          <aui:col width="40">
+          <aui:col width="50">
             <aui:input
                     label="City:"
                     name="city"
@@ -203,15 +196,9 @@
               <aui:validator name="maxLength">255</aui:validator>
             </aui:input>
           </aui:col>
-          <aui:col width="20">
-            <aui:select disabled="true" helpMessage="USA Resident" label="Country:" name="country" />
-          </aui:col>
-          <aui:col width="40">
-            <aui:select label="State:" name="state" required="true" title="Please select some state" />   
+          <aui:col width="30">
+            <aui:select label="State:" name="state" required="false" onclick="choice(event)" />   
           </aui:col>  
-         
-        </aui:row>
-        <aui:row>
           <aui:col width="20">
             <aui:input
                     label="Zip Code:"
@@ -224,7 +211,10 @@
               <aui:validator name="maxLength">5</aui:validator>
             </aui:input>
           </aui:col>
-          <aui:col width="30">
+        </aui:row>
+        <div class="clickable">
+        <aui:row>
+          <aui:col width="50">
             <aui:select
                     label="Security Question:"
                     name="securityQuestion"
@@ -259,22 +249,25 @@
                 required="true"
                 type="text"
         >
-          
           <aui:validator name="maxLength">255</aui:validator>
           </aui:input>
         </aui:col>
-       
-      <aui:col width="50">   
-        <aui:input label="&nbsp;Term of Use" name="accepted_tou" required="true" type="checkbox" /> 
-        
-        <button class="btn btn-link" onclick="modal()">
-          Read terms of use
-        </button> 
-      </aui:col>    
+       <div id="accept-tou">  
+          <aui:input label="&nbsp;Term of Use" name="accepted_tou" required="true" type="checkbox" /> 
+       </div>
     </aui:row>
-  </div>
+    <aui:row> 
+      <div id="read-tou">  
+        <aui:button onclick="modal()" value="Read Terms of Use" />
+      </div>
+      <div id="reset-form">
+        <aui:button type="reset" value="Reset Form"/>
+      </div>
+    </div>
+  </aui:row>
+</div>
       
-      <!--Buttons-->
+<!--Buttons-->
       <div class="buttons">
         <liferay-frontend:edit-form-footer>
           <aui:button name="submitButton" type="submit" value="save" />
@@ -288,7 +281,7 @@
   </c:if>
 </aui:container>
 
-<!--Modal script-->
+<!--Read Terms script-->
   <%@ include file="/META-INF/resources/touContent.jsp" %>
     <aui:script>
         var touContent = document.getElementById("tou-content").innerHTML; function
@@ -305,7 +298,7 @@
 						selectData: Liferay.Address.getCountries,
 						selectDesc: 'a3',
 						selectId: 'countryId',
-						selectVal: '21541'
+						selectVal: '21533'
 					},
 					{
 						select: '<portlet:namespace />state',
@@ -318,4 +311,11 @@
 			);
 		</aui:script>
 
-  
+<!--State Change script-->
+    <aui:script>
+        const choice = (event) => {
+          if (event.target.value === "0") {
+            alert("Please select some state!");
+          }
+        }
+    </aui:script>
