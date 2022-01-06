@@ -17,7 +17,7 @@ import javax.portlet.Portlet;
 			"com.liferay.portlet.instance=false",
 			"javax.portlet.display-name=Registration",
 			"javax.portlet.init-param.template-path=/",
-			"javax.portlet.init-param.view-template=/view.jsp",
+			"javax.portlet.init-param.view-template=/home.jsp",
 			"javax.portlet.name=" + AcmeMoviePortletKeys.REGISTRATION,
 			"javax.portlet.resource-bundle=content.Language",
 			"javax.portlet.security-role-ref=power-user,user",

@@ -4,12 +4,15 @@
 <h1 class="title"><liferay-ui:message key="registration.caption" /></h1>
 
   <c:if test="<%= !themeDisplay.isSignedIn() %>">
-    <portlet:actionURL
-            name="<%=MCVCommandNames.ADD_REGISTRATION%>"
-            var="addRegistrationURL"
-    >
+
+    <portlet:actionURL name="<%=MCVCommandNames.ADD_REGISTRATION%>" var="addRegistrationURL">
       <portlet:param name="redirect" value="${param.redirect}" />
     </portlet:actionURL>
+
+    <portlet:renderURL var="homeURL">
+      <portlet:param name="mvcPath" value="/home.jsp"/>
+    </portlet:renderURL>
+
     <aui:form action="${addRegistrationURL}" method="post" name="fm">
 
       <div class="personal-data">
@@ -281,6 +284,7 @@
           <aui:button
                   href='<%= ParamUtil.getString(request, "backURL") %>'
                   type="cancel"
+                  onClick="<%=homeURL.toString()%>"
           />
         </liferay-frontend:edit-form-footer>
       </div>
