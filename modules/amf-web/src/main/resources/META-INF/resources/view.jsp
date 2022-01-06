@@ -302,7 +302,7 @@
 						selectData: Liferay.Address.getCountries,
 						selectDesc: 'a3',
 						selectId: 'countryId',
-						selectVal: '21533'
+						selectVal: '21531'
 					},
 					{
 						select: '<portlet:namespace />state',
