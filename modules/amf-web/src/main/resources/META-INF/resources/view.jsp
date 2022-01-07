@@ -215,7 +215,7 @@
             </aui:input>
           </aui:col>
         </aui:row>
-        <div class="clickable">
+        <div class="security-infos">
         <aui:row>
           <aui:col width="50">
             <aui:select
@@ -259,19 +259,21 @@
           <aui:input label="&nbsp;Term of Use" name="accepted_tou" required="true" type="checkbox" /> 
        </div>
     </aui:row>
-    <aui:row> 
+    <div class="inner-buttons"> 
+       <aui:row> 
       <div id="read-tou">  
         <aui:button onclick="modal()" value="Read Terms of Use" />
       </div>
       <div id="reset-form">
         <aui:button type="reset" value="Reset Form"/>
       </div>
-    </div>
-  </aui:row>
-</div>
+    </aui:row>
+   </div> 
+  </div>
+ </div>
       
 <!--Buttons-->
-      <div class="buttons">
+      <div class="external-buttons">
         <liferay-frontend:edit-form-footer>
           <aui:button name="submitButton" type="submit" value="save" />
           <aui:button
@@ -295,25 +297,25 @@
 
 <!--State script-->
     <aui:script use="liferay-dynamic-select">
-			    new Liferay.DynamicSelect(
-				[
-					{
-						select: '<portlet:namespace />country',
-						selectData: Liferay.Address.getCountries,
-						selectDesc: 'a3',
-						selectId: 'countryId',
-						selectVal: '21531'
-					},
-					{
-						select: '<portlet:namespace />state',
-						selectData: Liferay.Address.getRegions,
-						selectDesc: 'name',
-						selectId: 'name',
-						selectVal: '&lt;%= regionId %&gt;'
-					}
-				]
-			);
-		</aui:script>
+          new Liferay.DynamicSelect(
+        [
+          {
+            select: '<portlet:namespace />country',
+            selectData: Liferay.Address.getCountries,
+            selectDesc: 'a3',
+            selectId: 'countryId',
+            selectVal: '21531'
+          },
+          {
+            select: '<portlet:namespace />state',
+            selectData: Liferay.Address.getRegions,
+            selectDesc: 'name',
+            selectId: 'name',
+            selectVal: '&lt; regionId &gt;'
+          }
+        ]
+      );
+    </aui:script>
 
 <!--State Change script-->
     <aui:script>
@@ -322,4 +324,4 @@
             alert("Please select some state!");
           }
         }
-    </aui:script>
+  </aui:script>
