@@ -58,6 +58,7 @@ public class RegistrationLocalServiceImpl
 			throws PortalException {
 
 		_registrationValidator.validate(userName, firstName, lastName, emailAddress);
+		_registrationValidator.isValidBirthday(birthday);
 
 		long userId = counterLocalService.increment(User.class.getName());
 
