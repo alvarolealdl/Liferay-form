@@ -44,7 +44,7 @@ public class AddRegistrationMVCActionCommand extends BaseMVCActionCommand {
 		throws Exception {
 
 		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			Registration.class.getName(), actionRequest);
+				Registration.class.getName(), actionRequest);
 
 		long groupId = serviceContext.getScopeGroupId();
 
@@ -54,10 +54,10 @@ public class AddRegistrationMVCActionCommand extends BaseMVCActionCommand {
 		String userName = ParamUtil.getString(actionRequest, "userName", StringPool.BLANK);
 		String gender = ParamUtil.getString(actionRequest, "gender");
 		Date birthday = ParamUtil.getDate(
-			actionRequest, "birthday", new SimpleDateFormat("yyyy-MM-dd"));
+				actionRequest, "birthday", new SimpleDateFormat("yyyy-MM-dd"));
 		String password = ParamUtil.getString(actionRequest, "password", StringPool.BLANK);
 		String confirmPassword = ParamUtil.getString(
-			actionRequest, "confirmPassword", StringPool.BLANK);
+				actionRequest, "confirmPassword", StringPool.BLANK);
 		String homePhone = ParamUtil.getString(actionRequest, "homePhone", StringPool.BLANK);
 		String mobilePhone = ParamUtil.getString(actionRequest, "mobilePhone", StringPool.BLANK);
 		String address1 = ParamUtil.getString(actionRequest, "address1", StringPool.BLANK);
@@ -68,24 +68,32 @@ public class AddRegistrationMVCActionCommand extends BaseMVCActionCommand {
 		String securityAnswer = ParamUtil.getString(actionRequest, "answer", StringPool.BLANK);
 
 		boolean male = false;
+		String passwordChecked = null;
+
 		if(gender.equals("male")){
 			male = true;
 		}
+
+		if (password.equals(confirmPassword)){
+			passwordChecked = password;
+		}
+
 		try {
 			_log.debug("Adding Registration to database...");
 
-			_registrationService.addRegistration(
-				groupId, userName, firstName, lastName, emailAddress, male,
-				birthday, password, homePhone, mobilePhone, address1, address2,
-				city, state, zipCode, securityAnswer);
+			 _registrationService.addRegistration(
+					groupId, userName, firstName, lastName, emailAddress, male,
+					birthday, passwordChecked, homePhone, mobilePhone, address1, address2,
+					city, state, zipCode, securityAnswer);
 
 			_eventTrack.addEvent(groupId, serviceContext.getCompanyId(), "registration", serviceContext.getRemoteAddr(),
-			userName, new Date());
+					userName, new Date());
 
 			SessionMessages.add(actionRequest, "addRegistration");
 			sendRedirect(actionRequest, actionResponse);
+
 		}
-		catch (Exception e ){{
+		catch (Exception e ){
 			_log.error(new Date() + " :: " + _log.getClass().getName() + " :: " + e.getMessage());
 
 			SessionErrors.add(actionRequest, "emailAddressValidation");
@@ -94,7 +102,7 @@ public class AddRegistrationMVCActionCommand extends BaseMVCActionCommand {
 
 
 		}
-		}
+
 	}
 
 	@Reference
@@ -105,5 +113,7 @@ public class AddRegistrationMVCActionCommand extends BaseMVCActionCommand {
 
 	private static final Log _log = LogFactoryUtil.getLog(AddRegistrationMVCActionCommand.class);
 
-
 }
+
+
+
