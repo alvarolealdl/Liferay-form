@@ -1,9 +1,13 @@
 <%@ include file="/META-INF/resources/init.jsp" %>
 <%@include file="/META-INF/resources/entry_login.jsp"%>
 
+<h1 class="title"><liferay-ui:message key="login.capition" /></h1>
 
-<c:if test="<%=themeDisplay.isSignedIn()%>">
-    <button  class="btn btn-link" onclick="modal2()">Sign In </button>
+<c:if test="<%=!themeDisplay.isSignedIn()%>">
+
+    <aui:button-row>
+        <aui:button  onClick="modal2()" value="Sign In"/>
+    </aui:button-row>
 
 </c:if>
 

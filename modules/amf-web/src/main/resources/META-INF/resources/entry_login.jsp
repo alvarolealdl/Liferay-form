@@ -2,6 +2,10 @@
 
 <portlet:actionURL name="<%=MCVCommandNames.ACCESS_LOGIN%>" var="loginURL"/>
 
+<portlet:renderURL var="backToHomeURL">
+    <portlet:param name="mvcPath" value="/view_login.jsp"/>
+</portlet:renderURL>
+
 <h1><liferay-ui:message key="login.capition" /></h1>
 
 <div id="entry_login" style="display: none" >
@@ -19,7 +23,7 @@
         <liferay-frontend:edit-form-footer>
             <aui:button type="submit" value="save" />
 
-            <aui:button href='<%= ParamUtil.getString(request, "backURL") %>' type="cancel" />
+            <aui:button onClick="<%= backToHomeURL.toString()%>" type="cancel" />
         </liferay-frontend:edit-form-footer>
 
     </aui:form>
